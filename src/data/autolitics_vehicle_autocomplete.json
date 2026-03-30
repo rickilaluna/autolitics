@@ -1,0 +1,3611 @@
+[
+  {
+    "id": "acura-adx",
+    "brand": "Acura",
+    "model": "ADX",
+    "display_name": "Acura ADX",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "acura-integra",
+    "brand": "Acura",
+    "model": "Integra",
+    "display_name": "Acura Integra",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "acura-mdx",
+    "brand": "Acura",
+    "model": "MDX",
+    "display_name": "Acura MDX",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "acura-rdx",
+    "brand": "Acura",
+    "model": "RDX",
+    "display_name": "Acura RDX",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "acura-rsx",
+    "brand": "Acura",
+    "model": "RSX",
+    "display_name": "Acura RSX",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-a3",
+    "brand": "Audi",
+    "model": "A3",
+    "display_name": "Audi A3",
+    "aliases": [
+      "S3",
+      "RS3"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-a5",
+    "brand": "Audi",
+    "model": "A5",
+    "display_name": "Audi A5",
+    "aliases": [
+      "A5 Sportback",
+      "A5 Coupe",
+      "A5 Cabriolet",
+      "S5",
+      "RS5"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-a6",
+    "brand": "Audi",
+    "model": "A6",
+    "display_name": "Audi A6",
+    "aliases": [
+      "A6 Allroad",
+      "S6",
+      "RS6"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-a6-e-tron",
+    "brand": "Audi",
+    "model": "A6 e-tron",
+    "display_name": "Audi A6 e-tron",
+    "aliases": [
+      "A6 e-tron Sportback"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-a7",
+    "brand": "Audi",
+    "model": "A7",
+    "display_name": "Audi A7",
+    "aliases": [
+      "S7",
+      "RS7"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-a8",
+    "brand": "Audi",
+    "model": "A8",
+    "display_name": "Audi A8",
+    "aliases": [
+      "S8"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-e-tron-gt",
+    "brand": "Audi",
+    "model": "e-tron GT",
+    "display_name": "Audi e-tron GT",
+    "aliases": [
+      "RS e-tron GT"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-q3",
+    "brand": "Audi",
+    "model": "Q3",
+    "display_name": "Audi Q3",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-q4-e-tron",
+    "brand": "Audi",
+    "model": "Q4 e-tron",
+    "display_name": "Audi Q4 e-tron",
+    "aliases": [
+      "Q4 e-tron Sportback"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-q5",
+    "brand": "Audi",
+    "model": "Q5",
+    "display_name": "Audi Q5",
+    "aliases": [
+      "Q5 Sportback",
+      "SQ5"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-q6-e-tron",
+    "brand": "Audi",
+    "model": "Q6 e-tron",
+    "display_name": "Audi Q6 e-tron",
+    "aliases": [
+      "Q6 e-tron Sportback"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-q7",
+    "brand": "Audi",
+    "model": "Q7",
+    "display_name": "Audi Q7",
+    "aliases": [
+      "SQ7"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "audi-q8",
+    "brand": "Audi",
+    "model": "Q8",
+    "display_name": "Audi Q8",
+    "aliases": [
+      "Q8 Sportback",
+      "SQ8",
+      "RSQ8"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-2-series",
+    "brand": "BMW",
+    "model": "2 Series",
+    "display_name": "BMW 2 Series",
+    "aliases": [
+      "2-Series",
+      "228i",
+      "230i",
+      "M235i",
+      "M240i"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-2-series-gran-coupe",
+    "brand": "BMW",
+    "model": "2 Series Gran Coupe",
+    "display_name": "BMW 2 Series Gran Coupe",
+    "aliases": [
+      "228i Gran Coupe",
+      "M235i Gran Coupe"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-3-series",
+    "brand": "BMW",
+    "model": "3 Series",
+    "display_name": "BMW 3 Series",
+    "aliases": [
+      "3-Series",
+      "330i",
+      "330e",
+      "M340i"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-4-series",
+    "brand": "BMW",
+    "model": "4 Series",
+    "display_name": "BMW 4 Series",
+    "aliases": [
+      "4-Series",
+      "430i",
+      "M440i"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-5-series",
+    "brand": "BMW",
+    "model": "5 Series",
+    "display_name": "BMW 5 Series",
+    "aliases": [
+      "5-Series",
+      "530i",
+      "540i",
+      "550e"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-7-series",
+    "brand": "BMW",
+    "model": "7 Series",
+    "display_name": "BMW 7 Series",
+    "aliases": [
+      "7-Series",
+      "740i",
+      "750e",
+      "760i",
+      "i7"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "phev",
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-8-series",
+    "brand": "BMW",
+    "model": "8 Series",
+    "display_name": "BMW 8 Series",
+    "aliases": [
+      "8-Series",
+      "840i",
+      "M850i"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-alpina-b8",
+    "brand": "BMW",
+    "model": "ALPINA B8",
+    "display_name": "BMW ALPINA B8",
+    "aliases": [
+      "ALPINA B8 Gran Coupe"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-alpina-xb7",
+    "brand": "BMW",
+    "model": "ALPINA XB7",
+    "display_name": "BMW ALPINA XB7",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-i4",
+    "brand": "BMW",
+    "model": "i4",
+    "display_name": "BMW i4",
+    "aliases": [
+      "i4 eDrive40",
+      "i4 M50",
+      "i4 xDrive40"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-i5",
+    "brand": "BMW",
+    "model": "i5",
+    "display_name": "BMW i5",
+    "aliases": [
+      "i5 eDrive40",
+      "i5 M60",
+      "i5 xDrive40"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-i7",
+    "brand": "BMW",
+    "model": "i7",
+    "display_name": "BMW i7",
+    "aliases": [
+      "i7 eDrive50",
+      "i7 M70",
+      "i7 xDrive60"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-ix",
+    "brand": "BMW",
+    "model": "iX",
+    "display_name": "BMW iX",
+    "aliases": [
+      "iX xDrive50",
+      "iX M60"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-m2",
+    "brand": "BMW",
+    "model": "M2",
+    "display_name": "BMW M2",
+    "aliases": [
+      "M2 Coupe"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-m8",
+    "brand": "BMW",
+    "model": "M8",
+    "display_name": "BMW M8",
+    "aliases": [
+      "M8 Competition",
+      "M8 Gran Coupe"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-x1",
+    "brand": "BMW",
+    "model": "X1",
+    "display_name": "BMW X1",
+    "aliases": [
+      "X1 xDrive28i",
+      "X1 M35i"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-x2",
+    "brand": "BMW",
+    "model": "X2",
+    "display_name": "BMW X2",
+    "aliases": [
+      "X2 xDrive28i",
+      "X2 M35i"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-x3",
+    "brand": "BMW",
+    "model": "X3",
+    "display_name": "BMW X3",
+    "aliases": [
+      "X3 xDrive30i",
+      "X3 M40i",
+      "X3 30 xDrive"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-x4",
+    "brand": "BMW",
+    "model": "X4",
+    "display_name": "BMW X4",
+    "aliases": [
+      "X4 M40i",
+      "X4 M"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-x5",
+    "brand": "BMW",
+    "model": "X5",
+    "display_name": "BMW X5",
+    "aliases": [
+      "X5 xDrive40i",
+      "X5 M60i",
+      "X5 xDrive50e",
+      "X5 M Competition"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-x6",
+    "brand": "BMW",
+    "model": "X6",
+    "display_name": "BMW X6",
+    "aliases": [
+      "X6 xDrive40i",
+      "X6 M60i",
+      "X6 M Competition"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-x7",
+    "brand": "BMW",
+    "model": "X7",
+    "display_name": "BMW X7",
+    "aliases": [
+      "X7 xDrive40i",
+      "X7 M60i"
+    ],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-xm",
+    "brand": "BMW",
+    "model": "XM",
+    "display_name": "BMW XM",
+    "aliases": [
+      "XM Label"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "bmw-z4",
+    "brand": "BMW",
+    "model": "Z4",
+    "display_name": "BMW Z4",
+    "aliases": [
+      "Z4 M40i",
+      "Z4 sDrive30i"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "buick-enclave",
+    "brand": "Buick",
+    "model": "Enclave",
+    "display_name": "Buick Enclave",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "buick-encore-gx",
+    "brand": "Buick",
+    "model": "Encore GX",
+    "display_name": "Buick Encore GX",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "buick-envision",
+    "brand": "Buick",
+    "model": "Envision",
+    "display_name": "Buick Envision",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "buick-envista",
+    "brand": "Buick",
+    "model": "Envista",
+    "display_name": "Buick Envista",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-celestiq",
+    "brand": "Cadillac",
+    "model": "Celestiq",
+    "display_name": "Cadillac Celestiq",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-ct4",
+    "brand": "Cadillac",
+    "model": "CT4",
+    "display_name": "Cadillac CT4",
+    "aliases": [
+      "CT4V",
+      "CT4-V",
+      "CT4 V-Series"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-ct5",
+    "brand": "Cadillac",
+    "model": "CT5",
+    "display_name": "Cadillac CT5",
+    "aliases": [
+      "CT5-V",
+      "CT5 V-Series",
+      "CT5V"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-escalade",
+    "brand": "Cadillac",
+    "model": "Escalade",
+    "display_name": "Cadillac Escalade",
+    "aliases": [
+      "Escalade V",
+      "Escalade-V"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-escalade-esv",
+    "brand": "Cadillac",
+    "model": "Escalade ESV",
+    "display_name": "Cadillac Escalade ESV",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-escalade-iq",
+    "brand": "Cadillac",
+    "model": "Escalade IQ",
+    "display_name": "Cadillac Escalade IQ",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-lyriq",
+    "brand": "Cadillac",
+    "model": "Lyriq",
+    "display_name": "Cadillac Lyriq",
+    "aliases": [
+      "Lyriq-V"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-optiq",
+    "brand": "Cadillac",
+    "model": "Optiq",
+    "display_name": "Cadillac Optiq",
+    "aliases": [
+      "Optiq-V"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-vistiq",
+    "brand": "Cadillac",
+    "model": "Vistiq",
+    "display_name": "Cadillac Vistiq",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-xt5",
+    "brand": "Cadillac",
+    "model": "XT5",
+    "display_name": "Cadillac XT5",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "cadillac-xt6",
+    "brand": "Cadillac",
+    "model": "XT6",
+    "display_name": "Cadillac XT6",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-blazer",
+    "brand": "Chevrolet",
+    "model": "Blazer",
+    "display_name": "Chevrolet Blazer",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-blazer-ev",
+    "brand": "Chevrolet",
+    "model": "Blazer EV",
+    "display_name": "Chevrolet Blazer EV",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-colorado",
+    "brand": "Chevrolet",
+    "model": "Colorado",
+    "display_name": "Chevrolet Colorado",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-corvette-e-ray",
+    "brand": "Chevrolet",
+    "model": "Corvette E-Ray",
+    "display_name": "Chevrolet Corvette E-Ray",
+    "aliases": [
+      "E-Ray"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-corvette-stingray",
+    "brand": "Chevrolet",
+    "model": "Corvette Stingray",
+    "display_name": "Chevrolet Corvette Stingray",
+    "aliases": [
+      "Stingray"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-corvette-z06",
+    "brand": "Chevrolet",
+    "model": "Corvette Z06",
+    "display_name": "Chevrolet Corvette Z06",
+    "aliases": [
+      "Z06"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-corvette-zr1",
+    "brand": "Chevrolet",
+    "model": "Corvette ZR1",
+    "display_name": "Chevrolet Corvette ZR1",
+    "aliases": [
+      "ZR1"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-corvette-zr1x",
+    "brand": "Chevrolet",
+    "model": "Corvette ZR1X",
+    "display_name": "Chevrolet Corvette ZR1X",
+    "aliases": [
+      "ZR1X"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-equinox",
+    "brand": "Chevrolet",
+    "model": "Equinox",
+    "display_name": "Chevrolet Equinox",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-equinox-ev",
+    "brand": "Chevrolet",
+    "model": "Equinox EV",
+    "display_name": "Chevrolet Equinox EV",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-express-cargo-van",
+    "brand": "Chevrolet",
+    "model": "Express Cargo Van",
+    "display_name": "Chevrolet Express Cargo Van",
+    "aliases": [],
+    "segment": "van",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-express-passenger-van",
+    "brand": "Chevrolet",
+    "model": "Express Passenger Van",
+    "display_name": "Chevrolet Express Passenger Van",
+    "aliases": [],
+    "segment": "van",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-silverado",
+    "brand": "Chevrolet",
+    "model": "Silverado",
+    "display_name": "Chevrolet Silverado",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-silverado-ev",
+    "brand": "Chevrolet",
+    "model": "Silverado EV",
+    "display_name": "Chevrolet Silverado EV",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-silverado-hd",
+    "brand": "Chevrolet",
+    "model": "Silverado HD",
+    "display_name": "Chevrolet Silverado HD",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-suburban",
+    "brand": "Chevrolet",
+    "model": "Suburban",
+    "display_name": "Chevrolet Suburban",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-tahoe",
+    "brand": "Chevrolet",
+    "model": "Tahoe",
+    "display_name": "Chevrolet Tahoe",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-trailblazer",
+    "brand": "Chevrolet",
+    "model": "Trailblazer",
+    "display_name": "Chevrolet Trailblazer",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-traverse",
+    "brand": "Chevrolet",
+    "model": "Traverse",
+    "display_name": "Chevrolet Traverse",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "chevrolet-trax",
+    "brand": "Chevrolet",
+    "model": "Trax",
+    "display_name": "Chevrolet Trax",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-bronco",
+    "brand": "Ford",
+    "model": "Bronco",
+    "display_name": "Ford Bronco",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-bronco-sport",
+    "brand": "Ford",
+    "model": "Bronco Sport",
+    "display_name": "Ford Bronco Sport",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-e-transit",
+    "brand": "Ford",
+    "model": "E-Transit",
+    "display_name": "Ford E-Transit",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-escape",
+    "brand": "Ford",
+    "model": "Escape",
+    "display_name": "Ford Escape",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas",
+      "hybrid",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-expedition",
+    "brand": "Ford",
+    "model": "Expedition",
+    "display_name": "Ford Expedition",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-explorer",
+    "brand": "Ford",
+    "model": "Explorer",
+    "display_name": "Ford Explorer",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-f-150",
+    "brand": "Ford",
+    "model": "F-150",
+    "display_name": "Ford F-150",
+    "aliases": [
+      "F150"
+    ],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-f-150-lightning",
+    "brand": "Ford",
+    "model": "F-150 Lightning",
+    "display_name": "Ford F-150 Lightning",
+    "aliases": [
+      "F150 Lightning"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-maverick",
+    "brand": "Ford",
+    "model": "Maverick",
+    "display_name": "Ford Maverick",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-mustang",
+    "brand": "Ford",
+    "model": "Mustang",
+    "display_name": "Ford Mustang",
+    "aliases": [],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-mustang-mach-e",
+    "brand": "Ford",
+    "model": "Mustang Mach-E",
+    "display_name": "Ford Mustang Mach-E",
+    "aliases": [
+      "Mach-E"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-ranger",
+    "brand": "Ford",
+    "model": "Ranger",
+    "display_name": "Ford Ranger",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-super-duty",
+    "brand": "Ford",
+    "model": "Super Duty",
+    "display_name": "Ford Super Duty",
+    "aliases": [
+      "F-250",
+      "F-350",
+      "F-450"
+    ],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ford-transit",
+    "brand": "Ford",
+    "model": "Transit",
+    "display_name": "Ford Transit",
+    "aliases": [],
+    "segment": "van",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-acadia",
+    "brand": "GMC",
+    "model": "Acadia",
+    "display_name": "GMC Acadia",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-canyon",
+    "brand": "GMC",
+    "model": "Canyon",
+    "display_name": "GMC Canyon",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-hummer-ev-pickup",
+    "brand": "GMC",
+    "model": "HUMMER EV Pickup",
+    "display_name": "GMC HUMMER EV Pickup",
+    "aliases": [
+      "Hummer EV Truck"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-hummer-ev-suv",
+    "brand": "GMC",
+    "model": "HUMMER EV SUV",
+    "display_name": "GMC HUMMER EV SUV",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-savana-cargo-van",
+    "brand": "GMC",
+    "model": "Savana Cargo Van",
+    "display_name": "GMC Savana Cargo Van",
+    "aliases": [
+      "Savana Cargo"
+    ],
+    "segment": "van",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-savana-passenger-van",
+    "brand": "GMC",
+    "model": "Savana Passenger Van",
+    "display_name": "GMC Savana Passenger Van",
+    "aliases": [
+      "Savana Passenger"
+    ],
+    "segment": "van",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-sierra-1500",
+    "brand": "GMC",
+    "model": "Sierra 1500",
+    "display_name": "GMC Sierra 1500",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-sierra-hd",
+    "brand": "GMC",
+    "model": "Sierra HD",
+    "display_name": "GMC Sierra HD",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-terrain",
+    "brand": "GMC",
+    "model": "Terrain",
+    "display_name": "GMC Terrain",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-yukon",
+    "brand": "GMC",
+    "model": "Yukon",
+    "display_name": "GMC Yukon",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "gmc-yukon-xl",
+    "brand": "GMC",
+    "model": "Yukon XL",
+    "display_name": "GMC Yukon XL",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-accord",
+    "brand": "Honda",
+    "model": "Accord",
+    "display_name": "Honda Accord",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-accord-hybrid",
+    "brand": "Honda",
+    "model": "Accord Hybrid",
+    "display_name": "Honda Accord Hybrid",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-civic-hatchback",
+    "brand": "Honda",
+    "model": "Civic Hatchback",
+    "display_name": "Honda Civic Hatchback",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-civic-hatchback-hybrid",
+    "brand": "Honda",
+    "model": "Civic Hatchback Hybrid",
+    "display_name": "Honda Civic Hatchback Hybrid",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-civic-sedan",
+    "brand": "Honda",
+    "model": "Civic Sedan",
+    "display_name": "Honda Civic Sedan",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-civic-sedan-hybrid",
+    "brand": "Honda",
+    "model": "Civic Sedan Hybrid",
+    "display_name": "Honda Civic Sedan Hybrid",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-civic-si-sedan",
+    "brand": "Honda",
+    "model": "Civic Si Sedan",
+    "display_name": "Honda Civic Si Sedan",
+    "aliases": [
+      "Civic Si"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-civic-type-r",
+    "brand": "Honda",
+    "model": "Civic Type R",
+    "display_name": "Honda Civic Type R",
+    "aliases": [
+      "Civic R"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-cr-v",
+    "brand": "Honda",
+    "model": "CR-V",
+    "display_name": "Honda CR-V",
+    "aliases": [
+      "CRV"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-cr-v-e-fcev",
+    "brand": "Honda",
+    "model": "CR-V e:FCEV",
+    "display_name": "Honda CR-V e:FCEV",
+    "aliases": [
+      "CRV e:FCEV"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-cr-v-hybrid",
+    "brand": "Honda",
+    "model": "CR-V Hybrid",
+    "display_name": "Honda CR-V Hybrid",
+    "aliases": [
+      "CRV Hybrid"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-hr-v",
+    "brand": "Honda",
+    "model": "HR-V",
+    "display_name": "Honda HR-V",
+    "aliases": [
+      "HRV"
+    ],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-odyssey",
+    "brand": "Honda",
+    "model": "Odyssey",
+    "display_name": "Honda Odyssey",
+    "aliases": [],
+    "segment": "van",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-passport",
+    "brand": "Honda",
+    "model": "Passport",
+    "display_name": "Honda Passport",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-pilot",
+    "brand": "Honda",
+    "model": "Pilot",
+    "display_name": "Honda Pilot",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-prelude-hybrid",
+    "brand": "Honda",
+    "model": "Prelude Hybrid",
+    "display_name": "Honda Prelude Hybrid",
+    "aliases": [],
+    "segment": "sports",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-prologue",
+    "brand": "Honda",
+    "model": "Prologue",
+    "display_name": "Honda Prologue",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "honda-ridgeline",
+    "brand": "Honda",
+    "model": "Ridgeline",
+    "display_name": "Honda Ridgeline",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-elantra",
+    "brand": "Hyundai",
+    "model": "Elantra",
+    "display_name": "Hyundai Elantra",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-elantra-hybrid",
+    "brand": "Hyundai",
+    "model": "Elantra Hybrid",
+    "display_name": "Hyundai Elantra Hybrid",
+    "aliases": [
+      "Elantra HEV"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-ioniq-5",
+    "brand": "Hyundai",
+    "model": "IONIQ 5",
+    "display_name": "Hyundai IONIQ 5",
+    "aliases": [
+      "Ioniq 5"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-ioniq-6",
+    "brand": "Hyundai",
+    "model": "IONIQ 6",
+    "display_name": "Hyundai IONIQ 6",
+    "aliases": [
+      "Ioniq 6"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-ioniq-9",
+    "brand": "Hyundai",
+    "model": "IONIQ 9",
+    "display_name": "Hyundai IONIQ 9",
+    "aliases": [
+      "Ioniq 9"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-kona",
+    "brand": "Hyundai",
+    "model": "Kona",
+    "display_name": "Hyundai Kona",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-palisade",
+    "brand": "Hyundai",
+    "model": "Palisade",
+    "display_name": "Hyundai Palisade",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-palisade-hybrid",
+    "brand": "Hyundai",
+    "model": "Palisade Hybrid",
+    "display_name": "Hyundai Palisade Hybrid",
+    "aliases": [
+      "Palisade HEV"
+    ],
+    "segment": "3-row",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-santa-cruz",
+    "brand": "Hyundai",
+    "model": "Santa Cruz",
+    "display_name": "Hyundai Santa Cruz",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-santa-fe",
+    "brand": "Hyundai",
+    "model": "Santa Fe",
+    "display_name": "Hyundai Santa Fe",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-santa-fe-hybrid",
+    "brand": "Hyundai",
+    "model": "Santa Fe Hybrid",
+    "display_name": "Hyundai Santa Fe Hybrid",
+    "aliases": [
+      "Santa Fe HEV"
+    ],
+    "segment": "3-row",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-sonata",
+    "brand": "Hyundai",
+    "model": "Sonata",
+    "display_name": "Hyundai Sonata",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-sonata-hybrid",
+    "brand": "Hyundai",
+    "model": "Sonata Hybrid",
+    "display_name": "Hyundai Sonata Hybrid",
+    "aliases": [
+      "Sonata HEV"
+    ],
+    "segment": "midsize",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-tucson",
+    "brand": "Hyundai",
+    "model": "Tucson",
+    "display_name": "Hyundai Tucson",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-tucson-hybrid",
+    "brand": "Hyundai",
+    "model": "Tucson Hybrid",
+    "display_name": "Hyundai Tucson Hybrid",
+    "aliases": [
+      "Tucson HEV"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-tucson-plug-in-hybrid",
+    "brand": "Hyundai",
+    "model": "Tucson Plug-in Hybrid",
+    "display_name": "Hyundai Tucson Plug-in Hybrid",
+    "aliases": [
+      "Tucson PHEV"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-venue",
+    "brand": "Hyundai",
+    "model": "Venue",
+    "display_name": "Hyundai Venue",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-cherokee",
+    "brand": "Jeep",
+    "model": "Cherokee",
+    "display_name": "Jeep Cherokee",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-compass",
+    "brand": "Jeep",
+    "model": "Compass",
+    "display_name": "Jeep Compass",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-gladiator",
+    "brand": "Jeep",
+    "model": "Gladiator",
+    "display_name": "Jeep Gladiator",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-grand-cherokee",
+    "brand": "Jeep",
+    "model": "Grand Cherokee",
+    "display_name": "Jeep Grand Cherokee",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-grand-cherokee-l",
+    "brand": "Jeep",
+    "model": "Grand Cherokee L",
+    "display_name": "Jeep Grand Cherokee L",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-grand-wagoneer",
+    "brand": "Jeep",
+    "model": "Grand Wagoneer",
+    "display_name": "Jeep Grand Wagoneer",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-recon",
+    "brand": "Jeep",
+    "model": "Recon",
+    "display_name": "Jeep Recon",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-wagoneer",
+    "brand": "Jeep",
+    "model": "Wagoneer",
+    "display_name": "Jeep Wagoneer",
+    "aliases": [],
+    "segment": "fullsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-wagoneer-s",
+    "brand": "Jeep",
+    "model": "Wagoneer S",
+    "display_name": "Jeep Wagoneer S",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "jeep-wrangler",
+    "brand": "Jeep",
+    "model": "Wrangler",
+    "display_name": "Jeep Wrangler",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-carnival-mpv",
+    "brand": "Kia",
+    "model": "Carnival MPV",
+    "display_name": "Kia Carnival MPV",
+    "aliases": [
+      "Carnival"
+    ],
+    "segment": "van",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-carnival-mpv-hybrid",
+    "brand": "Kia",
+    "model": "Carnival MPV Hybrid",
+    "display_name": "Kia Carnival MPV Hybrid",
+    "aliases": [
+      "Carnival Hybrid"
+    ],
+    "segment": "van",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-ev6",
+    "brand": "Kia",
+    "model": "EV6",
+    "display_name": "Kia EV6",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-ev9",
+    "brand": "Kia",
+    "model": "EV9",
+    "display_name": "Kia EV9",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-k4",
+    "brand": "Kia",
+    "model": "K4",
+    "display_name": "Kia K4",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-k4-hatchback",
+    "brand": "Kia",
+    "model": "K4 Hatchback",
+    "display_name": "Kia K4 Hatchback",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-k5",
+    "brand": "Kia",
+    "model": "K5",
+    "display_name": "Kia K5",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-niro",
+    "brand": "Kia",
+    "model": "Niro",
+    "display_name": "Kia Niro",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-niro-ev",
+    "brand": "Kia",
+    "model": "Niro EV",
+    "display_name": "Kia Niro EV",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-niro-plug-in-hybrid",
+    "brand": "Kia",
+    "model": "Niro Plug-in Hybrid",
+    "display_name": "Kia Niro Plug-in Hybrid",
+    "aliases": [
+      "Niro PHEV"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-seltos",
+    "brand": "Kia",
+    "model": "Seltos",
+    "display_name": "Kia Seltos",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-sorento",
+    "brand": "Kia",
+    "model": "Sorento",
+    "display_name": "Kia Sorento",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-sorento-hybrid",
+    "brand": "Kia",
+    "model": "Sorento Hybrid",
+    "display_name": "Kia Sorento Hybrid",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-sorento-plug-in-hybrid",
+    "brand": "Kia",
+    "model": "Sorento Plug-in Hybrid",
+    "display_name": "Kia Sorento Plug-in Hybrid",
+    "aliases": [
+      "Sorento PHEV"
+    ],
+    "segment": "3-row",
+    "powertrain_types": [
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-soul",
+    "brand": "Kia",
+    "model": "Soul",
+    "display_name": "Kia Soul",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-sportage",
+    "brand": "Kia",
+    "model": "Sportage",
+    "display_name": "Kia Sportage",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-sportage-hybrid",
+    "brand": "Kia",
+    "model": "Sportage Hybrid",
+    "display_name": "Kia Sportage Hybrid",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-sportage-plug-in-hybrid",
+    "brand": "Kia",
+    "model": "Sportage Plug-in Hybrid",
+    "display_name": "Kia Sportage Plug-in Hybrid",
+    "aliases": [
+      "Sportage PHEV"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-telluride",
+    "brand": "Kia",
+    "model": "Telluride",
+    "display_name": "Kia Telluride",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "kia-telluride-hybrid",
+    "brand": "Kia",
+    "model": "Telluride Hybrid",
+    "display_name": "Kia Telluride Hybrid",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-es",
+    "brand": "Lexus",
+    "model": "ES",
+    "display_name": "Lexus ES",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-es-hybrid",
+    "brand": "Lexus",
+    "model": "ES Hybrid",
+    "display_name": "Lexus ES Hybrid",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-gx",
+    "brand": "Lexus",
+    "model": "GX",
+    "display_name": "Lexus GX",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-is",
+    "brand": "Lexus",
+    "model": "IS",
+    "display_name": "Lexus IS",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-ls",
+    "brand": "Lexus",
+    "model": "LS",
+    "display_name": "Lexus LS",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-lx",
+    "brand": "Lexus",
+    "model": "LX",
+    "display_name": "Lexus LX",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-nx",
+    "brand": "Lexus",
+    "model": "NX",
+    "display_name": "Lexus NX",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "hybrid",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-rx",
+    "brand": "Lexus",
+    "model": "RX",
+    "display_name": "Lexus RX",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "hybrid",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-rz",
+    "brand": "Lexus",
+    "model": "RZ",
+    "display_name": "Lexus RZ",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-tx",
+    "brand": "Lexus",
+    "model": "TX",
+    "display_name": "Lexus TX",
+    "aliases": [],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "hybrid",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "lexus-uxh",
+    "brand": "Lexus",
+    "model": "UXh",
+    "display_name": "Lexus UXh",
+    "aliases": [
+      "UX Hybrid"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-cx-30",
+    "brand": "Mazda",
+    "model": "CX-30",
+    "display_name": "Mazda CX-30",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-cx-5",
+    "brand": "Mazda",
+    "model": "CX-5",
+    "display_name": "Mazda CX-5",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-cx-50",
+    "brand": "Mazda",
+    "model": "CX-50",
+    "display_name": "Mazda CX-50",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-cx-50-hybrid",
+    "brand": "Mazda",
+    "model": "CX-50 Hybrid",
+    "display_name": "Mazda CX-50 Hybrid",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-cx-70",
+    "brand": "Mazda",
+    "model": "CX-70",
+    "display_name": "Mazda CX-70",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-cx-70-phev",
+    "brand": "Mazda",
+    "model": "CX-70 PHEV",
+    "display_name": "Mazda CX-70 PHEV",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-cx-90",
+    "brand": "Mazda",
+    "model": "CX-90",
+    "display_name": "Mazda CX-90",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-cx-90-phev",
+    "brand": "Mazda",
+    "model": "CX-90 PHEV",
+    "display_name": "Mazda CX-90 PHEV",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-mazda3-hatchback",
+    "brand": "Mazda",
+    "model": "Mazda3 Hatchback",
+    "display_name": "Mazda Mazda3 Hatchback",
+    "aliases": [
+      "Mazda 3 Hatchback"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-mazda3-sedan",
+    "brand": "Mazda",
+    "model": "Mazda3 Sedan",
+    "display_name": "Mazda Mazda3 Sedan",
+    "aliases": [
+      "Mazda 3 Sedan"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-mx-5-miata",
+    "brand": "Mazda",
+    "model": "MX-5 Miata",
+    "display_name": "Mazda MX-5 Miata",
+    "aliases": [
+      "Miata"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mazda-mx-5-miata-rf",
+    "brand": "Mazda",
+    "model": "MX-5 Miata RF",
+    "display_name": "Mazda MX-5 Miata RF",
+    "aliases": [
+      "Miata RF"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-amg-gt",
+    "brand": "Mercedes-Benz",
+    "model": "AMG GT",
+    "display_name": "Mercedes-Benz AMG GT",
+    "aliases": [
+      "AMG GT 4-door",
+      "AMG GT Coupe"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-c-class",
+    "brand": "Mercedes-Benz",
+    "model": "C-Class",
+    "display_name": "Mercedes-Benz C-Class",
+    "aliases": [
+      "C300",
+      "C43",
+      "C63"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-cla",
+    "brand": "Mercedes-Benz",
+    "model": "CLA",
+    "display_name": "Mercedes-Benz CLA",
+    "aliases": [
+      "CLA250",
+      "CLA 250"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-cle",
+    "brand": "Mercedes-Benz",
+    "model": "CLE",
+    "display_name": "Mercedes-Benz CLE",
+    "aliases": [
+      "CLE 300",
+      "CLE Coupe",
+      "CLE Cabriolet"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-e-class",
+    "brand": "Mercedes-Benz",
+    "model": "E-Class",
+    "display_name": "Mercedes-Benz E-Class",
+    "aliases": [
+      "E350",
+      "E450",
+      "E53"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-eqb",
+    "brand": "Mercedes-Benz",
+    "model": "EQB",
+    "display_name": "Mercedes-Benz EQB",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-eqe",
+    "brand": "Mercedes-Benz",
+    "model": "EQE",
+    "display_name": "Mercedes-Benz EQE",
+    "aliases": [
+      "EQE SUV"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-eqs",
+    "brand": "Mercedes-Benz",
+    "model": "EQS",
+    "display_name": "Mercedes-Benz EQS",
+    "aliases": [
+      "EQS SUV",
+      "EQS 450"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-g-class",
+    "brand": "Mercedes-Benz",
+    "model": "G-Class",
+    "display_name": "Mercedes-Benz G-Class",
+    "aliases": [
+      "G550",
+      "G63",
+      "G Wagon",
+      "G-Wagon"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-gla",
+    "brand": "Mercedes-Benz",
+    "model": "GLA",
+    "display_name": "Mercedes-Benz GLA",
+    "aliases": [
+      "GLA 250"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-glb",
+    "brand": "Mercedes-Benz",
+    "model": "GLB",
+    "display_name": "Mercedes-Benz GLB",
+    "aliases": [
+      "GLB 250"
+    ],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-glc",
+    "brand": "Mercedes-Benz",
+    "model": "GLC",
+    "display_name": "Mercedes-Benz GLC",
+    "aliases": [
+      "GLC 300",
+      "GLC Coupe"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-gle",
+    "brand": "Mercedes-Benz",
+    "model": "GLE",
+    "display_name": "Mercedes-Benz GLE",
+    "aliases": [
+      "GLE 350",
+      "GLE 450",
+      "GLE Coupe"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-gls",
+    "brand": "Mercedes-Benz",
+    "model": "GLS",
+    "display_name": "Mercedes-Benz GLS",
+    "aliases": [
+      "GLS 450",
+      "GLS 580"
+    ],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-maybach-gls",
+    "brand": "Mercedes-Benz",
+    "model": "Maybach GLS",
+    "display_name": "Mercedes-Benz Maybach GLS",
+    "aliases": [
+      "Maybach GLS 600"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-maybach-s-class",
+    "brand": "Mercedes-Benz",
+    "model": "Maybach S-Class",
+    "display_name": "Mercedes-Benz Maybach S-Class",
+    "aliases": [
+      "Maybach S 580",
+      "Maybach S 680"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-s-class",
+    "brand": "Mercedes-Benz",
+    "model": "S-Class",
+    "display_name": "Mercedes-Benz S-Class",
+    "aliases": [
+      "S500",
+      "S580",
+      "S63"
+    ],
+    "segment": "luxury",
+    "powertrain_types": [
+      "gas",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "mercedes-benz-sl",
+    "brand": "Mercedes-Benz",
+    "model": "SL",
+    "display_name": "Mercedes-Benz SL",
+    "aliases": [
+      "SL 43",
+      "SL 55",
+      "SL 63"
+    ],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-altima",
+    "brand": "Nissan",
+    "model": "Altima",
+    "display_name": "Nissan Altima",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-armada",
+    "brand": "Nissan",
+    "model": "Armada",
+    "display_name": "Nissan Armada",
+    "aliases": [],
+    "segment": "fullsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-frontier",
+    "brand": "Nissan",
+    "model": "Frontier",
+    "display_name": "Nissan Frontier",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-kicks",
+    "brand": "Nissan",
+    "model": "Kicks",
+    "display_name": "Nissan Kicks",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-leaf",
+    "brand": "Nissan",
+    "model": "LEAF",
+    "display_name": "Nissan LEAF",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-murano",
+    "brand": "Nissan",
+    "model": "Murano",
+    "display_name": "Nissan Murano",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-pathfinder",
+    "brand": "Nissan",
+    "model": "Pathfinder",
+    "display_name": "Nissan Pathfinder",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-rogue",
+    "brand": "Nissan",
+    "model": "Rogue",
+    "display_name": "Nissan Rogue",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-rogue-plug-in-hybrid",
+    "brand": "Nissan",
+    "model": "Rogue Plug-in Hybrid",
+    "display_name": "Nissan Rogue Plug-in Hybrid",
+    "aliases": [
+      "Rogue PHEV"
+    ],
+    "segment": "compact",
+    "powertrain_types": [
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-sentra",
+    "brand": "Nissan",
+    "model": "Sentra",
+    "display_name": "Nissan Sentra",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-versa",
+    "brand": "Nissan",
+    "model": "Versa",
+    "display_name": "Nissan Versa",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "nissan-z",
+    "brand": "Nissan",
+    "model": "Z",
+    "display_name": "Nissan Z",
+    "aliases": [],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ram-ram-1500",
+    "brand": "Ram",
+    "model": "Ram 1500",
+    "display_name": "Ram Ram 1500",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ram-ram-1500-rho",
+    "brand": "Ram",
+    "model": "Ram 1500 RHO",
+    "display_name": "Ram Ram 1500 RHO",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ram-ram-2500",
+    "brand": "Ram",
+    "model": "Ram 2500",
+    "display_name": "Ram Ram 2500",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ram-ram-3500",
+    "brand": "Ram",
+    "model": "Ram 3500",
+    "display_name": "Ram Ram 3500",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ram-ram-chassis-cab",
+    "brand": "Ram",
+    "model": "Ram Chassis Cab",
+    "display_name": "Ram Ram Chassis Cab",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ram-ram-promaster",
+    "brand": "Ram",
+    "model": "Ram ProMaster",
+    "display_name": "Ram Ram ProMaster",
+    "aliases": [],
+    "segment": "van",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "ram-ram-promaster-ev",
+    "brand": "Ram",
+    "model": "Ram ProMaster EV",
+    "display_name": "Ram Ram ProMaster EV",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-ascent",
+    "brand": "Subaru",
+    "model": "Ascent",
+    "display_name": "Subaru Ascent",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-brz",
+    "brand": "Subaru",
+    "model": "BRZ",
+    "display_name": "Subaru BRZ",
+    "aliases": [],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-crosstrek",
+    "brand": "Subaru",
+    "model": "Crosstrek",
+    "display_name": "Subaru Crosstrek",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-crosstrek-hybrid",
+    "brand": "Subaru",
+    "model": "Crosstrek Hybrid",
+    "display_name": "Subaru Crosstrek Hybrid",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-forester",
+    "brand": "Subaru",
+    "model": "Forester",
+    "display_name": "Subaru Forester",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-forester-hybrid",
+    "brand": "Subaru",
+    "model": "Forester Hybrid",
+    "display_name": "Subaru Forester Hybrid",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-impreza",
+    "brand": "Subaru",
+    "model": "Impreza",
+    "display_name": "Subaru Impreza",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-legacy",
+    "brand": "Subaru",
+    "model": "Legacy",
+    "display_name": "Subaru Legacy",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-outback",
+    "brand": "Subaru",
+    "model": "Outback",
+    "display_name": "Subaru Outback",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-solterra",
+    "brand": "Subaru",
+    "model": "Solterra",
+    "display_name": "Subaru Solterra",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "subaru-wrx",
+    "brand": "Subaru",
+    "model": "WRX",
+    "display_name": "Subaru WRX",
+    "aliases": [],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "tesla-cybertruck",
+    "brand": "Tesla",
+    "model": "Cybertruck",
+    "display_name": "Tesla Cybertruck",
+    "aliases": [
+      "Cyber Truck",
+      "CT"
+    ],
+    "segment": "pickup",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "tesla-model-3",
+    "brand": "Tesla",
+    "model": "Model 3",
+    "display_name": "Tesla Model 3",
+    "aliases": [
+      "Model3",
+      "M3"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "tesla-model-s",
+    "brand": "Tesla",
+    "model": "Model S",
+    "display_name": "Tesla Model S",
+    "aliases": [
+      "ModelS",
+      "MS",
+      "Model S Plaid"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "tesla-model-x",
+    "brand": "Tesla",
+    "model": "Model X",
+    "display_name": "Tesla Model X",
+    "aliases": [
+      "ModelX",
+      "MX",
+      "Model X Plaid"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "tesla-model-y",
+    "brand": "Tesla",
+    "model": "Model Y",
+    "display_name": "Tesla Model Y",
+    "aliases": [
+      "ModelY",
+      "MY"
+    ],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-4runner",
+    "brand": "Toyota",
+    "model": "4Runner",
+    "display_name": "Toyota 4Runner",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-bz",
+    "brand": "Toyota",
+    "model": "bZ",
+    "display_name": "Toyota bZ",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-bz-woodland",
+    "brand": "Toyota",
+    "model": "bZ Woodland",
+    "display_name": "Toyota bZ Woodland",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-c-hr",
+    "brand": "Toyota",
+    "model": "C-HR",
+    "display_name": "Toyota C-HR",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-camry",
+    "brand": "Toyota",
+    "model": "Camry",
+    "display_name": "Toyota Camry",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-corolla",
+    "brand": "Toyota",
+    "model": "Corolla",
+    "display_name": "Toyota Corolla",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-corolla-cross",
+    "brand": "Toyota",
+    "model": "Corolla Cross",
+    "display_name": "Toyota Corolla Cross",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-corolla-hatchback",
+    "brand": "Toyota",
+    "model": "Corolla Hatchback",
+    "display_name": "Toyota Corolla Hatchback",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-gr86",
+    "brand": "Toyota",
+    "model": "GR86",
+    "display_name": "Toyota GR86",
+    "aliases": [],
+    "segment": "sports",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-grand-highlander",
+    "brand": "Toyota",
+    "model": "Grand Highlander",
+    "display_name": "Toyota Grand Highlander",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-highlander",
+    "brand": "Toyota",
+    "model": "Highlander",
+    "display_name": "Toyota Highlander",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-land-cruiser",
+    "brand": "Toyota",
+    "model": "Land Cruiser",
+    "display_name": "Toyota Land Cruiser",
+    "aliases": [],
+    "segment": "fullsize",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-mirai",
+    "brand": "Toyota",
+    "model": "Mirai",
+    "display_name": "Toyota Mirai",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-prius",
+    "brand": "Toyota",
+    "model": "Prius",
+    "display_name": "Toyota Prius",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "hybrid",
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-rav4",
+    "brand": "Toyota",
+    "model": "RAV4",
+    "display_name": "Toyota RAV4",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-rav4-plug-in-hybrid",
+    "brand": "Toyota",
+    "model": "RAV4 Plug-in Hybrid",
+    "display_name": "Toyota RAV4 Plug-in Hybrid",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "phev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-sequoia",
+    "brand": "Toyota",
+    "model": "Sequoia",
+    "display_name": "Toyota Sequoia",
+    "aliases": [],
+    "segment": "fullsize",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-sienna",
+    "brand": "Toyota",
+    "model": "Sienna",
+    "display_name": "Toyota Sienna",
+    "aliases": [],
+    "segment": "van",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-tacoma",
+    "brand": "Toyota",
+    "model": "Tacoma",
+    "display_name": "Toyota Tacoma",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-toyota-crown-signia",
+    "brand": "Toyota",
+    "model": "Toyota Crown Signia",
+    "display_name": "Toyota Toyota Crown Signia",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "toyota-tundra",
+    "brand": "Toyota",
+    "model": "Tundra",
+    "display_name": "Toyota Tundra",
+    "aliases": [],
+    "segment": "pickup",
+    "powertrain_types": [
+      "gas",
+      "hybrid"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-atlas",
+    "brand": "Volkswagen",
+    "model": "Atlas",
+    "display_name": "Volkswagen Atlas",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-atlas-cross-sport",
+    "brand": "Volkswagen",
+    "model": "Atlas Cross Sport",
+    "display_name": "Volkswagen Atlas Cross Sport",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-golf-gti",
+    "brand": "Volkswagen",
+    "model": "Golf GTI",
+    "display_name": "Volkswagen Golf GTI",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-golf-r",
+    "brand": "Volkswagen",
+    "model": "Golf R",
+    "display_name": "Volkswagen Golf R",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-id-buzz",
+    "brand": "Volkswagen",
+    "model": "ID. Buzz",
+    "display_name": "Volkswagen ID. Buzz",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-id-4",
+    "brand": "Volkswagen",
+    "model": "ID.4",
+    "display_name": "Volkswagen ID.4",
+    "aliases": [],
+    "segment": "ev",
+    "powertrain_types": [
+      "ev"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-jetta",
+    "brand": "Volkswagen",
+    "model": "Jetta",
+    "display_name": "Volkswagen Jetta",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-jetta-gli",
+    "brand": "Volkswagen",
+    "model": "Jetta GLI",
+    "display_name": "Volkswagen Jetta GLI",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-taos",
+    "brand": "Volkswagen",
+    "model": "Taos",
+    "display_name": "Volkswagen Taos",
+    "aliases": [],
+    "segment": "subcompact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  },
+  {
+    "id": "volkswagen-tiguan",
+    "brand": "Volkswagen",
+    "model": "Tiguan",
+    "display_name": "Volkswagen Tiguan",
+    "aliases": [],
+    "segment": "compact",
+    "powertrain_types": [
+      "gas"
+    ],
+    "is_active": true
+  }
+]

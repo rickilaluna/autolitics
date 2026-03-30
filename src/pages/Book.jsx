@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { Clock, ShieldCheck, Globe, Calendar, ChevronLeft, Check } from 'lucide-react';
+import { Clock, ShieldCheck, Globe, Calendar, Check } from 'lucide-react';
 import ReactSlider from 'react-slider';
+import MinimalHeader from '../components/MinimalHeader';
 
 export default function Book() {
     const containerRef = useRef(null);
@@ -23,7 +24,7 @@ export default function Book() {
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState(null);
+    const [, setSubmitStatus] = useState(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -110,8 +111,7 @@ export default function Book() {
                 },
                 body: JSON.stringify(payload)
             });
-            const result = await response.json();
-
+            await response.json();
 
             // Simulating a successful submission for now
             await new Promise(resolve => setTimeout(resolve, 1500));
@@ -128,15 +128,9 @@ export default function Book() {
     const timeSlots = ['Morning (9–12)', 'Afternoon (12–3)', 'Evening (3–6)'];
 
     return (
-        <div ref={containerRef} className="bg-background min-h-screen text-text font-sans relative flex flex-col items-center py-12 px-6">
+        <div ref={containerRef} className="bg-background min-h-screen text-text font-sans relative flex flex-col items-center py-12 px-6 pt-32">
 
-            {/* Back Button */}
-            <div className="w-full max-w-3xl mb-8 fade-up">
-                <Link to="/" className="inline-flex items-center text-sm font-medium text-text/60 hover:text-primary transition-colors">
-                    <ChevronLeft className="w-4 h-4 mr-1" />
-                    Back to Home
-                </Link>
-            </div>
+            <MinimalHeader />
 
             {/* Header */}
             <div className="text-center max-w-2xl mb-12 fade-up">

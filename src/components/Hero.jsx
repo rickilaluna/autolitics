@@ -1,7 +1,8 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
-import heroImage from '../../img/autolitics-studio-hero.png';
+
+const heroImage = '/img/autolitics-studio-hero.png';
 
 export default function Hero() {
     const containerRef = useRef(null);
@@ -42,10 +43,10 @@ export default function Hero() {
 
                     <div className="hero-el mt-10 flex flex-col sm:flex-row gap-6 items-start sm:items-center">
                         <Link to="/book" className="inline-block bg-accent text-primary px-8 py-4 rounded-full font-bold transition-transform duration-300 hover:scale-[1.03]" style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}>
-                            Book Your Intro Call
+                            Schedule Your Intro Strategy Session
                         </Link>
                         <p className="font-mono text-sm text-ivory/60 max-w-sm leading-relaxed">
-                            Objective, independent guidance from first search to final signature — so you can make a smart decision with total confidence.
+                            Make a confident vehicle decision — with expert clarity and no dealership game-play.
                         </p>
                     </div>
                 </div>

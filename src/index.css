@@ -22,4 +22,37 @@
   .text-balance {
     text-wrap: balance;
   }
+}.font-inter { font-family: 'Inter', sans-serif; }
+.font-playfair { font-family: 'Playfair Display', serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+@media print {
+    @page { margin: 0; size: letter; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #0D0D12 !important; }
+    .page-break { page-break-before: always; break-before: page; }
+    .no-break { page-break-inside: avoid; break-inside: avoid; }
+    .print-hidden { display: none !important; }
+
+    .min-h-screen { min-height: 100% !important; height: auto !important; }
+
+    header, h1, h2, h3, h4 { page-break-after: avoid; break-after: avoid; }
+    ul, p, table, tr { page-break-inside: avoid; break-inside: avoid; }
+}
+
+.nav-print-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #C9A84C;
+    color: #0D0D12;
+    padding: 12px 24px;
+    border-radius: 99px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 50;
+    box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+    transition: transform 0.2s;
+}
+.nav-print-btn:hover {
+    transform: translateY(-2px);
 }

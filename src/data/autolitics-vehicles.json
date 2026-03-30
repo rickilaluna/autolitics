@@ -1,0 +1,132 @@
+[
+  {
+    "id": "ford-mustang-mach-e",
+    "brand": "Ford",
+    "model": "Mustang Mach-E",
+    "display_name": "Ford Mustang Mach-E",
+    "aliases": ["Mach E", "Mach-E", "Mustang Mach E"],
+    "segment": "ev",
+    "powertrain_types": ["ev"],
+    "is_active": true
+  },
+  {
+    "id": "tesla-model-3",
+    "brand": "Tesla",
+    "model": "Model 3",
+    "display_name": "Tesla Model 3",
+    "aliases": ["Model3", "Model 3"],
+    "segment": "ev",
+    "powertrain_types": ["ev"],
+    "is_active": true
+  },
+  {
+    "id": "tesla-model-y",
+    "brand": "Tesla",
+    "model": "Model Y",
+    "display_name": "Tesla Model Y",
+    "aliases": ["ModelY", "Model Y"],
+    "segment": "ev",
+    "powertrain_types": ["ev"],
+    "is_active": true
+  },
+  {
+    "id": "tesla-model-s",
+    "brand": "Tesla",
+    "model": "Model S",
+    "display_name": "Tesla Model S",
+    "aliases": ["ModelS", "Model S"],
+    "segment": "ev",
+    "powertrain_types": ["ev"],
+    "is_active": true
+  },
+  {
+    "id": "tesla-model-x",
+    "brand": "Tesla",
+    "model": "Model X",
+    "display_name": "Tesla Model X",
+    "aliases": ["ModelX", "Model X"],
+    "segment": "ev",
+    "powertrain_types": ["ev"],
+    "is_active": true
+  },
+  {
+    "id": "toyota-rav4",
+    "brand": "Toyota",
+    "model": "RAV4",
+    "display_name": "Toyota RAV4",
+    "aliases": ["Rav4", "Rav 4", "RAV 4"],
+    "segment": "compact",
+    "powertrain_types": ["gas", "hybrid"],
+    "is_active": true
+  },
+  {
+    "id": "honda-cr-v",
+    "brand": "Honda",
+    "model": "CR-V",
+    "display_name": "Honda CR-V",
+    "aliases": ["CRV", "CR-V"],
+    "segment": "compact",
+    "powertrain_types": ["gas", "hybrid"],
+    "is_active": true
+  },
+  {
+    "id": "kia-telluride",
+    "brand": "Kia",
+    "model": "Telluride",
+    "display_name": "Kia Telluride",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": ["gas"],
+    "is_active": true
+  },
+  {
+    "id": "hyundai-palisade",
+    "brand": "Hyundai",
+    "model": "Palisade",
+    "display_name": "Hyundai Palisade",
+    "aliases": [],
+    "segment": "3-row",
+    "powertrain_types": ["gas"],
+    "is_active": true
+  },
+  {
+    "id": "mazda-cx-5",
+    "brand": "Mazda",
+    "model": "CX-5",
+    "display_name": "Mazda CX-5",
+    "aliases": ["CX5", "CX 5"],
+    "segment": "compact",
+    "powertrain_types": ["gas"],
+    "is_active": true
+  },
+  {
+    "id": "subaru-outback",
+    "brand": "Subaru",
+    "model": "Outback",
+    "display_name": "Subaru Outback",
+    "aliases": [],
+    "segment": "midsize",
+    "powertrain_types": ["gas"],
+    "is_active": true
+  },
+  {
+    "id": "rivian-r1s",
+    "brand": "Rivian",
+    "model": "R1S",
+    "display_name": "Rivian R1S",
+    "aliases": ["R1S"],
+    "segment": "ev",
+    "powertrain_types": ["ev"],
+    "is_active": true
+  },
+  {
+    "id": "rivian-r2",
+    "brand": "Rivian",
+    "model": "R2",
+    "display_name": "Rivian R2",
+    "aliases": ["R2"],
+    "segment": "ev",
+    "powertrain_types": ["ev"],
+    "is_active": true
+  }
+]

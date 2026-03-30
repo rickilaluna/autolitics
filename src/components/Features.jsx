@@ -78,9 +78,9 @@ export default function Features() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Clarity Card */}
                     <div className="feature-card bg-white rounded-[2rem] p-10 border border-text/5 shadow-sm hover:shadow-xl transition-shadow duration-500 flex flex-col h-[460px]">
-                        <h4 className="text-2xl font-bold font-sans text-primary mb-3">Clarity</h4>
+                        <h4 className="text-2xl font-bold font-sans text-primary mb-3">Strategic Clarity</h4>
                         <p className="text-text/70 text-[15px] mb-8 leading-relaxed">
-                            We define what you actually need — not what marketing pushes.
+                            Cut through complexity with a structured, data-informed approach tailored to your needs.
                         </p>
 
                         <div className="relative h-[200px] w-full mt-auto bg-background rounded-xl border border-text/5 p-6 overflow-hidden flex items-center justify-center text-center">
@@ -110,7 +110,7 @@ export default function Features() {
                     <div className="feature-card bg-primary text-ivory rounded-[2rem] p-10 shadow-2xl overflow-hidden flex flex-col h-[460px] relative">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent to-transparent opacity-50"></div>
                         <div className="flex justify-between items-center mb-8">
-                            <h4 className="text-2xl font-bold font-sans">Strategy</h4>
+                            <h4 className="text-2xl font-bold font-sans">Independent Advocacy</h4>
                             <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
                                 <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse"></span>
                                 <span className="font-mono text-[9px] text-[#10B981] uppercase tracking-wider">Live Feed</span>
@@ -118,7 +118,7 @@ export default function Features() {
                         </div>
 
                         <p className="text-ivory/60 text-[15px] mb-8 leading-relaxed">
-                            We identify the best-fit vehicles for your lifestyle and budget.
+                            Transparent, brand-neutral guidance — no affiliations, no commissions.
                         </p>
 
                         <div className="mt-auto bg-[#08080A] rounded-xl p-6 border border-white/5 font-mono text-sm leading-relaxed h-40 relative flex flex-col justify-center">
@@ -129,9 +129,9 @@ export default function Features() {
 
                     {/* Advocacy Card */}
                     <div className="feature-card bg-white rounded-[2rem] p-10 border border-text/5 shadow-sm hover:shadow-xl transition-shadow duration-500 flex flex-col h-[460px]">
-                        <h4 className="text-2xl font-bold font-sans text-primary mb-3">Advocacy</h4>
+                        <h4 className="text-2xl font-bold font-sans text-primary mb-3">Decision Confidence</h4>
                         <p className="text-text/70 text-[15px] mb-8 flex-grow leading-relaxed">
-                            I guide you through test drives, pricing, and decision-making so you move forward confidently.
+                            Structured test-drive strategy, offer preparation, and negotiation posture guidance.
                         </p>
 
                         <div className="relative mt-auto bg-background rounded-xl p-6 border border-text/5 h-44 flex flex-col items-center justify-center overflow-hidden">
