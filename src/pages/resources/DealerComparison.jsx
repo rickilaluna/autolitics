@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Printer, GitCompare, ShieldCheck } from 'lucide-react';
+import { Printer, ShieldCheck, Copy, Check } from 'lucide-react';
 import MinimalHeader from '../../components/MinimalHeader';
 import ResourceNav from '../../components/ResourceNav';
+import DealerComparisonInteractive from '../../components/resources/DealerComparisonInteractive';
 
 /* ─── Print styles ──────────────────────────────────────────────── */
 const PRINT_STYLES = `
@@ -33,15 +34,19 @@ const PRINT_STYLES = `
     .chart-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .comparison-grid { break-inside: avoid; }
     .print-table-section { break-before: page; break-inside: avoid; }
+    .comparison-interactive-root .no-print { display: none !important; }
 }
 @page { margin: 0.6in; size: letter landscape; }
 `;
 
+const SECTION_SCROLL = 'scroll-mt-28';
+
 /* ─── Helpers ───────────────────────────────────────────────────── */
-// Section number sits proud above the heading, outdented on md+ screens
-const SectionLabel = ({ n, children }) => (
-    <div className="relative mb-7">
-        <span className="block text-[10px] font-['JetBrains_Mono'] text-[#C9A84C]/50 uppercase tracking-[0.25em] mb-2">{n}</span>
+const SectionLabel = ({ n, id, children }) => (
+    <div id={id} className={`relative mb-6 ${SECTION_SCROLL}`}>
+        {n && (
+            <span className="block text-[10px] font-['JetBrains_Mono'] text-[#C9A84C]/50 uppercase tracking-[0.25em] mb-2">{n}</span>
+        )}
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight">{children}</h2>
     </div>
 );
@@ -53,7 +58,6 @@ const Bullet = ({ children }) => (
     </li>
 );
 
-// Clean left-border accent card — no icon box, less visual noise
 const StepCard = ({ n, title, children }) => (
     <div className="section-card flex gap-6 bg-[#14141B] rounded-2xl border border-[#2A2A35] px-6 py-5 border-l-2 border-l-[#C9A84C]/30">
         <span className="text-[10px] font-['JetBrains_Mono'] text-[#C9A84C]/40 uppercase tracking-widest pt-0.5 shrink-0 w-5">{n}</span>
@@ -64,7 +68,25 @@ const StepCard = ({ n, title, children }) => (
     </div>
 );
 
-/* ─── Comparison diagram (Typical vs Strategic) ─────────────────── */
+const ON_PAGE_LINKS = [
+    { href: '#what-otd-means', label: 'What OTD Means' },
+    { href: '#why-comparison-is-difficult', label: 'Why Comparison Is Difficult' },
+    { href: '#the-autolitics-method', label: 'The Autolitics Method' },
+    { href: '#compare-real-dealer-quotes', label: 'Compare Real Dealer Quotes' },
+    { href: '#financing-apr-evaluation', label: 'Financing & APR Evaluation' },
+    { href: '#worksheet', label: 'Worksheet' },
+    { href: '#key-takeaway', label: 'Key Takeaway' },
+];
+
+const ON_PAGE_BULLETS = [
+    'Understand what an out-the-door price includes',
+    'Learn why discounts can mislead',
+    'Evaluate financing and promotional APR offers',
+    'Compare dealer quotes with the interactive tool',
+    'Download a worksheet to standardize offers',
+];
+
+/* ─── Comparison diagram ───────────────────────────────────────── */
 const rows = [
     { typical: 'Negotiates on monthly payment', strategic: 'Negotiates on total vehicle price' },
     { typical: 'Contacts one dealership', strategic: 'Requests quotes from 3–5 dealers' },
@@ -75,7 +97,6 @@ const rows = [
 
 const ComparisonDiagram = () => (
     <div className="comparison-grid section-card bg-[#14141B] rounded-2xl border border-[#2A2A35] overflow-hidden">
-        {/* Header */}
         <div className="grid grid-cols-2 divide-x divide-[#2A2A35]">
             <div className="px-6 py-4 bg-[#0D0D12]">
                 <div className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/25 uppercase tracking-widest mb-0.5">Typical Buyer</div>
@@ -86,7 +107,6 @@ const ComparisonDiagram = () => (
                 <div className="text-sm font-semibold text-[#C9A84C]">Prepared</div>
             </div>
         </div>
-        {/* Rows */}
         {rows.map((r, i) => (
             <div key={i} className="grid grid-cols-2 divide-x divide-[#2A2A35] border-t border-[#2A2A35]">
                 <div className="px-6 py-4 text-sm text-[#FAF8F5]/35">{r.typical}</div>
@@ -144,7 +164,6 @@ const ComparisonTable = () => (
                         {DEALERS.map(d => (
                             <td key={d} className={`px-4 py-${row.tall ? '8' : '3'} border border-[#2A2A35] text-center ${row.bold ? 'font-bold text-[#C9A84C]' : 'text-[#FAF8F5]/30'
                                 }`}>
-                                {/* blank fill-in cell */}
                             </td>
                         ))}
                     </tr>
@@ -157,7 +176,7 @@ const ComparisonTable = () => (
     </div>
 );
 
-/* ─── Sample preview table (filled) ────────────────────────────── */
+/* ─── Sample preview table ─────────────────────────────────────── */
 const SAMPLE = [
     { dealer: 'Dealer A', msrp: '$48,000', discount: '-$1,200', fees: '$600', addons: '$0', otd: '$50,100', highlight: false },
     { dealer: 'Dealer B', msrp: '$48,000', discount: '-$900', fees: '$200', addons: '$0', otd: '$49,800', highlight: true },
@@ -191,22 +210,33 @@ const SampleTable = () => (
             </tbody>
         </table>
         <p className="px-5 py-3 text-xs text-[#FAF8F5]/25 font-['JetBrains_Mono'] border-t border-[#2A2A35]">
-            Dealer B has the lowest OTD price despite the smallest headline discount. Dealer C's large discount is erased by fees and add-ons.
+            Dealer B has the lowest OTD price despite the smallest headline discount. Dealer C&apos;s large discount is erased by fees and add-ons.
         </p>
     </div>
 );
 
-/* ─── Main Component ────────────────────────────────────────────── */
-export default function DealerComparison() {
+const DEALER_SCRIPT = 'Can you send me the full itemized out-the-door price, including all fees and add-ons?';
 
-    const handlePrint = () => window.print(); // eslint-disable-line no-undef
+export default function DealerComparison() {
+    const [copied, setCopied] = useState(false);
+
+    const handlePrint = () => window.print();
+
+    const copyScript = async () => {
+        try {
+            await navigator.clipboard.writeText(DEALER_SCRIPT);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch {
+            /* ignore */
+        }
+    };
 
     return (
         <>
             <style>{PRINT_STYLES}</style>
 
             <div className="bg-[#0D0D12] min-h-screen text-[#FAF8F5] font-['Inter'] selection:bg-[#C9A84C]/20">
-                {/* Noise overlay */}
                 <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.04] mix-blend-overlay no-print">
                     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
                         <filter id="noiseFilterDC">
@@ -220,11 +250,11 @@ export default function DealerComparison() {
                 <div className="pt-28">
                     <ResourceNav title="Dealer Offer Comparison" />
 
-                    <main className="w-full max-w-4xl mx-auto px-6 md:px-8 pt-6 pb-24">
+                    <main className="w-full max-w-7xl mx-auto px-6 md:px-8 pt-6 pb-24 min-w-0">
 
-                        {/* Print button */}
                         <div className="no-print flex justify-end mb-10">
                             <button
+                                type="button"
                                 onClick={handlePrint}
                                 className="flex items-center gap-2 text-sm font-semibold text-[#0D0D12] bg-[#C9A84C] px-5 py-2.5 rounded-full hover:scale-[1.03] transition-transform duration-300"
                                 style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
@@ -234,8 +264,8 @@ export default function DealerComparison() {
                             </button>
                         </div>
 
-                        {/* ── Hero ── */}
-                        <section className="mb-14 print-page">
+                        {/* Hero */}
+                        <section className="mb-10 print-page">
                             <div className="inline-flex items-center gap-2 text-[10px] font-['JetBrains_Mono'] text-[#C9A84C]/60 uppercase tracking-widest mb-4 border border-[#C9A84C]/20 px-3 py-1 rounded-full">
                                 Autolitics Studio Resource
                             </div>
@@ -243,99 +273,218 @@ export default function DealerComparison() {
                                 Dealer Offer<br />
                                 <span className="font-['Playfair_Display'] italic text-[#C9A84C]">Comparison Template</span>
                             </h1>
-                            <p className="text-lg text-[#FAF8F5]/55 max-w-2xl leading-relaxed mb-8">
-                                Compare dealership quotes and uncover the true lowest cost.
+                            <p className="text-lg text-[#FAF8F5]/55 max-w-3xl leading-relaxed">
+                                Compare dealer quotes with confidence. Understand out-the-door pricing, identify hidden extras, evaluate financing offers, use the comparison tool, and download a clean worksheet.
                             </p>
+                        </section>
 
-                            {/* Callout quote */}
-                            <div className="section-card border border-[#C9A84C]/20 bg-[#C9A84C]/5 rounded-2xl px-6 py-5 max-w-xl">
-                                <p className="text-sm text-[#FAF8F5]/70 leading-relaxed italic font-['Playfair_Display']">
-                                    "Dealership quotes rarely look the same.
+                        {/* On This Page */}
+                        <section className={`mb-12 ${SECTION_SCROLL}`} aria-labelledby="on-this-page-heading">
+                            <div className="section-card bg-[#14141B] rounded-2xl border border-[#2A2A35] p-6 md:p-8">
+                                <h2 id="on-this-page-heading" className="text-lg font-semibold text-[#FAF8F5]/90 mb-4">
+                                    On This Page
+                                </h2>
+                                <ul className="space-y-2 mb-8 text-sm text-[#FAF8F5]/60">
+                                    {ON_PAGE_BULLETS.map((line) => (
+                                        <li key={line} className="flex items-start gap-2">
+                                            <span className="text-[#C9A84C]/80 mt-0.5">·</span>
+                                            <span>{line}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <nav aria-label="In-page navigation">
+                                    <p className="text-[10px] font-['JetBrains_Mono'] text-[#C9A84C]/50 uppercase tracking-widest mb-3">Jump to section</p>
+                                    <ul className="flex flex-wrap gap-2">
+                                        {ON_PAGE_LINKS.map(({ href, label }) => (
+                                            <li key={href}>
+                                                <a
+                                                    href={href}
+                                                    className="inline-block text-xs font-medium text-[#C9A84C] border border-[#C9A84C]/25 rounded-full px-3 py-1.5 hover:bg-[#C9A84C]/10 transition-colors"
+                                                >
+                                                    {label}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </section>
 
-                                    One dealer may discount the vehicle but add fees.
-                                    Another may hide incentives in the pricing.
-
-                                    A structured comparison reveals the true lowest cost."
+                        {/* What OTD Means */}
+                        <section className="mb-12">
+                            <SectionLabel id="what-otd-means">What &ldquo;Out-the-Door&rdquo; Actually Means</SectionLabel>
+                            <div className="section-card bg-[#14141B] rounded-2xl border border-[#2A2A35] p-6 md:p-8 space-y-6">
+                                <p className="text-sm text-[#FAF8F5]/70 leading-relaxed">
+                                    The only number that matters when comparing dealer offers is the full out-the-door price.
+                                </p>
+                                <div>
+                                    <h3 className="text-xs font-['JetBrains_Mono'] text-[#C9A84C]/70 uppercase tracking-widest mb-3">A clean total includes</h3>
+                                    <ul className="space-y-2">
+                                        <Bullet>Vehicle price (MSRP or negotiated price, incl. destination)</Bullet>
+                                        <Bullet>Sales tax</Bullet>
+                                        <Bullet>DMV / registration</Bullet>
+                                        <Bullet>Documentation fee</Bullet>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 uppercase tracking-widest mb-3">It should not include</h3>
+                                    <ul className="space-y-2">
+                                        <Bullet>Market adjustments</Bullet>
+                                        <Bullet>Add-ons or protection packages</Bullet>
+                                        <Bullet>VIN etching, nitrogen, tint</Bullet>
+                                        <Bullet>Vague dealer fees</Bullet>
+                                    </ul>
+                                </div>
+                                <p className="text-sm text-[#FAF8F5]/55 border-t border-[#2A2A35] pt-6">
+                                    If it is not the vehicle or a required government fee, it should be questioned.
                                 </p>
                             </div>
                         </section>
 
-                        {/* ── Core Insight ── */}
+                        {/* Why comparison is difficult */}
                         <section className="mb-12">
-                            <div className="section-card bg-[#14141B] rounded-2xl border border-[#2A2A35] p-7">
-                                <div className="flex items-start gap-4">
-                                    <div className="w-10 h-10 rounded-xl bg-[#C9A84C]/10 border border-[#C9A84C]/20 flex items-center justify-center shrink-0">
-                                        <GitCompare size={18} className="text-[#C9A84C]" />
-                                    </div>
-                                    <div>
-                                        <h2 className="font-bold text-base text-[#FAF8F5]/90 mb-3">The Problem With Comparing Quotes</h2>
-                                        <p className="text-sm text-[#FAF8F5]/55 leading-relaxed mb-3">
-                                            Two quotes with the same vehicle price can differ by thousands of dollars once fees, add-ons, and incentives are included. Dealership offers are designed for negotiation — not clarity.
+                            <SectionLabel n="01" id="why-comparison-is-difficult">Why Offer Comparison Is Difficult</SectionLabel>
+                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-2 max-w-3xl">
+                                Two quotes with the same vehicle price can differ by thousands once fees, add-ons, and incentives are included. Dealership offers are built for negotiation — not side-by-side clarity.
+                            </p>
+                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-5 max-w-3xl">
+                                Autolitics buyers line everything up using the <span className="text-[#C9A84C] font-semibold">out-the-door price</span> — the amount that should match your purchase contract.
+                            </p>
+                            <ul className="space-y-3">
+                                <Bullet>Different documentation fees — often $0 to $1,200+ depending on dealership</Bullet>
+                                <Bullet>Dealer-installed accessories bundled without clear disclosure</Bullet>
+                                <Bullet>Incentives applied differently — or not shown the same way</Bullet>
+                                <Bullet>Financing incentives folded into vehicle price</Bullet>
+                                <Bullet>Tax and registration estimated or calculated differently across quotes</Bullet>
+                            </ul>
+                        </section>
+
+                        {/* Autolitics method */}
+                        <section className="mb-12">
+                            <SectionLabel n="02" id="the-autolitics-method">The Autolitics Offer Comparison Method</SectionLabel>
+                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-5 max-w-3xl">
+                                Informal comparisons fail because line items don&apos;t match. Use one structure for every quote so you can judge offers objectively.
+                            </p>
+                            <div className="space-y-3">
+                                <StepCard n="01" title="Request Written Out-the-Door Quotes">
+                                    Ask each dealership for a full breakdown: vehicle price, discount, add-ons, fees, taxes, and registration. Avoid verbal-only pricing.
+                                </StepCard>
+                                <StepCard n="02" title="Enter Quotes Into the Comparison Tool or Worksheet">
+                                    Use the interactive tool below or the printable worksheet. Each column is one dealer — you&apos;ll see how each offer was built, not just the headline.
+                                </StepCard>
+                                <StepCard n="03" title="Compare the Final Out-the-Door Price">
+                                    The largest discount is not always the lowest total. Decide on the clean out-the-door total, then validate financing separately.
+                                </StepCard>
+                            </div>
+                        </section>
+
+                        {/* Example + sample table */}
+                        <section className="mb-12">
+                            <SectionLabel n="03">Why the Biggest Discount Isn&apos;t Always the Best Deal</SectionLabel>
+                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-5 max-w-3xl">
+                                Same MSRP, three dealers — Dealer C shows the largest discount but the highest out-the-door cost.
+                            </p>
+                            <div className="section-card border border-[#C9A84C]/25 bg-[#C9A84C]/[0.06] rounded-2xl px-5 py-4 mb-5">
+                                <h3 className="text-sm font-semibold text-[#C9A84C] mb-2">Example Insight</h3>
+                                <p className="text-sm text-[#FAF8F5]/70 leading-relaxed">
+                                    The largest discount does not guarantee the best deal. Fees, add-ons, and financing can change the final cost significantly.
+                                </p>
+                            </div>
+                            <SampleTable />
+                        </section>
+
+                        {/* Negotiation diagram */}
+                        <section className="mb-12">
+                            <SectionLabel n="04">The Autolitics Negotiation Advantage</SectionLabel>
+                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-5 max-w-3xl">
+                                When you know how offers are structured, the conversation changes — you&apos;re comparing totals, not slogans.
+                            </p>
+                            <ComparisonDiagram />
+                        </section>
+
+                        {/* Interactive comparison */}
+                        <section className="mb-12">
+                            <SectionLabel n="05" id="compare-real-dealer-quotes">Compare Real Dealer Quotes</SectionLabel>
+                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-6 max-w-3xl">
+                                Enter dealer quotes to see which offer is truly lowest once tax, fees, and extras are accounted for.
+                            </p>
+                            <div className="section-card bg-[#14141B] rounded-2xl border border-[#2A2A35] p-6 mb-6">
+                                <h3 className="text-sm font-semibold text-[#FAF8F5]/90 mb-3">How to Read the Difference</h3>
+                                <p className="text-xs text-[#FAF8F5]/45 font-['JetBrains_Mono'] uppercase tracking-wider mb-3">Variance (quoted OTD vs. clean estimate)</p>
+                                <ul className="space-y-2 mb-4">
+                                    <Bullet><span className="text-[#FAF8F5]/80">$0–$500</span> — normal variation</Bullet>
+                                    <Bullet><span className="text-[#FAF8F5]/80">$500–$1,500</span> — review closely</Bullet>
+                                    <Bullet><span className="text-[#FAF8F5]/80">$1,500+</span> — likely markup or add-ons</Bullet>
+                                </ul>
+                                <p className="text-sm text-[#FAF8F5]/55 border-t border-[#2A2A35] pt-4">
+                                    Focus on the clean total, not the advertised price.
+                                </p>
+                            </div>
+                            <DealerComparisonInteractive embedInPage />
+                        </section>
+
+                        {/* Financing */}
+                        <section className="mb-12">
+                            <SectionLabel n="06" id="financing-apr-evaluation">Financing &amp; APR: When the Math Changes</SectionLabel>
+                            <div className="section-card bg-[#14141B] rounded-2xl border border-[#2A2A35] p-6 md:p-8 space-y-6">
+                                <p className="text-sm text-[#FAF8F5]/60 leading-relaxed">
+                                    Some offers include manufacturer-supported promotional interest rates that are lower than market rates. These can materially change the true cost of the vehicle.
+                                </p>
+                                <div>
+                                    <h3 className="text-xs font-['JetBrains_Mono'] text-[#C9A84C]/70 uppercase tracking-widest mb-3">To evaluate financing properly</h3>
+                                    <ul className="space-y-2">
+                                        <Bullet>Compare total cost of ownership, not just monthly payment</Bullet>
+                                        <Bullet>A higher vehicle price with a low APR may cost less overall</Bullet>
+                                        <Bullet>A lower price with a high APR can erase upfront savings</Bullet>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 uppercase tracking-widest mb-3">Rule of thumb — always evaluate</h3>
+                                    <ul className="space-y-2">
+                                        <Bullet>Out-the-door price</Bullet>
+                                        <Bullet>Interest rate (APR)</Bullet>
+                                        <Bullet>Loan term</Bullet>
+                                        <Bullet>Total paid over the life of the loan</Bullet>
+                                    </ul>
+                                </div>
+                                <p className="text-sm text-[#FAF8F5]/55 border-t border-[#2A2A35] pt-6">
+                                    The best deal is the lowest total cost—not the lowest price or the lowest payment alone.
+                                </p>
+                            </div>
+                        </section>
+
+                        {/* What to do next */}
+                        <section id="what-to-do-next" className={`mb-12 ${SECTION_SCROLL}`}>
+                            <SectionLabel>What to Do Next</SectionLabel>
+                            <div className="section-card bg-[#14141B] rounded-2xl border border-[#2A2A35] p-6 md:p-8 space-y-6">
+                                <ul className="space-y-2">
+                                    <Bullet>Request a fully itemized out-the-door quote</Bullet>
+                                    <Bullet>Remove all add-ons and dealer extras</Bullet>
+                                    <Bullet>Compare at least 3 written offers</Bullet>
+                                </ul>
+                                <div>
+                                    <p className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 uppercase tracking-widest mb-2">Dealer script (copyable)</p>
+                                    <div className="flex flex-col sm:flex-row sm:items-stretch gap-2">
+                                        <p className="flex-1 text-sm text-[#FAF8F5]/75 bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 font-['JetBrains_Mono'] leading-relaxed">
+                                            {DEALER_SCRIPT}
                                         </p>
-                                        <p className="text-sm text-[#FAF8F5]/55 leading-relaxed">
-                                            Autolitics buyers compare offers using the <span className="text-[#C9A84C] font-semibold">out-the-door price</span> — This number represents the <span className="text-[#C9A84C] font-semibold">true cost of the vehicle purchase</span> — the amount that will appear on the final purchase contract.
-                                        </p>
+                                        <button
+                                            type="button"
+                                            onClick={copyScript}
+                                            className="no-print inline-flex items-center justify-center gap-2 shrink-0 text-xs font-semibold text-[#0D0D12] bg-[#C9A84C] px-4 py-3 rounded-xl hover:opacity-90 transition-opacity"
+                                        >
+                                            {copied ? <Check size={16} /> : <Copy size={16} />}
+                                            {copied ? 'Copied' : 'Copy'}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        {/* ── Section 1: Why It's Difficult ── */}
+                        {/* Worksheet */}
                         <section className="mb-12">
-                            <SectionLabel n="01">Why Offer Comparison Is Difficult</SectionLabel>
-                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-5">
-                                Dealership quotes vary widely in structure. Without a consistent framework, buyers may choose the wrong offer.
-                            </p>
-                            <ul className="space-y-3">
-                                <Bullet>Different documentation fees — ranging from $0 to $1,200+ depending on dealership</Bullet>
-                                <Bullet>Dealer-installed accessories bundled without disclosure</Bullet>
-                                <Bullet>Varying incentive application — some dealers apply manufacturer rebates, others do not</Bullet>
-                                <Bullet>Financing incentives embedded into vehicle price</Bullet>
-                                <Bullet>Tax and registration calculated differently across quotes</Bullet>
-                            </ul>
-                        </section>
-
-                        {/* ── Section 2: The Method ── */}
-                        <section className="mb-12">
-                            <SectionLabel n="02">The Autolitics Offer Comparison Method</SectionLabel>
-                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-5">
-                                Most dealership negotiations fail because buyers compare offers informally.< br />The Autolitics method applies a consistent structure so every quote can be evaluated objectively.
-                            </p>
-                            <div className="space-y-3">
-                                <StepCard n="01" title="Request Written Out-the-Door Quotes">
-                                    Ask each dealership for a full breakdown including vehicle price, dealer discount, dealer add-ons, fees, taxes, and registration. Never accept verbal-only pricing.
-                                </StepCard>
-                                <StepCard n="02" title="Enter Quotes Into the Comparison Template">
-                                    Input each dealer's offer into the template below. Each column represents one dealership. This structure reveals how each dealer constructed their offer — not just the headline number.
-                                </StepCard>
-                                <StepCard n="03" title="Compare the Final Out-the-Door Price">
-                                    The largest discount does not always mean the lowest total cost. Focus solely on the final out-the-door price to identify the best offer.
-                                </StepCard>
-                            </div>
-                        </section>
-
-                        {/* ── Section 3: Visual Sample ── */}
-                        <section className="mb-12">
-                            <SectionLabel n="03">Why the Biggest Discount Isn’t Always the Best Deal</SectionLabel>
-                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-5">
-                                This example shows three dealers quoting the same vehicle at the same MSRP. Dealer C offers the largest discount — but has the highest out-the-door cost.
-                            </p>
-                            <SampleTable />
-                        </section>
-
-                        {/* ── Section 4: Negotiation Advantage diagram ── */}
-                        <section className="mb-12">
-                            <SectionLabel n="04">The Autolitics Negotiation Advantage</SectionLabel>
-                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-5">
-                                Prepared buyers negotiate differently. Understanding how offers are structured changes the entire dynamic of the conversation.
-                            </p>
-                            <ComparisonDiagram />
-                        </section>
-
-                        {/* ── Printable Comparison Template ── */}
-                        <section className="mb-12">
-                            <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
-                                <SectionLabel n="05">Comparison Template</SectionLabel>
+                            <div id="worksheet" className={`flex items-center justify-between mb-5 flex-wrap gap-3 ${SECTION_SCROLL}`}>
+                                <SectionLabel n="07">Download the Comparison Worksheet</SectionLabel>
                                 <Link
                                     to="/resources/dealer-offer-comparison/template"
                                     target="_blank"
@@ -346,30 +495,29 @@ export default function DealerComparison() {
                                     Print Template (PDF)
                                 </Link>
                             </div>
-                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-6">
-                                Use this worksheet to capture and compare quotes from up to four dealerships. Print it and bring it to every dealer conversation, or complete it digitally.
+                            <p className="text-sm text-[#FAF8F5]/50 leading-relaxed mb-6 max-w-3xl">
+                                Use this worksheet to standardize every quote and compare dealers on equal terms. Bring it into dealer conversations or complete it after collecting written offers.
                             </p>
                             <ComparisonTable />
                         </section>
 
-                        {/* ── Summary ── */}
-                        <section className="mb-8">
+                        {/* Key takeaway */}
+                        <section id="key-takeaway" className={`mb-8 ${SECTION_SCROLL}`}>
                             <div className="section-card bg-[#14141B] rounded-2xl border border-[#2A2A35] p-7">
                                 <div className="flex items-start gap-4">
                                     <div className="w-10 h-10 rounded-xl bg-[#C9A84C]/10 border border-[#C9A84C]/20 flex items-center justify-center shrink-0">
                                         <ShieldCheck size={18} className="text-[#C9A84C]" />
                                     </div>
                                     <div>
-                                        <h2 className="font-bold text-base text-[#FAF8F5]/90 mb-2">Clarity Removes Pressure</h2>
+                                        <h2 className="font-bold text-lg text-[#FAF8F5]/90 mb-2">Clarity Removes Pressure</h2>
                                         <p className="text-sm text-[#FAF8F5]/55 leading-relaxed">
-                                            When you understand pricing structures, request written offers, and compare multiple dealers using a consistent format, the negotiation process becomes straightforward. The goal is not confrontation — it is a confident, informed purchase.
+                                            When quotes are standardized and itemized, the dealership process becomes easier to navigate. The buyer with the clearest numbers makes the strongest decision.
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        {/* ── Footer note ── */}
                         <p className="text-xs text-[#FAF8F5]/20 font-['JetBrains_Mono'] text-center">
                             Autolitics Studio · Dealer Offer Comparison Template · studio.autolitics.com
                         </p>

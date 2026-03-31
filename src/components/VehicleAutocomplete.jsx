@@ -43,6 +43,40 @@ function searchVehicles(vehicles, query) {
         .map(({ vehicle }) => vehicle);
 }
 
+/** Labels from Decision Engine / worksheets / profile — shown when query is short or as extra matches */
+function contextStringsMatching(contextRecent, query) {
+    if (!contextRecent?.length) return [];
+    const q = normalize(query);
+    const uniq = [...new Set(contextRecent.map((s) => (s || '').trim()).filter(Boolean))];
+    if (!q.length) return uniq.slice(0, 6);
+    return uniq
+        .filter((s) => {
+            const ns = normalize(s);
+            return ns.includes(q) || q.includes(ns);
+        })
+        .slice(0, 6);
+}
+
+function mergeCatalogAndContext(vehicles, query, contextRecent) {
+    const q = normalize(query);
+    const catalog =
+        q.length >= MIN_CHARS
+            ? searchVehicles(vehicles, query)
+            : [];
+    const ctxLabels = contextStringsMatching(contextRecent, query);
+    const catalogNorms = new Set(catalog.map((v) => normalize(v.display_name)));
+    const fromContext = ctxLabels
+        .filter((label) => !catalogNorms.has(normalize(label)))
+        .map((label, i) => ({
+            id: `ctx-${i}-${label.slice(0, 24)}`,
+            display_name: label,
+            brand: 'From your tools',
+            is_active: true,
+            _fromContext: true,
+        }));
+    return [...fromContext, ...catalog].slice(0, MAX_SUGGESTIONS + 4);
+}
+
 /** Find start index in original text that corresponds to normalized match start */
 function findMatchRange(text, query) {
     const nq = normalize(query);
@@ -97,12 +131,15 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
         placeholder = 'Enter vehicle name',
         helperText = 'Start typing to search supported models, or enter a custom vehicle manually.',
         className = '',
+        /** Recent / cross-tool labels (Decision Engine, worksheets, etc.) */
+        contextRecent = [],
         id,
         'aria-label': ariaLabel,
         ...inputProps
     },
     ref
 ) {
+    const { onKeyDown: onKeyDownProp, ...restInputProps } = inputProps;
     const [open, setOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
     const listRef = useRef(null);
@@ -111,8 +148,8 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
 
     const vehicles = useMemo(() => vehiclesData, []);
     const suggestions = useMemo(
-        () => searchVehicles(vehicles, value),
-        [vehicles, value]
+        () => mergeCatalogAndContext(vehicles, value, contextRecent),
+        [vehicles, value, contextRecent]
     );
 
     const exactMatch = useMemo(() => {
@@ -125,7 +162,7 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
         });
     }, [vehicles, value]);
 
-    const showDropdown = open && value.length >= MIN_CHARS && suggestions.length > 0;
+    const showDropdown = open && suggestions.length > 0;
 
     const closeDropdown = useCallback(() => {
         setOpen(false);
@@ -143,7 +180,7 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
 
     useEffect(() => {
         setHighlightedIndex(showDropdown ? 0 : -1);
-    }, [showDropdown, suggestions.length, value]);
+    }, [showDropdown, suggestions.length, value, contextRecent]);
 
     useEffect(() => {
         if (!showDropdown) return;
@@ -203,7 +240,7 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
                 id={id}
                 aria-label={ariaLabel ?? placeholder}
                 aria-autocomplete="list"
-                aria-expanded={showDropdown}
+                aria-expanded={!!showDropdown}
                 aria-controls={showDropdown ? listboxId : undefined}
                 role="combobox"
                 value={value}
@@ -212,11 +249,14 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
                     setOpen(true);
                 }}
                 onFocus={() => setOpen(true)}
-                onKeyDown={handleKeyDown}
+                onKeyDown={(e) => {
+                    handleKeyDown(e);
+                    onKeyDownProp?.(e);
+                }}
                 placeholder={placeholder}
                 className={className}
                 autoComplete="off"
-                {...inputProps}
+                {...restInputProps}
             />
             {showDropdown && (
                 <ul
@@ -243,7 +283,7 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
                                 {boldMatch(vehicle.display_name, value)}
                             </span>
                             <span className="block text-xs text-[#FAF8F5]/50 mt-0.5">
-                                {vehicle.brand}
+                                {vehicle._fromContext ? 'Decision Engine · worksheets · saved' : vehicle.brand}
                             </span>
                         </li>
                     ))}
