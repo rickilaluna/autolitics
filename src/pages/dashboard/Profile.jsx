@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { User as UserIcon, Save, Loader2, ShieldCheck, BookOpen, Clock, CarFront } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { User as UserIcon, Save, Loader2, ShieldCheck, BookOpen, Clock, CarFront, Plus, X } from 'lucide-react';
+import VehicleAutocomplete from '../../components/VehicleAutocomplete';
+import { getConsideringModelStrings, recordConsideringModel } from '../../lib/vehicleContextStorage';
 import { useAuth } from '../../contexts/AuthContext';
 import { useClientProfile } from '../../hooks/useClientProfile';
 import { usePurchases } from '../../hooks/usePurchases';
 import { useJourneyStatus } from '../../hooks/useJourneyStatus';
+import ResourceHubCrosslinks from '../../components/dashboard/ResourceHubCrosslinks';
 
 const PHASES = [
     { num: 1, label: 'Setup' },
@@ -110,13 +113,80 @@ const BudgetSlider = ({ min, max, onChange }) => {
     );
 };
 
+function ProfileShortlistEditor({ form, setForm, contextRecent }) {
+    const [draft, setDraft] = useState('');
+    const add = () => {
+        const t = draft.trim();
+        if (!t) return;
+        recordConsideringModel(t);
+        setForm((prev) => ({
+            ...prev,
+            active_shortlist: [...(prev.active_shortlist || []), t],
+        }));
+        setDraft('');
+    };
+    const remove = (idx) => {
+        setForm((prev) => ({
+            ...prev,
+            active_shortlist: (prev.active_shortlist || []).filter((_, i) => i !== idx),
+        }));
+    };
+    const list = form.active_shortlist || [];
+    return (
+        <div className="space-y-3">
+            <div className="flex flex-col sm:flex-row gap-2">
+                <VehicleAutocomplete
+                    value={draft}
+                    onChange={setDraft}
+                    contextRecent={contextRecent}
+                    placeholder="Add a vehicle"
+                    helperText=""
+                    className="flex-1 min-w-0 bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2.5 text-sm text-[#0D0D12]"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            add();
+                        }
+                    }}
+                />
+                <button
+                    type="button"
+                    onClick={add}
+                    className="inline-flex items-center justify-center gap-1 bg-[#0D0D12] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1A1A24] shrink-0"
+                >
+                    <Plus size={16} /> Add
+                </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+                {list.map((car, idx) => (
+                    <span
+                        key={`${car}-${idx}`}
+                        className="inline-flex items-center gap-2 bg-[#FAF8F5] border border-[#0D0D12]/10 px-3 py-1.5 rounded-lg text-sm text-[#0D0D12]"
+                    >
+                        <CarFront size={14} className="text-[#C9A84C] shrink-0" />
+                        {car}
+                        <button
+                            type="button"
+                            onClick={() => remove(idx)}
+                            className="p-0.5 text-[#0D0D12]/40 hover:text-red-500 rounded"
+                            aria-label="Remove"
+                        >
+                            <X size={14} />
+                        </button>
+                    </span>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 // ── Main component ──
 
 const Profile = () => {
     const { user } = useAuth();
     const { profile, loading: profileLoading, updateProfile } = useClientProfile();
     const { loading: purchaseLoading, hasPurchasedAdvisory, hasPurchasedGuide } = usePurchases();
-    const { currentPhase } = useJourneyStatus({ profile, hasPurchasedAdvisory });
+    const { currentPhase, nextStep } = useJourneyStatus({ profile, hasPurchasedAdvisory });
 
     const [editing, setEditing] = useState(false);
     const [saving, setSaving] = useState(false);
@@ -138,9 +208,12 @@ const Profile = () => {
                 buying_timeline: profile.buying_timeline || '',
                 primary_goal: profile.primary_goal || '',
                 trade_in_status: profile.trade_in_status || '',
+                active_shortlist: Array.isArray(profile.active_shortlist) ? [...profile.active_shortlist] : [],
             });
         }
     }, [profile]);
+
+    const profileContextRecent = useMemo(() => getConsideringModelStrings(), [form.active_shortlist]);
 
     const set = useCallback((field) => (e) => {
         setForm(prev => ({ ...prev, [field]: e.target.value }));
@@ -309,6 +382,16 @@ const Profile = () => {
                             { value: 'Yes, With Loan', label: 'Yes, with active loan' },
                             { value: 'Yes, Lease Return', label: 'Yes, lease maturity' },
                         ]} />
+
+                        <div className="sm:col-span-2 pt-4 border-t border-[#0D0D12]/10">
+                            <p className="text-xs text-[#0D0D12]/50 font-['JetBrains_Mono'] uppercase tracking-wider mb-3">Models considering</p>
+                            <p className="text-xs text-[#0D0D12]/45 mb-3">Same catalog as the Decision Engine and OTD tools — suggestions include vehicles you&apos;ve entered elsewhere on this device.</p>
+                            <ProfileShortlistEditor
+                                form={form}
+                                setForm={setForm}
+                                contextRecent={profileContextRecent}
+                            />
+                        </div>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -345,6 +428,8 @@ const Profile = () => {
                     </div>
                 </div>
             )}
+
+            <ResourceHubCrosslinks variant="compact" emphasizePhase={nextStep?.resourcePhase || null} />
 
             {/* Account Details */}
             <div className="bg-white border border-[#0D0D12]/10 rounded-[2rem] p-8 shadow-sm">

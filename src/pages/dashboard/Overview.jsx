@@ -17,8 +17,10 @@ import { useAuth } from '../../contexts/AuthContext';
 import { usePurchases } from '../../hooks/usePurchases';
 import { useClientProfile } from '../../hooks/useClientProfile';
 import { useJourneyStatus } from '../../hooks/useJourneyStatus';
-import { PHASE_RESOURCES } from './Resources';
+import { PHASE_RESOURCES } from '../../data/dashboardResourceCatalog';
+import ResourceHubCrosslinks from '../../components/dashboard/ResourceHubCrosslinks';
 import OnboardingModal from './OnboardingModal';
+import { getConsideringModelStrings } from '../../lib/vehicleContextStorage';
 
 const PHASES = [
     { num: 1, label: 'Setup', short: 'Profile' },
@@ -118,6 +120,17 @@ const Overview = () => {
 
     const isProfileComplete = profile && profile.buying_timeline && profile.primary_goal;
     const hasActiveShortlist = profile?.active_shortlist && profile.active_shortlist.length > 0;
+
+    const mergedConsideringModels = (() => {
+        const fromProfile = profile?.active_shortlist || [];
+        const fromTools = getConsideringModelStrings();
+        const set = new Set();
+        [...fromProfile, ...fromTools].forEach((s) => {
+            const t = (s || '').trim();
+            if (t) set.add(t);
+        });
+        return [...set];
+    })();
 
     const handleOpenOnboarding = () => setShowOnboarding(true);
 
@@ -229,9 +242,40 @@ const Overview = () => {
                         </div>
                     ) : (
                         <div className="bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl p-4 text-sm font-['JetBrains_Mono'] text-[#0D0D12]/50">
-                            No vehicles added to shortlist yet. Use 'Edit Profile' to add targets.
+                            No vehicles added to shortlist yet. Use Edit Profile to add targets, or add models in the Decision Engine — they sync here on this device.
                         </div>
                     )}
+                </div>
+            )}
+
+            {isProfileComplete && mergedConsideringModels.length > 0 && (
+                <div className="bg-white border border-[#0D0D12]/10 rounded-[2rem] p-8 shadow-sm">
+                    <h3 className="text-sm font-['JetBrains_Mono'] text-[#0D0D12]/40 uppercase tracking-widest mb-2">Models considering</h3>
+                    <p className="text-sm text-[#0D0D12]/55 mb-4 max-w-2xl">
+                        Union of your profile shortlist and vehicles you&apos;ve typed in the Decision Engine, OTD checker, and offer comparison on this browser.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-5">
+                        {mergedConsideringModels.map((car) => (
+                            <div
+                                key={car}
+                                className="bg-[#FAF8F5] border border-[#0D0D12]/15 px-4 py-2 rounded-xl font-medium text-sm flex items-center gap-2"
+                            >
+                                <CarFront size={16} className="text-[#C9A84C]" />
+                                {car}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="flex flex-wrap gap-4 text-sm">
+                        <Link to="/resources/vehicle-comparison-matrix" className="font-medium text-[#C9A84C] hover:text-[#0D0D12] transition-colors">
+                            Vehicle Decision Engine →
+                        </Link>
+                        <Link to="/resources/out-the-door-calculator" className="font-medium text-[#C9A84C] hover:text-[#0D0D12] transition-colors">
+                            OTD Price Checker →
+                        </Link>
+                        <Link to="/resources/dealer-offer-comparison" className="font-medium text-[#C9A84C] hover:text-[#0D0D12] transition-colors">
+                            Offer comparison →
+                        </Link>
+                    </div>
                 </div>
             )}
 
@@ -256,6 +300,11 @@ const Overview = () => {
                     </Link>
                 </div>
             </div>
+
+            {/* Full toolkit strip — same IP as Resources hub */}
+            {isProfileComplete && (
+                <ResourceHubCrosslinks variant="compact" emphasizePhase={nextStep?.resourcePhase || null} />
+            )}
 
             {/* Phase-relevant Resources */}
             {isProfileComplete && nextStep?.resourcePhase && PHASE_RESOURCES[nextStep.resourcePhase] && (

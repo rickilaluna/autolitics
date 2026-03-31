@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { usePurchases } from '../../hooks/usePurchases';
 import { supabase } from '../../lib/supabase';
 import { CarFront, MessageSquareText, FileSignature, ArrowRight, Loader2, Clock, CheckCircle2, XCircle } from 'lucide-react';
+import ResourceHubCrosslinks from '../../components/dashboard/ResourceHubCrosslinks';
 
 const MySearch = () => {
     const { user } = useAuth();
@@ -153,6 +154,8 @@ const MySearch = () => {
                     </Link>
                 </div>
             </div>
+
+            <ResourceHubCrosslinks variant="workspace" />
 
             {/* Recent Activity Timeline */}
             <div className="mt-12">

@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { FolderKanban, Loader2, PlayCircle, Download, CarFront, MessageSquareText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { usePurchases } from '../../hooks/usePurchases';
+import { useClientProfile } from '../../hooks/useClientProfile';
+import { useJourneyStatus } from '../../hooks/useJourneyStatus';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
+import ResourceHubCrosslinks from '../../components/dashboard/ResourceHubCrosslinks';
 
 const StrategyBrief = () => {
     const { loading: purchaseLoading, hasPurchasedAdvisory } = usePurchases();
+    const { profile } = useClientProfile();
+    const { nextStep } = useJourneyStatus({ profile, hasPurchasedAdvisory });
     const { user } = useAuth();
     const [deliverables, setDeliverables] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -96,6 +101,14 @@ const StrategyBrief = () => {
                     Your strategy briefs, recommendations, and advisory actions.
                 </p>
             </header>
+
+            {hasPurchasedAdvisory && (
+                <ResourceHubCrosslinks
+                    variant="grouped"
+                    emphasizePhase={nextStep?.resourcePhase || null}
+                    className="max-w-4xl"
+                />
+            )}
 
             {!hasPurchasedAdvisory && deliverables.length === 0 ? (
                 <div className="bg-white border border-[#0D0D12]/10 rounded-[2rem] p-8 sm:p-12 shadow-sm text-center">
