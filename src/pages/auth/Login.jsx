@@ -22,7 +22,14 @@ const Login = () => {
         });
 
         if (error) {
-            setError(error.message);
+            let msg = error.message || 'Sign-in failed';
+            if (
+                /load failed|failed to fetch|networkerror/i.test(msg) ||
+                error.name === 'AuthRetryableFetchError'
+            ) {
+                msg += ' — Often caused by missing VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY on Vercel (Production) or blocked requests. Check Vercel env and redeploy.';
+            }
+            setError(msg);
             setLoading(false);
         } else {
             const redirect = searchParams.get('redirect');
@@ -50,6 +57,15 @@ const Login = () => {
                     </div>
 
                     <form onSubmit={handleLogin} className="space-y-6">
+                        {import.meta.env.PROD &&
+                            (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) && (
+                                <div className="bg-amber-500/10 border border-amber-500/30 text-amber-200 p-4 rounded-xl text-sm font-['JetBrains_Mono']">
+                                    This build is missing Supabase environment variables. In Vercel, add{' '}
+                                    <code className="text-amber-100">VITE_SUPABASE_URL</code> and{' '}
+                                    <code className="text-amber-100">VITE_SUPABASE_ANON_KEY</code> for{' '}
+                                    <strong>Production</strong>, then trigger a new deployment.
+                                </div>
+                            )}
                         {error && (
                             <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-sm font-['JetBrains_Mono']">
                                 {error}
