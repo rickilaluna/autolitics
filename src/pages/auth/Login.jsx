@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import MinimalHeader from '../../components/MinimalHeader';
 
 const Login = () => {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -24,7 +25,12 @@ const Login = () => {
             setError(error.message);
             setLoading(false);
         } else {
-            navigate('/dashboard');
+            const redirect = searchParams.get('redirect');
+            const safe =
+                redirect && redirect.startsWith('/') && !redirect.startsWith('//')
+                    ? redirect
+                    : '/dashboard';
+            navigate(safe);
         }
     };
 

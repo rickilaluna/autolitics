@@ -11,6 +11,12 @@ import ResourceNav from '../../components/ResourceNav';
 import VehicleAutocomplete from '../../components/VehicleAutocomplete';
 import { logUnmatched } from '../../utils/unmatchedVehicleLogger';
 import {
+    loadDecisionEngineSnapshot,
+    saveDecisionEngineSnapshot,
+    getConsideringModelStrings,
+    recordConsideringModel,
+} from '../../lib/vehicleContextStorage';
+import {
     CATEGORY_KEYS,
     WEIGHT_MULTIPLIERS,
     averageScore,
@@ -392,15 +398,58 @@ function WeightDots({ value, onChange }) {
     );
 }
 
+function initialEngineState() {
+    const saved = loadDecisionEngineSnapshot();
+    if (saved?.vehicles?.length >= 1) {
+        return {
+            vehicles: saved.vehicles.map((v) => ({
+                ...v,
+                scores: v.scores && typeof v.scores === 'object' ? { ...defaultScores(), ...v.scores } : defaultScores(),
+            })),
+            weights: saved.weights && typeof saved.weights === 'object' ? { ...defaultWeights(), ...saved.weights } : defaultWeights(),
+            useWeighted: !!saved.useWeighted,
+        };
+    }
+    return {
+        vehicles: [newVehicle(''), newVehicle('')],
+        weights: defaultWeights(),
+        useWeighted: false,
+    };
+}
+
+const initEngine = initialEngineState();
+
 /* ─── Main Component ────────────────────────────────────────────── */
 export default function VehicleComparisonMatrix() {
-    const [vehicles, setVehicles] = useState(() => [newVehicle(''), newVehicle('')]);
-    const [weights, setWeights] = useState(() => defaultWeights());
-    const [useWeighted, setUseWeighted] = useState(false);
+    const [vehicles, setVehicles] = useState(initEngine.vehicles);
+    const [weights, setWeights] = useState(initEngine.weights);
+    const [useWeighted, setUseWeighted] = useState(initEngine.useWeighted);
+    const [contextRecent, setContextRecent] = useState(() => getConsideringModelStrings());
     const [lastAddedId, setLastAddedId] = useState(null);
     const [shownNewId, setShownNewId] = useState(null);
     const newCardRef = useRef(null);
     const nameInputRef = useRef(null);
+
+    useEffect(() => {
+        const t = setTimeout(() => {
+            saveDecisionEngineSnapshot({ vehicles, weights, useWeighted, savedAt: Date.now() });
+        }, 450);
+        return () => clearTimeout(t);
+    }, [vehicles, weights, useWeighted]);
+
+    useEffect(() => {
+        setContextRecent(getConsideringModelStrings());
+    }, [vehicles]);
+
+    useEffect(() => {
+        const t = setTimeout(() => {
+            vehicles.forEach((v) => {
+                const n = (v.name || '').trim();
+                if (n) recordConsideringModel(n);
+            });
+        }, 800);
+        return () => clearTimeout(t);
+    }, [vehicles]);
 
     const winnerIndex = useMemo(() => getWinnerIndex(vehicles, useWeighted, weights), [vehicles, useWeighted, weights]);
     const categoryLeaders = useMemo(() => getCategoryLeaders(vehicles), [vehicles]);
@@ -620,8 +669,9 @@ export default function VehicleComparisonMatrix() {
                                                     value={vehicle.name}
                                                     onChange={(name) => updateVehicle(vehicle.id, { name, vehicleData: undefined })}
                                                     onSelectVehicle={(selectedVehicle) => updateVehicle(vehicle.id, { name: selectedVehicle.display_name, vehicleData: selectedVehicle })}
+                                                    contextRecent={contextRecent}
                                                     placeholder="Enter vehicle name"
-                                                    helperText={idx === 0 ? 'Start typing to search supported models, or enter a custom vehicle manually.' : undefined}
+                                                    helperText={idx === 0 ? 'Start typing to search supported models, or enter a custom vehicle manually. Models from your OTD runs and offer worksheet appear here too.' : undefined}
                                                     onUnmatchedEntry={logUnmatched}
                                                     className="w-full bg-transparent text-[#FAF8F5] font-medium placeholder:text-[#FAF8F5]/30 focus:outline-none focus:ring-0 border-0 p-0"
                                                 />

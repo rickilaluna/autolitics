@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { X, Save, CarFront, Plus, Minus } from 'lucide-react';
+import VehicleAutocomplete from '../../components/VehicleAutocomplete';
+import { getConsideringModelStrings, recordConsideringModel } from '../../lib/vehicleContextStorage';
 
 const OnboardingModal = ({ profile, onClose, onSave }) => {
     const [formData, setFormData] = useState({
@@ -10,10 +12,12 @@ const OnboardingModal = ({ profile, onClose, onSave }) => {
     });
 
     const [newCar, setNewCar] = useState('');
+    const contextRecent = useMemo(() => getConsideringModelStrings(), [formData.active_shortlist]);
 
     const handleCarAdd = () => {
         if (newCar.trim()) {
-            setFormData(prev => ({ ...prev, active_shortlist: [...prev.active_shortlist, newCar.trim()] }));
+            recordConsideringModel(newCar.trim());
+            setFormData((prev) => ({ ...prev, active_shortlist: [...prev.active_shortlist, newCar.trim()] }));
             setNewCar('');
         }
     };
@@ -101,18 +105,19 @@ const OnboardingModal = ({ profile, onClose, onSave }) => {
                                 <p className="text-xs text-[#0D0D12]/50 font-['JetBrains_Mono'] mb-3">Add any vehicles you are actively considering.</p>
                                 
                                 <div className="flex gap-2 mb-4">
-                                    <input 
-                                        type="text" 
+                                    <VehicleAutocomplete
                                         value={newCar}
-                                        onChange={(e) => setNewCar(e.target.value)}
+                                        onChange={setNewCar}
+                                        contextRecent={contextRecent}
+                                        placeholder="e.g. 2024 Toyota RAV4 Hybrid"
+                                        helperText=""
+                                        className="flex-1 bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50"
                                         onKeyDown={(e) => {
                                             if (e.key === 'Enter') {
                                                 e.preventDefault();
                                                 handleCarAdd();
                                             }
                                         }}
-                                        placeholder="e.g. 2024 Toyota RAV4 Hybrid"
-                                        className="flex-1 bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50"
                                     />
                                     <button 
                                         type="button"

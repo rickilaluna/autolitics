@@ -1,64 +1,24 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import MinimalHeader from '../../components/MinimalHeader';
 import ResourceNav from '../../components/ResourceNav';
-import { Calculator, AlertTriangle, CheckCircle2, Info, Save, RefreshCw, Copy, Check, X } from 'lucide-react';
+import ExpertReviewUpsellCard from '../../components/resources/ExpertReviewUpsellCard';
+import VehicleAutocomplete from '../../components/VehicleAutocomplete';
+import { Calculator, AlertTriangle, CheckCircle2, Info, Save, RefreshCw, Copy, Check, X, GitCompare } from 'lucide-react';
 import caTaxData from '../../data/ca_sales_tax.json';
-
-const STATES = [
-    { code: 'CA', name: 'California' },
-    { code: 'AL', name: 'Alabama' },
-    { code: 'AK', name: 'Alaska' },
-    { code: 'AZ', name: 'Arizona' },
-    { code: 'AR', name: 'Arkansas' },
-    { code: 'CO', name: 'Colorado' },
-    { code: 'CT', name: 'Connecticut' },
-    { code: 'DE', name: 'Delaware' },
-    { code: 'FL', name: 'Florida' },
-    { code: 'GA', name: 'Georgia' },
-    { code: 'HI', name: 'Hawaii' },
-    { code: 'ID', name: 'Idaho' },
-    { code: 'IL', name: 'Illinois' },
-    { code: 'IN', name: 'Indiana' },
-    { code: 'IA', name: 'Iowa' },
-    { code: 'KS', name: 'Kansas' },
-    { code: 'KY', name: 'Kentucky' },
-    { code: 'LA', name: 'Louisiana' },
-    { code: 'ME', name: 'Maine' },
-    { code: 'MD', name: 'Maryland' },
-    { code: 'MA', name: 'Massachusetts' },
-    { code: 'MI', name: 'Michigan' },
-    { code: 'MN', name: 'Minnesota' },
-    { code: 'MS', name: 'Mississippi' },
-    { code: 'MO', name: 'Missouri' },
-    { code: 'MT', name: 'Montana' },
-    { code: 'NE', name: 'Nebraska' },
-    { code: 'NV', name: 'Nevada' },
-    { code: 'NH', name: 'New Hampshire' },
-    { code: 'NJ', name: 'New Jersey' },
-    { code: 'NM', name: 'New Mexico' },
-    { code: 'NY', name: 'New York' },
-    { code: 'NC', name: 'North Carolina' },
-    { code: 'ND', name: 'North Dakota' },
-    { code: 'OH', name: 'Ohio' },
-    { code: 'OK', name: 'Oklahoma' },
-    { code: 'OR', name: 'Oregon' },
-    { code: 'PA', name: 'Pennsylvania' },
-    { code: 'RI', name: 'Rhode Island' },
-    { code: 'SC', name: 'South Carolina' },
-    { code: 'SD', name: 'South Dakota' },
-    { code: 'TN', name: 'Tennessee' },
-    { code: 'TX', name: 'Texas' },
-    { code: 'UT', name: 'Utah' },
-    { code: 'VT', name: 'Vermont' },
-    { code: 'VA', name: 'Virginia' },
-    { code: 'WA', name: 'Washington' },
-    { code: 'WV', name: 'West Virginia' },
-    { code: 'WI', name: 'Wisconsin' },
-    { code: 'WY', name: 'Wyoming' }
-];
+import caZipToCounty from '../../data/ca_zip_to_county.json';
+import {
+    STATES,
+    computeOtdResults,
+    resolveCalculatedCaTaxRate,
+    resolveCaLocationFromZip,
+    OTD_SAVED_QUOTES_KEY,
+} from '../../lib/otdCalculatorCore';
+import { getConsideringModelStrings, recordConsideringModel } from '../../lib/vehicleContextStorage';
 
 export default function OTDCalculator() {
     const [formData, setFormData] = useState({
+        vehicleLabel: '',
         salePrice: '',
         state: 'CA',
         zipCode: '',
@@ -86,6 +46,16 @@ export default function OTDCalculator() {
     const [excludeExtras, setExcludeExtras] = useState(false);
     const [copiedScript, setCopiedScript] = useState(false);
 
+    const contextRecent = useMemo(() => getConsideringModelStrings(), [formData.vehicleLabel]);
+
+    useEffect(() => {
+        const t = setTimeout(() => {
+            const v = (formData.vehicleLabel || '').trim();
+            if (v) recordConsideringModel(v);
+        }, 600);
+        return () => clearTimeout(t);
+    }, [formData.vehicleLabel]);
+
     // Derived CA locations
     const caCounties = useMemo(() => {
         const counties = caTaxData.filter(d => d.State === 'California').map(d => d.County);
@@ -100,26 +70,15 @@ export default function OTDCalculator() {
         return [...new Set(cities)].sort();
     }, [formData.county]);
 
-    const calculatedCaTaxRate = useMemo(() => {
-        if (formData.state !== 'CA' || !formData.county) return 8.25; // fallback state average
-        
-        let rateRecord;
-        if (formData.city) {
-            rateRecord = caTaxData.find(d => d.State === 'California' && d.County === formData.county && d.City === formData.city);
-        }
-        
-        if (!rateRecord) {
-            // Find the county base rate
-            rateRecord = caTaxData.find(d => d.State === 'California' && d.County === formData.county && !d.City);
-        }
-        
-        return rateRecord ? rateRecord.TaxRate : 8.25;
-    }, [formData.state, formData.county, formData.city]);
+    const calculatedCaTaxRate = useMemo(
+        () => resolveCalculatedCaTaxRate(caTaxData, formData.county, formData.city),
+        [formData.state, formData.county, formData.city]
+    );
 
     // Save Quote State
     const [savedQuotes, setSavedQuotes] = useState(() => {
         try {
-            const localData = localStorage.getItem('autolitics_otd_saved_quotes');
+            const localData = localStorage.getItem(OTD_SAVED_QUOTES_KEY);
             return localData ? JSON.parse(localData) : [];
         } catch (error) {
             console.error('Error loading saved quotes:', error);
@@ -131,7 +90,7 @@ export default function OTDCalculator() {
 
     useEffect(() => {
         try {
-            localStorage.setItem('autolitics_otd_saved_quotes', JSON.stringify(savedQuotes));
+            localStorage.setItem(OTD_SAVED_QUOTES_KEY, JSON.stringify(savedQuotes));
         } catch (error) {
             console.error('Error saving quotes to local storage:', error);
         }
@@ -146,17 +105,21 @@ export default function OTDCalculator() {
                     const zipInfo = zipData[formData.zipCode];
                     if (zipInfo) {
                         const newState = zipInfo.state;
-                        // Title case city name: "BEVERLY HILLS" -> "Beverly Hills"
-                        const newCity = zipInfo.city.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
-                        
-                        setFormData(prev => {
+                        setFormData((prev) => {
                             let next = { ...prev, state: newState };
                             if (newState === 'CA') {
-                                // Find matching county in our tax dataset
-                                const caRecord = caTaxData.find(d => d.State === 'California' && d.City && d.City.toLowerCase() === newCity.toLowerCase());
-                                if (caRecord) {
-                                    next.county = caRecord.County;
-                                    next.city = caRecord.City;
+                                const loc = resolveCaLocationFromZip({
+                                    zip5: prev.zipCode,
+                                    zipCityRaw: zipInfo.city,
+                                    caTaxData,
+                                    zipToCountyMap: caZipToCounty,
+                                });
+                                if (loc) {
+                                    next.county = loc.county;
+                                    next.city = loc.city;
+                                } else {
+                                    next.county = '';
+                                    next.city = '';
                                 }
                             } else {
                                 next.county = '';
@@ -176,109 +139,19 @@ export default function OTDCalculator() {
 
     const results = useMemo(() => {
         const salePrice = Number(formData.salePrice) || 0;
-        const state = formData.state;
-        
-        let docFee = Number(formData.docFee);
-        if (formData.docFee === '') {
-            docFee = state === 'CA' ? 85 : 0;
-        }
-
-        let regFee = Number(formData.regEstimate);
-        if (formData.regEstimate === '') {
-            regFee = state === 'CA' ? salePrice * 0.0115 : 0;
-        }
-
-        let taxRate = Number(formData.taxRateOverride);
-        if (formData.taxRateOverride === '') {
-            taxRate = state === 'CA' ? calculatedCaTaxRate : 0;
-        }
-
-        const calculatedTax = (salePrice + docFee) * (taxRate / 100);
-        const cleanOtd = salePrice + docFee + regFee + calculatedTax;
-        
-        const rangeLow = Math.max(0, cleanOtd - 150);
-        const rangeHigh = cleanOtd + 250;
-
-        // Use the debounced quote to run calculations so it doesn't flicker while typing
-        const baseQuoted = Number(debouncedQuote) || 0;
-        const knownAddons = Number(formData.addons) || 0;
-        const knownAdj = Number(formData.marketAdjustment) || 0;
-        const totalKnownExtras = knownAddons + knownAdj;
-
-        const activeQuote = excludeExtras ? Math.max(0, baseQuoted - totalKnownExtras) : baseQuoted;
-        const diff = activeQuote - cleanOtd;
-        const unexplainedDiff = excludeExtras ? diff : diff - totalKnownExtras;
-
-        const stackTotal = Math.max(cleanOtd, activeQuote);
-
-        let status = 'CLEAN';
-        let statusTitle = 'Appears Clean';
-        let statusMessage = 'This quote appears reasonably clean based on the vehicle price and expected taxes/fees.';
-        let statusColor = 'text-green-400';
-        let statusBg = 'bg-green-400/10';
-        let statusBorder = 'border-green-400/20';
-
-        if (diff > 1000) {
-            status = 'RED_FLAG';
-            statusTitle = 'Higher Than Expected';
-            statusMessage = 'This quote appears above a typical clean out-the-door total based on the vehicle price, estimated tax, and standard fees. The difference is likely driven by markup, add-ons, or elevated dealer fees.';
-            statusColor = 'text-red-400';
-            statusBg = 'bg-red-400/10';
-            statusBorder = 'border-red-400/20';
-        } else if (diff > 300) {
-            status = 'HIGH';
-            statusTitle = 'Slightly Elevated';
-            statusMessage = 'This quote may include elevated fees or small dealer-installed extras. Review itemization carefully.';
-            statusColor = 'text-yellow-400';
-            statusBg = 'bg-yellow-400/10';
-            statusBorder = 'border-yellow-400/20';
-        } else if (diff < -300 && activeQuote > 0) {
-            status = 'UNUSUALLY_LOW';
-            statusTitle = 'Unusually Low';
-            statusMessage = 'This quote is substantially lower than expected for standard fees. Verify that taxes and registration are fully included.';
-            statusColor = 'text-blue-400';
-            statusBg = 'bg-blue-400/10';
-            statusBorder = 'border-blue-400/20';
-        }
-
-        const barItems = [
-            { label: 'Vehicle', value: salePrice, color: 'bg-[#FAF8F5]', textColor: 'text-white' },
-            { label: 'Tax', value: calculatedTax, color: 'bg-[#8A9DB0]', textColor: 'text-white' },
-            { label: 'DMV', value: regFee, color: 'bg-[#C9A84C]', textColor: 'text-white' },
-            { label: 'Doc Fee', value: docFee, color: 'bg-[#564996]', textColor: 'text-white' }
-        ];
-        if (diff > 0) {
-            barItems.push({ 
-                label: 'Variance', value: diff, color: 'bg-red-400', textColor: 'text-red-400', borderColor: 'border-red-400/20' 
-            });
-        }
-        const visibleBars = barItems.filter(b => b.value > 0);
-
-        return {
-            valid: salePrice > 0 && baseQuoted > 0,
+        return computeOtdResults({
             salePrice,
-            docFee,
-            regFee,
-            taxRate,
-            calculatedTax,
-            cleanOtd,
-            rangeLow,
-            rangeHigh,
-            quoted: baseQuoted,
-            activeQuote,
-            diff,
-            totalKnownExtras,
-            unexplainedDiff,
-            stackTotal,
-            status,
-            statusTitle,
-            statusMessage,
-            statusColor,
-            statusBg,
-            statusBorder,
-            visibleBars
-        };
-    }, [formData, debouncedQuote, excludeExtras]);
+            state: formData.state,
+            docFee: formData.docFee,
+            regEstimate: formData.regEstimate,
+            taxRateOverride: formData.taxRateOverride,
+            calculatedCaTaxRate,
+            quotedOtd: debouncedQuote,
+            addons: formData.addons,
+            marketAdjustment: formData.marketAdjustment,
+            excludeExtras,
+        });
+    }, [formData, debouncedQuote, excludeExtras, calculatedCaTaxRate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -313,6 +186,7 @@ export default function OTDCalculator() {
     const handleCompareAnother = () => {
         setFormData(prev => ({
             ...prev,
+            vehicleLabel: '',
             salePrice: '',
             quotedOtd: '',
             taxRateOverride: '',
@@ -372,6 +246,18 @@ export default function OTDCalculator() {
                                 <h2 className="text-sm font-['JetBrains_Mono'] text-[#C9A84C] uppercase tracking-widest mb-6">Quote Details</h2>
                                 
                                 <div className="space-y-6">
+                                    <div className="space-y-2">
+                                        <label className="text-sm text-[#FAF8F5]/70 font-medium tracking-wide">Vehicle / trim <span className="text-[#FAF8F5]/40 text-[10px] uppercase font-normal">(Optional)</span></label>
+                                        <VehicleAutocomplete
+                                            value={formData.vehicleLabel}
+                                            onChange={(v) => setFormData((prev) => ({ ...prev, vehicleLabel: v }))}
+                                            contextRecent={contextRecent}
+                                            placeholder="e.g. 2025 BMW X3 xDrive30i"
+                                            helperText="Matches the vehicle catalog and models from your Decision Engine worksheet."
+                                            className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all text-sm"
+                                        />
+                                    </div>
+
                                     <div className="space-y-2">
                                         <label className="text-sm text-[#FAF8F5]/70 font-medium tracking-wide">Vehicle Sale Price / MSRP <span className="text-[#C9A84C]">*</span></label>
                                         <div className="relative">
@@ -701,6 +587,76 @@ export default function OTDCalculator() {
                                                 </p>
                                             </div>
 
+                                            <div className="p-6 border-t border-[#2A2A35] space-y-4">
+                                                <ExpertReviewUpsellCard
+                                                    variant="dark"
+                                                    prefill={{
+                                                        vehicle_name: formData.vehicleLabel?.trim() || '',
+                                                        out_the_door_price: String(Math.round(results.activeQuote)),
+                                                        client_notes:
+                                                            `From OTD Price Checker: Expected clean range approx. ${formatCurrency(results.rangeLow)}–${formatCurrency(results.rangeHigh)}. Variance vs clean estimate: ${results.diff > 0 ? '+' : ''}${formatCurrency(results.diff)}. Status: ${results.statusTitle}.`,
+                                                        quote_breakdown: {
+                                                            source: 'otd_calculator',
+                                                            salePrice: results.salePrice,
+                                                            cleanOtd: results.cleanOtd,
+                                                            rangeLow: results.rangeLow,
+                                                            rangeHigh: results.rangeHigh,
+                                                            quotedOtd: results.activeQuote,
+                                                            variance: results.diff,
+                                                            statusTitle: results.statusTitle,
+                                                            taxRate: results.taxRate,
+                                                            calculatedTax: results.calculatedTax,
+                                                            docFee: results.docFee,
+                                                            regFee: results.regFee,
+                                                            formSnapshot: { ...formData },
+                                                        },
+                                                    }}
+                                                />
+                                                <div className="flex flex-wrap gap-3">
+                                                    <Link
+                                                        to="/resources/dealer-offer-comparison?seedOtd=1"
+                                                        onClick={() => {
+                                                            try {
+                                                                sessionStorage.setItem(
+                                                                    'autolitics_comparison_seed_otd',
+                                                                    JSON.stringify({
+                                                                        shared: {
+                                                                            state: formData.state,
+                                                                            zipCode: formData.zipCode,
+                                                                            county: formData.county,
+                                                                            city: formData.city,
+                                                                        },
+                                                                        dealer: {
+                                                                            dealerName: '',
+                                                                            vehicleLabel: formData.vehicleLabel || '',
+                                                                            salePrice: formData.salePrice,
+                                                                            quotedOtd: formData.quotedOtd,
+                                                                            docFee: formData.docFee,
+                                                                            regEstimate: formData.regEstimate,
+                                                                            taxRateOverride: formData.taxRateOverride,
+                                                                            addons: formData.addons,
+                                                                            marketAdjustment: formData.marketAdjustment,
+                                                                        },
+                                                                    })
+                                                                );
+                                                            } catch (err) {
+                                                                console.warn(err);
+                                                            }
+                                                        }}
+                                                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#C9A84C] border border-[#C9A84C]/35 px-4 py-2.5 rounded-xl hover:bg-[#C9A84C]/10 transition-colors"
+                                                    >
+                                                        <GitCompare size={16} />
+                                                        Open in comparison worksheet
+                                                    </Link>
+                                                    <Link
+                                                        to="/resources/dealer-offer-comparison?loadSaved=1"
+                                                        className="inline-flex items-center gap-2 text-sm font-medium text-[#FAF8F5]/50 hover:text-[#FAF8F5]/80 transition-colors"
+                                                    >
+                                                        Compare saved quotes
+                                                    </Link>
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                         {/* Likely sources of variance */}
@@ -820,9 +776,14 @@ export default function OTDCalculator() {
                 {/* --- SAVED QUOTES UI --- */}
                 {savedQuotes.length > 0 && (
                     <div className="w-full max-w-5xl mx-auto px-6 md:px-8 mt-16 print:hidden">
-                        <div className="flex items-center gap-3 mb-6">
+                        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                             <h3 className="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[#FAF8F5]/60">Your Saved Quotes</h3>
-                            <span className="flex-grow h-px bg-[#2A2A35]"></span>
+                            <Link
+                                to="/resources/dealer-offer-comparison?loadSaved=1"
+                                className="text-xs font-semibold text-[#C9A84C] hover:underline"
+                            >
+                                Open all in comparison worksheet
+                            </Link>
                         </div>
                         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                             {savedQuotes.map(sq => (

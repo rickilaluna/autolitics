@@ -82,7 +82,7 @@ export function useJourneyStatus({ profile, hasPurchasedAdvisory }) {
     if (counts.testDrives > 0) currentPhase = 3;
     if (counts.offers > 0) currentPhase = 4;
 
-    // Determine next step (resourcePhase maps to PHASE_RESOURCES keys in Resources.jsx)
+    // Determine next step (resourcePhase maps to PHASE_RESOURCES keys in dashboardResourceCatalog.js)
     let nextStep = null;
     if (!isProfileComplete) {
         nextStep = {

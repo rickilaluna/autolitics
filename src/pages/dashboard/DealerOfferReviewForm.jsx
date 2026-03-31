@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, FileSignature, Loader2, CheckCircle2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
+import { consumeOfferReviewPrefill } from '../../lib/offerPrefill';
 
 const DealerOfferReviewForm = () => {
     const { user } = useAuth();
@@ -18,6 +19,25 @@ const DealerOfferReviewForm = () => {
         out_the_door_price: '',
         client_notes: ''
     });
+    const [quoteBreakdown, setQuoteBreakdown] = useState(null);
+
+    useEffect(() => {
+        const pre = consumeOfferReviewPrefill();
+        if (!pre) return;
+        setFormData((prev) => ({
+            ...prev,
+            dealership_name: pre.dealership_name ?? prev.dealership_name,
+            vehicle_name: pre.vehicle_name ?? prev.vehicle_name,
+            document_url: pre.document_url ?? prev.document_url,
+            out_the_door_price: pre.out_the_door_price ?? prev.out_the_door_price,
+            client_notes: pre.client_notes
+                ? prev.client_notes
+                    ? `${prev.client_notes}\n\n${pre.client_notes}`
+                    : pre.client_notes
+                : prev.client_notes,
+        }));
+        if (pre.quote_breakdown) setQuoteBreakdown(pre.quote_breakdown);
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,18 +74,21 @@ const DealerOfferReviewForm = () => {
             const price = parseFloat(formData.out_the_door_price.replace(/[^0-9.]/g, ''));
 
             // 3. Insert into dealer_offer_reviews
+            const insertPayload = {
+                client_id: client.id,
+                engagement_id: engagementId,
+                dealership_name: formData.dealership_name,
+                vehicle_name: formData.vehicle_name,
+                document_url: formData.document_url,
+                out_the_door_price: isNaN(price) ? null : price,
+                client_notes: formData.client_notes,
+                status: 'pending',
+            };
+            if (quoteBreakdown) insertPayload.quote_breakdown = quoteBreakdown;
+
             const { error: insertErr } = await supabase
                 .from('dealer_offer_reviews')
-                .insert({
-                    client_id: client.id,
-                    engagement_id: engagementId,
-                    dealership_name: formData.dealership_name,
-                    vehicle_name: formData.vehicle_name,
-                    document_url: formData.document_url,
-                    out_the_door_price: isNaN(price) ? null : price,
-                    client_notes: formData.client_notes,
-                    status: 'pending'
-                });
+                .insert(insertPayload);
 
             if (insertErr) throw insertErr;
 
@@ -119,6 +142,32 @@ const DealerOfferReviewForm = () => {
                     Upload a dealership quote or buyer's order to have the numbers, hidden fees, and financial structure evaluated before you sign anything.
                 </p>
             </header>
+
+            <div className="rounded-2xl border border-[#C9A84C]/25 bg-[#FAF8F5] p-6 mb-8">
+                <h2 className="text-sm font-semibold text-[#0D0D12] mb-2">Expert review</h2>
+                <p className="text-sm text-[#0D0D12]/65 leading-relaxed mb-3">
+                    A clear buyer&apos;s order or quote PDF lets your advisor apply the same line-by-line fee-stack review as our public OTD tools—so feedback goes beyond a single out-the-door number.
+                </p>
+                <Link
+                    to="/core-advisory"
+                    className="text-sm font-medium text-[#C9A84C] hover:underline"
+                >
+                    How Core Advisory extends this workflow
+                </Link>
+            </div>
+
+            {quoteBreakdown && (
+                <div className="mb-8 rounded-2xl border border-[#0D0D12]/10 bg-white p-6 text-sm text-[#0D0D12]/70">
+                    <h2 className="text-xs font-['JetBrains_Mono'] uppercase tracking-widest text-[#0D0D12]/45 mb-3">
+                        Numbers carried from calculator / worksheet
+                    </h2>
+                    <p className="leading-relaxed">
+                        Structured breakdown will be attached to this submission for your advisor (
+                        <span className="font-medium text-[#0D0D12]">{quoteBreakdown.source?.replace(/_/g, ' ') || 'attached'}</span>
+                        ). You can still edit notes below.
+                    </p>
+                </div>
+            )}
 
             <form onSubmit={handleSubmit} className="bg-white border text-left border-[#0D0D12]/10 rounded-[2rem] p-8 shadow-sm space-y-6">
                 

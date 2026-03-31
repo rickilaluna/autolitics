@@ -1,1 +1,2676 @@
-[]
+[
+  {
+    "State": "California",
+    "County": "Alameda",
+    "City": null,
+    "TaxRate": 10.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Alameda",
+    "City": "Alameda",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Alameda",
+    "City": "Albany",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Alameda",
+    "City": "Emeryville",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Alameda",
+    "City": "Hayward",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Alameda",
+    "City": "Newark",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Alameda",
+    "City": "Oakland",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Alameda",
+    "City": "San Leandro",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Alameda",
+    "City": "Union City",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Alpine",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Amador",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Amador",
+    "City": "Amador City",
+    "TaxRate": 8.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Amador",
+    "City": "Sutter Creek",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Butte",
+    "City": null,
+    "TaxRate": 8.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Butte",
+    "City": "Chico",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Butte",
+    "City": "Oroville",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Butte",
+    "City": "Paradise",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Calaveras",
+    "City": null,
+    "TaxRate": 8.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Calaveras",
+    "City": "Angels Camp",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Colusa",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Colusa",
+    "City": "Colusa",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Colusa",
+    "City": "Williams",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": null,
+    "TaxRate": 8.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Antioch",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Concord",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "El Cerrito",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Hercules",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Lafayette",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Martinez",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Moraga",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Orinda",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Pinole",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Pittsburg",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Pleasant Hill",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Richmond",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "San Pablo",
+    "TaxRate": 9.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "San Ramon",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Contra Costa",
+    "City": "Walnut Creek",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Del Norte",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Del Norte",
+    "City": "Crescent City",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Del Norte",
+    "City": "Unincorporated Area",
+    "TaxRate": 8.25,
+    "JurisdictionType": "unincorporated"
+  },
+  {
+    "State": "California",
+    "County": "El Dorado",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "El Dorado",
+    "City": "Placerville",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "El Dorado",
+    "City": "South Lake Tahoe",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": null,
+    "TaxRate": 7.975,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Clovis",
+    "TaxRate": 8.975,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Coalinga",
+    "TaxRate": 8.975,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Fowler",
+    "TaxRate": 8.975,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Fresno",
+    "TaxRate": 8.35,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Huron",
+    "TaxRate": 8.975,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Kerman",
+    "TaxRate": 8.975,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Kingsburg",
+    "TaxRate": 8.975,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Mendota",
+    "TaxRate": 9.225,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Parlier",
+    "TaxRate": 8.975,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Reedley",
+    "TaxRate": 9.225,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Sanger",
+    "TaxRate": 8.725,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Fresno",
+    "City": "Selma",
+    "TaxRate": 8.475,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Glenn",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Glenn",
+    "City": "Orland",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Glenn",
+    "City": "Willows",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Humboldt",
+    "City": null,
+    "TaxRate": 8.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Humboldt",
+    "City": "Arcata",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Humboldt",
+    "City": "Blue Lake",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Humboldt",
+    "City": "Eureka",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Humboldt",
+    "City": "Ferndale",
+    "TaxRate": 9.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Humboldt",
+    "City": "Fortuna",
+    "TaxRate": 9.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Humboldt",
+    "City": "Rio Dell",
+    "TaxRate": 9.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Humboldt",
+    "City": "Trinidad",
+    "TaxRate": 9.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Imperial",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Imperial",
+    "City": "Brawley",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Imperial",
+    "City": "Calexico",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Imperial",
+    "City": "El Centro",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Bishop",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Duarte",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "El Monte",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Gardena",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Glendale",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Glendora",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Hawaiian Gardens",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Hawthorne",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Huntington Park",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Inglewood",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Irwindale",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "La Cañada Flintridge",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "La Puente",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "La Verne",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Lakewood",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Lancaster",
+    "TaxRate": 11.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Lawndale",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Lomita",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Long Beach",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Lynwood",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Malibu",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Manhattan Beach",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Monrovia",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Montebello",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Monterey Park",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Norwalk",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Palmdale",
+    "TaxRate": 11.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Paramount",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Pasadena",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Pico Rivera",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Pomona",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "San Fernando",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "San Gabriel",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Santa Fe Springs",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Santa Monica",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Sierra Madre",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Signal Hill",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "South El Monte",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "South Gate",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "South Pasadena",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Torrance",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Vernon",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "West Hollywood",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Inyo",
+    "City": "Whittier",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "Arvin",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "Bakersfield",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "California City",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "Delano",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "Maricopa",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "McFarland",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "Ridgecrest",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "Taft",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "Tehachapi",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "Unincorporated Area",
+    "TaxRate": 8.25,
+    "JurisdictionType": "unincorporated"
+  },
+  {
+    "State": "California",
+    "County": "Kern",
+    "City": "Wasco",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kings",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Kings",
+    "City": "Avenal",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kings",
+    "City": "Corcoran",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kings",
+    "City": "Hanford",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Kings",
+    "City": "Lemoore",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Lake",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Lake",
+    "City": "Clearlake",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Lake",
+    "City": "Lakeport",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Lassen",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Lassen",
+    "City": "Susanville",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": null,
+    "TaxRate": 9.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Alhambra",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Arcadia",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Artesia",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Avalon",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Azusa",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Baldwin Park",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Bell Gardens",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Bellflower",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Burbank",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Carson",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Commerce",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Compton",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Covina",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Cudahy",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Culver City",
+    "TaxRate": 10.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Los Angeles",
+    "City": "Downey",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Madera",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Madera",
+    "City": "Chowchilla",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Madera",
+    "City": "Madera",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Marin",
+    "City": null,
+    "TaxRate": 8.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Marin",
+    "City": "Corte Madera",
+    "TaxRate": 9.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Marin",
+    "City": "Fairfax",
+    "TaxRate": 9.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Marin",
+    "City": "Larkspur",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Marin",
+    "City": "Mill Valley",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Marin",
+    "City": "Novato",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Marin",
+    "City": "San Anselmo",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Marin",
+    "City": "San Rafael",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Marin",
+    "City": "Sausalito",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Mariposa",
+    "City": null,
+    "TaxRate": 8.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Mendocino",
+    "City": null,
+    "TaxRate": 7.875,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Mendocino",
+    "City": "Fort Bragg",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Mendocino",
+    "City": "Point Arena",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Mendocino",
+    "City": "Ukiah",
+    "TaxRate": 8.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Mendocino",
+    "City": "Willits",
+    "TaxRate": 9.125,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Merced",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Merced",
+    "City": "Atwater",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Merced",
+    "City": "Dos Palos",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Merced",
+    "City": "Gustine",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Merced",
+    "City": "Livingston",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Merced",
+    "City": "Los Banos",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Merced",
+    "City": "Merced",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Modoc",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Mono",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Mono",
+    "City": "Mammoth Lakes",
+    "TaxRate": 7.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Carmel-by-the-Sea",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Del Rey Oaks",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Gonzales",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Greenfield",
+    "TaxRate": 9.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "King City",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Marina",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Monterey",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Pacific Grove",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Salinas",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Sand City",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Seaside",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Soledad",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Monterey",
+    "City": "Unincorporated Area",
+    "TaxRate": 8.75,
+    "JurisdictionType": "unincorporated"
+  },
+  {
+    "State": "California",
+    "County": "Napa",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Napa",
+    "City": "Napa",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Napa",
+    "City": "St. Helena",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Nevada",
+    "City": null,
+    "TaxRate": 7.5,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Nevada",
+    "City": "Grass Valley",
+    "TaxRate": 8.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Nevada",
+    "City": "Nevada City",
+    "TaxRate": 8.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Nevada",
+    "City": "Truckee",
+    "TaxRate": 9.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "Buena Park",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "Fountain Valley",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "Garden Grove",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "La Habra",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "La Palma",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "Los Alamitos",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "Placentia",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "Santa Ana",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "Seal Beach",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "Stanton",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Orange",
+    "City": "Westminster",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Placer",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Placer",
+    "City": "Loomis",
+    "TaxRate": 7.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Placer",
+    "City": "Roseville",
+    "TaxRate": 7.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Plumas",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Blythe",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Cathedral City",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Coachella",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Corona",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Desert Hot Springs",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Hemet",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Indio",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "La Quinta",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Lake Elsinore",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Menifee",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Moreno Valley",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Murrieta",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Norco",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Palm Desert",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Palm Springs",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Riverside",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "San Jacinto",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Temecula",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Riverside",
+    "City": "Wildomar",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sacramento",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Sacramento",
+    "City": "Elk Grove",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sacramento",
+    "City": "Galt",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sacramento",
+    "City": "Isleton",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sacramento",
+    "City": "Rancho Cordova",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sacramento",
+    "City": "Sacramento",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Benito",
+    "City": null,
+    "TaxRate": 8.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "San Benito",
+    "City": "Hollister",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Apple Valley",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Barstow",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Chino",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Colton",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Fontana",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Montclair",
+    "TaxRate": 9.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Ontario",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Redlands",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "San Bernardino",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Victorville",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Yucaipa",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Bernardino",
+    "City": "Yucca Valley",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "Chula Vista",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "Del Mar",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "El Cajon",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "Escondido",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "Imperial Beach",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "La Mesa",
+    "TaxRate": 8.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "Lemon Grove",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "National City",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "Oceanside",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "San Marcos",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "Solana Beach",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Diego",
+    "City": "Vista",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Francisco",
+    "City": null,
+    "TaxRate": 8.625,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "San Joaquin",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "San Joaquin",
+    "City": "Escalon",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Joaquin",
+    "City": "Lathrop",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Joaquin",
+    "City": "Lodi",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Joaquin",
+    "City": "Manteca",
+    "TaxRate": 9.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Joaquin",
+    "City": "Stockton",
+    "TaxRate": 9.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Joaquin",
+    "City": "Tracy",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Luis Obispo",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "San Luis Obispo",
+    "City": "Arroyo Grande",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Luis Obispo",
+    "City": "Atascadero",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Luis Obispo",
+    "City": "Grover Beach",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Luis Obispo",
+    "City": "Morro Bay",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Luis Obispo",
+    "City": "Paso Robles",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Luis Obispo",
+    "City": "Pismo Beach",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Luis Obispo",
+    "City": "San Luis Obispo",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": null,
+    "TaxRate": 9.375,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "Belmont",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "Brisbane",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "Burlingame",
+    "TaxRate": 9.625,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "Colma",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "Daly City",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "East Palo Alto",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "Half Moon Bay",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "Pacifica",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "Redwood City",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "San Bruno",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "San Mateo",
+    "TaxRate": 9.625,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "San Mateo",
+    "City": "South San Francisco",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Barbara",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Santa Barbara",
+    "City": "Carpinteria",
+    "TaxRate": 9.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Barbara",
+    "City": "Goleta",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Barbara",
+    "City": "Guadalupe",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Barbara",
+    "City": "Lompoc",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Barbara",
+    "City": "Santa Barbara",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Barbara",
+    "City": "Santa Maria",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Barbara",
+    "City": "Solvang",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Clara",
+    "City": null,
+    "TaxRate": 9.125,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Santa Clara",
+    "City": "Campbell",
+    "TaxRate": 9.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Clara",
+    "City": "Los Gatos",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Clara",
+    "City": "Milpitas",
+    "TaxRate": 9.375,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Clara",
+    "City": "San Jose",
+    "TaxRate": 9.375,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Cruz",
+    "City": null,
+    "TaxRate": 8.5,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Santa Cruz",
+    "City": "Capitola",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Cruz",
+    "City": "Santa Cruz",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Cruz",
+    "City": "Scotts Valley",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Santa Cruz",
+    "City": "Watsonville",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Shasta",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Shasta",
+    "City": "Anderson",
+    "TaxRate": 7.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sierra",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Siskiyou",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Siskiyou",
+    "City": "Dunsmuir",
+    "TaxRate": 7.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Siskiyou",
+    "City": "Mount Shasta",
+    "TaxRate": 7.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Siskiyou",
+    "City": "Weed",
+    "TaxRate": 7.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Siskiyou",
+    "City": "Yreka",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Solano",
+    "City": null,
+    "TaxRate": 7.375,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Solano",
+    "City": "Benicia",
+    "TaxRate": 9.625,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Solano",
+    "City": "Dixon",
+    "TaxRate": 8.375,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Solano",
+    "City": "Fairfield",
+    "TaxRate": 8.375,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Solano",
+    "City": "Rio Vista",
+    "TaxRate": 9.125,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Solano",
+    "City": "Suisun City",
+    "TaxRate": 9.125,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Solano",
+    "City": "Vacaville",
+    "TaxRate": 8.125,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Solano",
+    "City": "Vallejo",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sonoma",
+    "City": null,
+    "TaxRate": 9.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Sonoma",
+    "City": "Cloverdale",
+    "TaxRate": 10.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sonoma",
+    "City": "Cotati",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sonoma",
+    "City": "Healdsburg",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sonoma",
+    "City": "Petaluma",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sonoma",
+    "City": "Rohnert Park",
+    "TaxRate": 9.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sonoma",
+    "City": "Santa Rosa",
+    "TaxRate": 10.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sonoma",
+    "City": "Sebastopol",
+    "TaxRate": 10.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sonoma",
+    "City": "Sonoma",
+    "TaxRate": 10.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Stanislaus",
+    "City": null,
+    "TaxRate": 7.875,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Stanislaus",
+    "City": "Ceres",
+    "TaxRate": 8.375,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Stanislaus",
+    "City": "Modesto",
+    "TaxRate": 8.875,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Stanislaus",
+    "City": "Oakdale",
+    "TaxRate": 8.375,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Stanislaus",
+    "City": "Turlock",
+    "TaxRate": 8.625,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Sutter",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Tehama",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Tehama",
+    "City": "Corning",
+    "TaxRate": 7.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Tehama",
+    "City": "Red Bluff",
+    "TaxRate": 7.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Trinity",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Tulare",
+    "City": null,
+    "TaxRate": 7.75,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Tulare",
+    "City": "Dinuba",
+    "TaxRate": 8.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Tulare",
+    "City": "Exeter",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Tulare",
+    "City": "Farmersville",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Tulare",
+    "City": "Lindsay",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Tulare",
+    "City": "Porterville",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Tulare",
+    "City": "Tulare",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Tulare",
+    "City": "Visalia",
+    "TaxRate": 8.5,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Tulare",
+    "City": "Woodlake",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Tuolumne",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Tuolumne",
+    "City": "Sonora",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Ventura",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Ventura",
+    "City": "Oxnard",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Ventura",
+    "City": "Port Hueneme",
+    "TaxRate": 8.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Ventura",
+    "City": "Santa Paula",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Ventura",
+    "City": "Ventura",
+    "TaxRate": 7.75,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Yolo",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Yolo",
+    "City": "Davis",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Yolo",
+    "City": "West Sacramento",
+    "TaxRate": 9.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Yolo",
+    "City": "Winters",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Yolo",
+    "City": "Woodland",
+    "TaxRate": 8.0,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Yuba",
+    "City": null,
+    "TaxRate": 7.25,
+    "JurisdictionType": "county"
+  },
+  {
+    "State": "California",
+    "County": "Yuba",
+    "City": "Marysville",
+    "TaxRate": 8.25,
+    "JurisdictionType": "city"
+  },
+  {
+    "State": "California",
+    "County": "Yuba",
+    "City": "Unincorporated Area",
+    "TaxRate": 8.25,
+    "JurisdictionType": "unincorporated"
+  },
+  {
+    "State": "California",
+    "County": "Yuba",
+    "City": "Wheatland",
+    "TaxRate": 7.75,
+    "JurisdictionType": "city"
+  }
+]
