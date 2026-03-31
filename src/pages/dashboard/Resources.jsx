@@ -15,6 +15,9 @@ import {
 } from 'lucide-react';
 import { PHASE_RESOURCES } from '../../data/dashboardResourceCatalog';
 
+/** Back-compat for imports from `./Resources` (e.g. older dashboard paths). */
+export { PHASE_RESOURCES };
+
 const IconComponents = {
     'file-text': FileText,
     'book-open': BookOpen,
