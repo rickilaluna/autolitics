@@ -9,8 +9,8 @@ Set these where you deploy (Vercel, Netlify, etc.) or in `.env.production`:
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `VITE_SUPABASE_URL` | Yes | Supabase project URL |
-| `VITE_SUPABASE_ANON_KEY` | Yes | Supabase anon/public key |
+| `VITE_SUPABASE_URL` | Yes | Supabase project URL (`https://xxxxx.supabase.co`) |
+| `VITE_SUPABASE_ANON_KEY` | Yes | **anon public** key (API → Project API keys → **anon**). **Never** the `service_role` secret — it is blocked in the browser (*Forbidden use of secret API key in browser*) and breaks reads/writes. |
 
 Copy from `.env.example` and replace with real values. Do not commit real keys.
 

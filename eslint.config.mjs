@@ -26,6 +26,7 @@ export default [
                 sourceType: "module",
             },
             globals: {
+                atob: "readonly",
                 document: "readonly",
                 sessionStorage: "readonly",
                 crypto: "readonly",
