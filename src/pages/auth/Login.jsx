@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import MinimalHeader from '../../components/MinimalHeader';
+import { useAuth } from '../../contexts/AuthContext';
 
 const Login = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+    const { user } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    // If auth state has already resolved to a user, don't keep them on /login.
+    useEffect(() => {
+        if (!user) return;
+        const redirect = searchParams.get('redirect');
+        const safe =
+            redirect && redirect.startsWith('/') && !redirect.startsWith('//')
+                ? redirect
+                : '/dashboard';
+        navigate(safe, { replace: true });
+    }, [user, navigate, searchParams]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
 
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password,
         });
@@ -32,12 +45,22 @@ const Login = () => {
             setError(msg);
             setLoading(false);
         } else {
+            // In some browsers, onAuthStateChange can lag by a tick.
+            // Ensure we have a session before redirecting.
+            const session =
+                data?.session ??
+                (await supabase.auth.getSession()).data.session;
+            if (!session) {
+                setError('Sign-in succeeded but session is not ready yet. Please try again.');
+                setLoading(false);
+                return;
+            }
             const redirect = searchParams.get('redirect');
             const safe =
                 redirect && redirect.startsWith('/') && !redirect.startsWith('//')
                     ? redirect
                     : '/dashboard';
-            navigate(safe);
+            navigate(safe, { replace: true });
         }
     };
 

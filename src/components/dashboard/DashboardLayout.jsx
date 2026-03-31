@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { usePurchases } from '../../hooks/usePurchases';
 import {
     LayoutDashboard,
     FolderKanban,
@@ -16,16 +17,26 @@ import {
 
 const DashboardLayout = () => {
     const { user, signOut } = useAuth();
+    const { loading: purchaseLoading, hasPurchasedAdvisory } = usePurchases();
     const location = useLocation();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    const navItems = [
-        { path: '/dashboard', icon: <LayoutDashboard size={20} />, label: 'Overview' },
-        { path: '/dashboard/strategy-brief', icon: <FolderKanban size={20} />, label: 'My Strategy' },
-        { path: '/dashboard/my-search', icon: <Search size={20} />, label: 'My Search' },
-        { path: '/dashboard/resources', icon: <BookOpen size={20} />, label: 'Resources' },
-        { path: '/dashboard/profile', icon: <User size={20} />, label: 'Profile' },
-    ];
+    const navItems = useMemo(() => {
+        const items = [
+            { path: '/dashboard', icon: <LayoutDashboard size={20} />, label: 'Overview' },
+        ];
+        if (!purchaseLoading && hasPurchasedAdvisory) {
+            items.push(
+                { path: '/dashboard/strategy-brief', icon: <FolderKanban size={20} />, label: 'My Strategy' },
+                { path: '/dashboard/my-search', icon: <Search size={20} />, label: 'My Search' },
+            );
+        }
+        items.push(
+            { path: '/dashboard/resources', icon: <BookOpen size={20} />, label: 'Resources' },
+            { path: '/dashboard/profile', icon: <User size={20} />, label: 'Profile' },
+        );
+        return items;
+    }, [purchaseLoading, hasPurchasedAdvisory]);
 
     return (
         <div className="min-h-screen bg-[#0D0D12] text-[#FAF8F5] font-['Inter'] flex">

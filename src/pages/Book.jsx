@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { Clock, ShieldCheck, Globe, Calendar, Check } from 'lucide-react';
 import ReactSlider from 'react-slider';
 import MinimalHeader from '../components/MinimalHeader';
+import { supabase } from '../lib/supabase';
 
 export default function Book() {
     const containerRef = useRef(null);
@@ -113,8 +114,31 @@ export default function Book() {
             });
             await response.json();
 
-            // Simulating a successful submission for now
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            // Persist to Supabase so the same email can merge into client profile after login
+            try {
+                const email = (formData.email || '').trim().toLowerCase();
+                if (email) {
+                    await supabase.from('intro_call_bookings').insert({
+                        email,
+                        form_data: {
+                            name: formData.name,
+                            email,
+                            timeline: formData.timeline,
+                            considering: formData.considering,
+                            budget: formData.budget,
+                            vehicleTypes: formData.vehicleTypes,
+                            powertrains: formData.powertrains,
+                            size: formData.size,
+                            helpText: formData.helpText,
+                            availability: formData.availability,
+                        },
+                    });
+                }
+            } catch (persistErr) {
+                console.warn('intro_call_bookings insert failed', persistErr);
+            }
+
+            await new Promise(resolve => setTimeout(resolve, 800));
             navigate('/scheduled'); // Redirect to new scheduled page
 
         } catch (error) {

@@ -91,22 +91,30 @@ export function useJourneyStatus({ profile, hasPurchasedAdvisory }) {
             action: 'onboarding',
             resourcePhase: 'strategy',
         };
-    } else if (hasPurchasedAdvisory && counts.deliverables === 0) {
+    } else if (
+        hasPurchasedAdvisory &&
+        counts.deliverables === 0 &&
+        !profile?.advisory_strategy_brief_at
+    ) {
         nextStep = {
             label: 'Strategy Brief In Progress',
             description: 'Your advisor is preparing your custom vehicle strategy. You\'ll be notified when it\'s ready for review.',
             action: null,
             resourcePhase: 'strategy',
         };
-    } else if (counts.deliverables > 0 && counts.testDrives === 0) {
+    } else if (
+        hasPurchasedAdvisory &&
+        (counts.deliverables > 0 || profile?.advisory_strategy_brief_at) &&
+        counts.testDrives === 0
+    ) {
         nextStep = {
             label: 'Review Your Strategy Brief',
             description: 'Your personalized vehicle recommendations are ready. Review them, then schedule your first test drive.',
             link: '/dashboard/strategy-brief',
-            linkLabel: 'Open My Strategy',
+            linkLabel: 'Start Review',
             resourcePhase: 'strategy',
         };
-    } else if (counts.testDrives > 0 && counts.offers === 0) {
+    } else if (hasPurchasedAdvisory && counts.testDrives > 0 && counts.offers === 0) {
         nextStep = {
             label: 'Ready to Negotiate?',
             description: 'You\'ve driven vehicles and logged feedback. When you receive a dealer quote, submit it for a line-by-line review.',
@@ -114,21 +122,13 @@ export function useJourneyStatus({ profile, hasPurchasedAdvisory }) {
             linkLabel: 'Submit an Offer',
             resourcePhase: 'negotiate',
         };
-    } else if (counts.offers > 0) {
+    } else if (hasPurchasedAdvisory && counts.offers > 0) {
         nextStep = {
             label: 'Review Your Offer Analysis',
             description: 'Your submitted offers are being evaluated. Check My Search for status updates and advisor feedback.',
             link: '/dashboard/my-search',
             linkLabel: 'View Submissions',
             resourcePhase: 'negotiate',
-        };
-    } else if (!hasPurchasedAdvisory && counts.listings === 0) {
-        nextStep = {
-            label: 'Start Evaluating Vehicles',
-            description: 'Found a listing you like? Submit it for a quick analysis, or explore our resources to sharpen your search.',
-            link: '/dashboard/my-search/listing',
-            linkLabel: 'Submit a Listing',
-            resourcePhase: 'evaluate',
         };
     }
 

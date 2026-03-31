@@ -6,6 +6,7 @@ import { OTD_SAVED_QUOTES_KEY } from './otdCalculatorCore';
 
 export const DECISION_ENGINE_STORAGE_KEY = 'autolitics_vehicle_decision_engine_v1';
 export const OFFER_COMPARISON_STORAGE_KEY = 'autolitics_offer_comparison_worksheet_v1';
+export const SCORECARD_STORAGE_KEY = 'autolitics_vehicle_scorecard_v1';
 export const CONSIDERING_MODELS_KEY = 'autolitics_considering_models_v1';
 const MAX_CONSIDERING = 24;
 
@@ -38,6 +39,18 @@ export function saveOfferComparisonSnapshot(payload) {
         localStorage.setItem(OFFER_COMPARISON_STORAGE_KEY, JSON.stringify(payload));
     } catch (e) {
         console.warn('vehicleContextStorage: could not save offer comparison', e);
+    }
+}
+
+export function loadScorecardSnapshot() {
+    return safeParse(localStorage.getItem(SCORECARD_STORAGE_KEY), null);
+}
+
+export function saveScorecardSnapshot(payload) {
+    try {
+        localStorage.setItem(SCORECARD_STORAGE_KEY, JSON.stringify(payload));
+    } catch (e) {
+        console.warn('vehicleContextStorage: could not save scorecard', e);
     }
 }
 
@@ -74,6 +87,11 @@ export function getConsideringModelStrings() {
 
     const oc = loadOfferComparisonSnapshot();
     (oc?.dealers || []).forEach((d) => push(d?.vehicleLabel));
+
+    const scorecard = loadScorecardSnapshot();
+    push(scorecard?.vehicleModel);
+    push([scorecard?.vehicleModel, scorecard?.trim].filter(Boolean).join(' ').trim());
+    (scorecard?.comparedVehicles || []).forEach(push);
 
     const quotes = safeParse(localStorage.getItem(OTD_SAVED_QUOTES_KEY), []);
     (Array.isArray(quotes) ? quotes : []).forEach((sq) => {

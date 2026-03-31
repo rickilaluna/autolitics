@@ -19,7 +19,14 @@ const ClientDetail = () => {
         secondary_email: '',
         location: '',
         household_notes: '',
-        current_vehicles: ''
+        current_vehicles: '',
+        buying_timeline: '',
+        primary_goal: '',
+        advisory_intro_call_at: null,
+        advisory_discovery_at: null,
+        advisory_strategy_brief_at: null,
+        advisory_negotiation_support_at: null,
+        advisory_engagement_completed_at: null,
     });
 
     useEffect(() => {
@@ -36,7 +43,7 @@ const ClientDetail = () => {
             .single();
 
         if (data) {
-            setFormData(data);
+            setFormData((prev) => ({ ...prev, ...data }));
         } else if (error) {
             console.error('Error fetching client:', error);
         }
@@ -51,11 +58,28 @@ const ClientDetail = () => {
         }));
     };
 
+    const formatDateInput = (iso) => {
+        if (!iso) return '';
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return '';
+        return d.toISOString().slice(0, 10);
+    };
+
+    const handleMilestoneDate = (name, dateStr) => {
+        setFormData((prev) => ({
+            ...prev,
+            [name]: dateStr ? new Date(`${dateStr}T12:00:00`).toISOString() : null,
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSaving(true);
 
         const payload = { ...formData };
+        ['advisory_intro_call_at', 'advisory_discovery_at', 'advisory_strategy_brief_at', 'advisory_negotiation_support_at', 'advisory_engagement_completed_at'].forEach((k) => {
+            if (payload[k] === '') payload[k] = null;
+        });
 
         if (isNew) {
             const { error } = await supabase.from('clients').insert([payload]);
@@ -117,6 +141,41 @@ const ClientDetail = () => {
                 <div>
                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Current Vehicles (Garage)</label>
                     <input type="text" name="current_vehicles" value={formData.current_vehicles || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="2008 RAV4, 2017 GLC" />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Buying timeline</label>
+                        <input type="text" name="buying_timeline" value={formData.buying_timeline || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="Within 1-3 months" />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Primary goal</label>
+                        <input type="text" name="primary_goal" value={formData.primary_goal || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="Narrow segment, minimize total cost" />
+                    </div>
+                </div>
+
+                <div className="border border-[#2A2A35] rounded-2xl p-6 space-y-4 bg-[#1A1A24]/40">
+                    <h2 className="text-lg font-semibold text-[#FAF8F5]">Advisory milestones</h2>
+                    <p className="text-sm text-[#FAF8F5]/50">Set the date when each 1:1 step is completed. Clear a field to unset. &quot;Engagement complete&quot; is when the vehicle purchase is done.</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {[
+                            ['advisory_intro_call_at', 'Free intro call'],
+                            ['advisory_discovery_at', 'Advisory discovery session'],
+                            ['advisory_strategy_brief_at', 'Strategy & recommendation brief'],
+                            ['advisory_negotiation_support_at', 'Negotiation support (add-on)'],
+                            ['advisory_engagement_completed_at', 'Engagement complete (vehicle purchased)'],
+                        ].map(([key, label]) => (
+                            <div key={key}>
+                                <label className="block text-xs font-medium text-[#FAF8F5]/60 mb-1 font-sans">{label}</label>
+                                <input
+                                    type="date"
+                                    value={formatDateInput(formData[key])}
+                                    onChange={(e) => handleMilestoneDate(key, e.target.value)}
+                                    className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans"
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="flex justify-end pt-4">

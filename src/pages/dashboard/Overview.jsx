@@ -102,9 +102,10 @@ const Overview = () => {
     const { user } = useAuth();
     const { loading: purchaseLoading, hasPurchasedAdvisory } = usePurchases();
     const { profile, loading: profileLoading, updateProfile } = useClientProfile();
+    const [profileSaveError, setProfileSaveError] = useState(null);
     const [showOnboarding, setShowOnboarding] = useState(false);
 
-    const { loading: journeyLoading, currentPhase, nextStep } = useJourneyStatus({
+    const { loading: journeyLoading, currentPhase, nextStep, counts } = useJourneyStatus({
         profile,
         hasPurchasedAdvisory,
     });
@@ -134,14 +135,26 @@ const Overview = () => {
 
     const handleOpenOnboarding = () => setShowOnboarding(true);
 
+    const displayFirstName =
+        (profile?.primary_contact_name || '').trim().split(/\s+/)[0] ||
+        user?.user_metadata?.first_name ||
+        'Client';
+
+    const deliverableCount = counts?.deliverables ?? 0;
+    const briefReadyForPortal =
+        deliverableCount > 0 ||
+        !!profile?.advisory_strategy_brief_at;
+
     return (
         <div className="space-y-8 animate-fade-in pb-12">
             <header className="mb-2">
                 <h1 className="text-3xl font-semibold tracking-tight text-[#0D0D12] mb-2">
-                    Welcome back, {user?.user_metadata?.first_name || 'Client'}.
+                    Welcome back, {displayFirstName}.
                 </h1>
                 <p className="text-[#0D0D12]/60 max-w-2xl">
-                    This is your vehicle search command center.
+                    {hasPurchasedAdvisory
+                        ? 'This is your advisory command center. Manage your active vehicle search, access your strategy, and use curated resources.'
+                        : 'This is your vehicle search command center.'}
                 </p>
             </header>
 
@@ -160,15 +173,32 @@ const Overview = () => {
                                     {PHASES.find(p => p.num === currentPhase)?.label || 'Active'}
                                 </span>
                             </div>
-                            <p className="text-[#0D0D12]/60 max-w-xl text-sm">Your advisor is with you at every step. Review your strategy or book a call.</p>
+                            <p className="text-[#0D0D12]/60 max-w-xl text-sm">
+                                {briefReadyForPortal
+                                    ? 'Your custom vehicle strategy brief is ready for review.'
+                                    : 'We are onboarding your engagement. Schedule your intro call if you have not yet, and your advisor will publish your strategy brief here when it is ready.'}
+                            </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3">
-                            <Link to="/dashboard/strategy-brief" className="inline-flex justify-center bg-[#0D0D12] text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-[#1A1A24] transition-colors items-center gap-2">
-                                Open My Strategy
-                            </Link>
-                            <a href="mailto:rickilaluna@gmail.com?subject=Advisory Call" className="inline-flex justify-center bg-[#FAF8F5] border border-[#0D0D12]/10 text-[#0D0D12] px-6 py-3 rounded-xl text-sm font-medium hover:bg-white transition-colors items-center gap-2">
-                                <Calendar size={16} /> Book Call
-                            </a>
+                            {briefReadyForPortal ? (
+                                <>
+                                    <Link to="/dashboard/strategy-brief" className="inline-flex justify-center bg-[#0D0D12] text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-[#1A1A24] transition-colors items-center gap-2">
+                                        Open Strategy Brief
+                                    </Link>
+                                    <a href="mailto:rickilaluna@gmail.com?subject=Advisory%20Call" className="inline-flex justify-center bg-[#FAF8F5] border border-[#0D0D12]/10 text-[#0D0D12] px-6 py-3 rounded-xl text-sm font-medium hover:bg-white transition-colors items-center gap-2">
+                                        <Calendar size={16} /> Schedule Call
+                                    </a>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/book" className="inline-flex justify-center bg-[#0D0D12] text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-[#1A1A24] transition-colors items-center gap-2">
+                                        <Calendar size={16} /> Schedule Intro Call
+                                    </Link>
+                                    <a href="mailto:rickilaluna@gmail.com?subject=Advisory%20question" className="inline-flex justify-center bg-[#FAF8F5] border border-[#0D0D12]/10 text-[#0D0D12] px-6 py-3 rounded-xl text-sm font-medium hover:bg-white transition-colors items-center gap-2">
+                                        Email advisor
+                                    </a>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -279,27 +309,29 @@ const Overview = () => {
                 </div>
             )}
 
-            {/* Quick Actions */}
-            <div>
-                <h3 className="text-sm font-['JetBrains_Mono'] text-[#0D0D12]/40 uppercase tracking-widest mb-4">Quick Actions</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <Link to="/dashboard/my-search/listing" className="p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
-                        <CarFront className="text-[#0D0D12] mb-3 group-hover:text-[#C9A84C] transition-colors" size={20} />
-                        <h3 className="font-semibold text-sm mb-1">Submit Listing</h3>
-                        <p className="text-xs text-[#0D0D12]/50 line-clamp-2">Vet a listing before visiting.</p>
-                    </Link>
-                    <Link to="/dashboard/my-search/test-drive" className="p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
-                        <MessagesSquare className="text-[#0D0D12] mb-3 group-hover:text-[#C9A84C] transition-colors" size={20} />
-                        <h3 className="font-semibold text-sm mb-1">Log Test Drive</h3>
-                        <p className="text-xs text-[#0D0D12]/50 line-clamp-2">Record reactions post-drive.</p>
-                    </Link>
-                    <Link to="/dashboard/my-search/offer" className="p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
-                        <FileSignature className="text-[#0D0D12] mb-3 group-hover:text-[#C9A84C] transition-colors" size={20} />
-                        <h3 className="font-semibold text-sm mb-1">Review Offer</h3>
-                        <p className="text-xs text-[#0D0D12]/50 line-clamp-2">Verify quote structures.</p>
-                    </Link>
+            {/* Quick Actions — advisory workspace only */}
+            {hasPurchasedAdvisory && (
+                <div>
+                    <h3 className="text-sm font-['JetBrains_Mono'] text-[#0D0D12]/40 uppercase tracking-widest mb-4">Quick Actions</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <Link to="/dashboard/my-search/listing" className="p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
+                            <CarFront className="text-[#0D0D12] mb-3 group-hover:text-[#C9A84C] transition-colors" size={20} />
+                            <h3 className="font-semibold text-sm mb-1">Submit Listing</h3>
+                            <p className="text-xs text-[#0D0D12]/50 line-clamp-2">Vet a listing before visiting.</p>
+                        </Link>
+                        <Link to="/dashboard/my-search/test-drive" className="p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
+                            <MessagesSquare className="text-[#0D0D12] mb-3 group-hover:text-[#C9A84C] transition-colors" size={20} />
+                            <h3 className="font-semibold text-sm mb-1">Log Test Drive</h3>
+                            <p className="text-xs text-[#0D0D12]/50 line-clamp-2">Record reactions post-drive.</p>
+                        </Link>
+                        <Link to="/dashboard/my-search/offer" className="p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
+                            <FileSignature className="text-[#0D0D12] mb-3 group-hover:text-[#C9A84C] transition-colors" size={20} />
+                            <h3 className="font-semibold text-sm mb-1">Review Offer</h3>
+                            <p className="text-xs text-[#0D0D12]/50 line-clamp-2">Verify quote structures.</p>
+                        </Link>
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* Full toolkit strip — same IP as Resources hub */}
             {isProfileComplete && (
@@ -343,11 +375,21 @@ const Overview = () => {
                 <OnboardingModal
                     profile={profile}
                     onClose={() => setShowOnboarding(false)}
-                    onSave={(updates) => {
-                        updateProfile(updates);
+                    onSave={async (updates) => {
+                        setProfileSaveError(null);
+                        const result = await updateProfile(updates);
+                        if (result?.error) {
+                            setProfileSaveError(result.error);
+                            return;
+                        }
                         setShowOnboarding(false);
                     }}
                 />
+            )}
+            {profileSaveError && (
+                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] max-w-md w-[calc(100%-2rem)] bg-red-500/15 border border-red-500/40 text-red-800 px-4 py-3 rounded-xl text-sm font-['JetBrains_Mono'] shadow-lg">
+                    Could not save profile: {profileSaveError}
+                </div>
             )}
         </div>
     );
