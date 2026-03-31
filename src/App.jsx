@@ -23,6 +23,7 @@ import VehicleComparisonMatrix from './pages/resources/VehicleComparisonMatrix';
 import VehicleComparisonMatrixPrint from './pages/resources/VehicleComparisonMatrixPrint';
 import VehicleDecisionEnginePrint from './pages/resources/VehicleDecisionEnginePrint';
 import OTDCalculator from './pages/resources/OTDCalculator';
+import BuildInfo from './pages/BuildInfo';
 
 // Auth Pages
 import Login from './pages/auth/Login';
@@ -79,6 +80,7 @@ function App() {
                     <Route path="/resources/vehicle-comparison-matrix/template" element={<VehicleComparisonMatrixPrint />} />
                     <Route path="/resources/vehicle-comparison-matrix/print-radar" element={<VehicleDecisionEnginePrint />} />
                     <Route path="/resources/out-the-door-calculator" element={<OTDCalculator />} />
+                    <Route path="/build-info" element={<BuildInfo />} />
 
                     {/* Auth Routes */}
                     <Route path="/login" element={<Login />} />
