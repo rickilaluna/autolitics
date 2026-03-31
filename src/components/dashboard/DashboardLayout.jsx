@@ -59,7 +59,13 @@ const DashboardLayout = () => {
                         </div>
                         <nav className="space-y-1">
                             {navItems.map((item) => {
-                                const isActive = location.pathname === item.path;
+                                const path =
+                                    location.pathname.replace(/\/$/, '') || '/';
+                                const itemPath = item.path.replace(/\/$/, '') || '/';
+                                const isActive =
+                                    itemPath === '/dashboard'
+                                        ? path === '/dashboard'
+                                        : path === itemPath || path.startsWith(`${itemPath}/`);
                                 return (
                                     <Link
                                         key={item.path}

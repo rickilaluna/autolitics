@@ -5,6 +5,14 @@ export default [
     js.configs.recommended,
     { ignores: ["dist/**", "node_modules/**", "**/tmp/**", "test*.cjs", "**/*.cjs", "scripts/**"] },
     {
+        files: ["vite.config.js"],
+        languageOptions: {
+            globals: {
+                process: "readonly",
+            },
+        },
+    },
+    {
         files: ["src/**/*.jsx", "src/**/*.js"],
         plugins: {
             react: reactPlugin,

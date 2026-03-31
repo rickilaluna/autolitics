@@ -183,6 +183,12 @@ const Resources = () => {
                     </div>
                 )}
             </div>
+
+            {import.meta.env.VITE_COMMIT_SHA ? (
+                <p className="text-[10px] font-['JetBrains_Mono'] text-[#0D0D12]/35 text-center pt-6" title="Git commit this build was produced from">
+                    Build {import.meta.env.VITE_COMMIT_SHA.slice(0, 7)}
+                </p>
+            ) : null}
         </div>
     );
 };
