@@ -152,7 +152,7 @@ const TestDriveFeedbackForm = () => {
                                 placeholder="Year, Make, Model, Trim"
                                 value={formData.vehicle_driven}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
                             />
                         </div>
                         <div className="space-y-2">
@@ -166,7 +166,7 @@ const TestDriveFeedbackForm = () => {
                                 required
                                 value={formData.drive_date}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
                             />
                         </div>
                     </div>
@@ -247,7 +247,7 @@ const TestDriveFeedbackForm = () => {
                                 placeholder="How did the car make you feel? Did it meet your expectations from the Strategy Brief?"
                                 value={formData.overall_impression}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y"
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y"
                             />
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -262,7 +262,7 @@ const TestDriveFeedbackForm = () => {
                                     placeholder="What did you love?"
                                     value={formData.likes}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y"
+                                    className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -276,7 +276,7 @@ const TestDriveFeedbackForm = () => {
                                     placeholder="What annoyed you?"
                                     value={formData.dislikes}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y"
+                                    className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y"
                                 />
                             </div>
                         </div>

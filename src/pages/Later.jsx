@@ -5,10 +5,10 @@ import MinimalHeader from '../components/MinimalHeader';
 
 export default function Later() {
     return (
-        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center font-sans tracking-tight pt-32">
+        <div className="public-page-shell bg-background flex flex-col items-center justify-center text-center font-sans tracking-tight">
             <MinimalHeader />
 
-            <div className="w-full max-w-2xl mx-auto space-y-8 animate-fade-in-up">
+            <div className="public-page-content w-full max-w-2xl mx-auto space-y-8 animate-fade-in-up pb-16 flex flex-col justify-center min-h-[min(80vh,calc(100dvh-8rem))]">
 
                 <h1 className="text-5xl md:text-7xl font-bold text-primary leading-[1.1] tracking-tighter">
                     No worries — ready
@@ -23,7 +23,7 @@ export default function Later() {
                 <div className="pt-8 flex flex-col items-center justify-center gap-6">
                     <Link
                         to="/book"
-                        className="group relative inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-transform duration-300 hover:-translate-y-1 shadow-[0_10px_40px_-10px_rgba(13,13,18,0.5)] w-full max-w-xs"
+                        className="studio-touch-btn group relative inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 sm:py-4 rounded-2xl font-bold text-lg transition-transform duration-300 hover:-translate-y-1 shadow-[0_10px_40px_-10px_rgba(13,13,18,0.5)] w-full max-w-xs"
                     >
                         <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
                         Return to Booking

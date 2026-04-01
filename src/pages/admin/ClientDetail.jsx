@@ -110,47 +110,47 @@ const ClientDetail = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Primary Contact Name</label>
-                        <input required type="text" name="primary_contact_name" value={formData.primary_contact_name || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Zachary Portin" />
+                        <input required type="text" name="primary_contact_name" value={formData.primary_contact_name || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Zachary Portin" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Secondary Contact Name</label>
-                        <input type="text" name="secondary_contact_name" value={formData.secondary_contact_name || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Elizabeth Portin" />
+                        <input type="text" name="secondary_contact_name" value={formData.secondary_contact_name || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Elizabeth Portin" />
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Primary Email</label>
-                        <input type="email" name="primary_email" value={formData.primary_email || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="email@example.com" />
+                        <input type="email" name="primary_email" value={formData.primary_email || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="email@example.com" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Secondary Email</label>
-                        <input type="email" name="secondary_email" value={formData.secondary_email || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="email2@example.com" />
+                        <input type="email" name="secondary_email" value={formData.secondary_email || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="email2@example.com" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Location</label>
-                        <input type="text" name="location" value={formData.location || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Austin, TX" />
+                        <input type="text" name="location" value={formData.location || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Austin, TX" />
                     </div>
                 </div>
 
                 <div>
                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Household Notes</label>
-                    <textarea name="household_notes" value={formData.household_notes || ''} onChange={handleChange} rows="3" className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans resize-none" placeholder="Growing family needs (2 children + large dog)"></textarea>
+                    <textarea name="household_notes" value={formData.household_notes || ''} onChange={handleChange} rows="3" className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans resize-none" placeholder="Growing family needs (2 children + large dog)"></textarea>
                 </div>
 
                 <div>
                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Current Vehicles (Garage)</label>
-                    <input type="text" name="current_vehicles" value={formData.current_vehicles || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="2008 RAV4, 2017 GLC" />
+                    <input type="text" name="current_vehicles" value={formData.current_vehicles || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="2008 RAV4, 2017 GLC" />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Buying timeline</label>
-                        <input type="text" name="buying_timeline" value={formData.buying_timeline || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="Within 1-3 months" />
+                        <input type="text" name="buying_timeline" value={formData.buying_timeline || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="Within 1-3 months" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Primary goal</label>
-                        <input type="text" name="primary_goal" value={formData.primary_goal || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="Narrow segment, minimize total cost" />
+                        <input type="text" name="primary_goal" value={formData.primary_goal || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="Narrow segment, minimize total cost" />
                     </div>
                 </div>
 
@@ -171,7 +171,7 @@ const ClientDetail = () => {
                                     type="date"
                                     value={formatDateInput(formData[key])}
                                     onChange={(e) => handleMilestoneDate(key, e.target.value)}
-                                    className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans"
+                                    className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans"
                                 />
                             </div>
                         ))}

@@ -5,6 +5,7 @@ import { usePurchases } from '../../hooks/usePurchases';
 import { supabase } from '../../lib/supabase';
 import { CarFront, MessageSquareText, FileSignature, ArrowRight, Loader2, Clock, CheckCircle2, XCircle } from 'lucide-react';
 import ResourceHubCrosslinks from '../../components/dashboard/ResourceHubCrosslinks';
+import GlobalJourneyTracker from '../../components/dashboard/GlobalJourneyTracker';
 
 const MySearch = () => {
     const { user } = useAuth();
@@ -113,6 +114,8 @@ const MySearch = () => {
                 </p>
             </header>
 
+            <GlobalJourneyTracker />
+
             {/* Quick Actions */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="p-8 bg-white border border-[#0D0D12]/10 rounded-[2rem] shadow-sm flex flex-col h-full hover:border-[#C9A84C]/50 transition-colors group">
@@ -157,9 +160,9 @@ const MySearch = () => {
 
             <ResourceHubCrosslinks variant="workspace" />
 
-            {/* Recent Activity Timeline */}
+            {/* Search Record */}
             <div className="mt-12">
-                <h3 className="text-xl font-semibold tracking-tight text-[#0D0D12] mb-6">Recent Submissions</h3>
+                <h3 className="text-xl font-semibold tracking-tight text-[#0D0D12] mb-6">Search Record</h3>
                 
                 {activities.length === 0 ? (
                     <div className="bg-white border border-[#0D0D12]/10 rounded-2xl p-8 text-center text-[#0D0D12]/50 font-['JetBrains_Mono'] text-sm">

@@ -108,29 +108,29 @@ const ResourcesManager = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Title</label>
-                    <input type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all" />
+                    <input type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all" />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Document URL / PDF Link</label>
-                    <input type="url" value={formData.document_url} onChange={e => setFormData({...formData, document_url: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all" />
+                    <input type="url" value={formData.document_url} onChange={e => setFormData({...formData, document_url: e.target.value})} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all" />
                 </div>
             </div>
             
             <div>
                 <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Description (1-2 sentences)</label>
-                <textarea rows={2} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all resize-none" />
+                <textarea rows={2} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all resize-none" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Icon Type</label>
-                    <select value={formData.icon_type} onChange={e => setFormData({...formData, icon_type: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all">
+                    <select value={formData.icon_type} onChange={e => setFormData({...formData, icon_type: e.target.value})} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all">
                         {ICONS.map(i => <option key={i} value={i}>{i}</option>)}
                     </select>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Sort Order</label>
-                    <input type="number" value={formData.sort_order} onChange={e => setFormData({...formData, sort_order: parseInt(e.target.value) || 0})} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all" />
+                    <input type="number" value={formData.sort_order} onChange={e => setFormData({...formData, sort_order: parseInt(e.target.value) || 0})} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all" />
                 </div>
                 <div className="flex items-center pt-8">
                     <label className="flex items-center gap-2 cursor-pointer">

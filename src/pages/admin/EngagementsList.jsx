@@ -111,7 +111,7 @@ const EngagementsList = () => {
                             <select
                                 value={selectedClientId}
                                 onChange={e => setSelectedClientId(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans"
+                                className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans"
                             >
                                 <option value="">-- Choose a Client --</option>
                                 {clients.map(c => (

@@ -18,10 +18,10 @@ const SuccessState = () => {
     }, [location]);
 
     return (
-        <div className="min-h-screen bg-[#0D0D12] text-[#FAF8F5] font-['Inter']">
+        <div className="public-page-shell bg-[#0D0D12] text-[#FAF8F5] font-['Inter']">
             <MinimalHeader />
 
-            <div className="pt-32 pb-24 px-6 sm:px-12 max-w-3xl mx-auto flex flex-col items-center justify-center min-h-[80vh] text-center">
+            <div className="public-page-content max-w-3xl mx-auto flex flex-col items-center justify-center min-h-[min(85vh,calc(100dvh-6rem))] pb-16 sm:pb-24 text-center">
                 <div className="bg-[#C9A84C]/10 w-24 h-24 rounded-[2rem] flex items-center justify-center mb-10 border border-[#C9A84C]/20 shadow-[0_0_50px_rgba(201,168,76,0.1)]">
                     <CheckCircle2 size={48} className="text-[#C9A84C]" />
                 </div>
@@ -43,11 +43,11 @@ const SuccessState = () => {
                             </ul>
 
                             {user ? (
-                                <Link to="/dashboard" className="w-full relative overflow-hidden bg-[#C9A84C] text-[#0D0D12] py-4 px-8 rounded-full font-semibold transition-transform duration-300 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-2">
+                                <Link to="/dashboard" className="studio-touch-btn w-full relative overflow-hidden bg-[#C9A84C] text-[#0D0D12] sm:py-4 px-8 rounded-full font-semibold transition-transform duration-300 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-2">
                                     <span className="relative z-10 block">Enter Dashboard</span>
                                 </Link>
                             ) : (
-                                <Link to="/register" className="w-full relative overflow-hidden bg-[#C9A84C] text-[#0D0D12] py-4 px-8 rounded-full font-semibold transition-transform duration-300 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-2">
+                                <Link to="/register" className="studio-touch-btn w-full relative overflow-hidden bg-[#C9A84C] text-[#0D0D12] sm:py-4 px-8 rounded-full font-semibold transition-transform duration-300 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-2">
                                     <span className="relative z-10 block">Create Account</span>
                                 </Link>
                             )}

@@ -6,8 +6,7 @@ import {
     Printer, Plus, Trash2, HelpCircle,
     Gauge, Sofa, Monitor, Package, Zap, Shield, Sparkles, DollarSign,
 } from 'lucide-react';
-import MinimalHeader from '../../components/MinimalHeader';
-import ResourceNav from '../../components/ResourceNav';
+import ResourcePageShell from '../../components/ResourcePageShell';
 import VehicleAutocomplete from '../../components/VehicleAutocomplete';
 import { logUnmatched } from '../../utils/unmatchedVehicleLogger';
 import {
@@ -502,23 +501,7 @@ export default function VehicleComparisonMatrix() {
     };
 
     return (
-        <>
-            <div className="bg-[#0D0D12] min-h-screen text-[#FAF8F5] font-['Inter'] selection:bg-[#C9A84C]/20">
-                <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.04] mix-blend-overlay no-print">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
-                        <filter id="noiseFilterVCM">
-                            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
-                        </filter>
-                        <rect width="100%" height="100%" filter="url(#noiseFilterVCM)" />
-                    </svg>
-                </div>
-
-                <MinimalHeader />
-                <div className="pt-28">
-                    <ResourceNav title="Vehicle Decision Engine" />
-
-                    <main className="w-full max-w-4xl mx-auto px-6 md:px-8 pt-6 pb-24">
-
+        <ResourcePageShell navTitle="Vehicle Decision Engine" maxWidth="4xl" mainClassName="md:px-6 !pb-24">
                         {/* Hero — taller, workflow includes Category Leaders */}
                         <section className="mb-12 pt-2">
                             <div className="inline-flex items-center gap-2 text-[10px] font-['JetBrains_Mono'] text-[#C9A84C]/60 uppercase tracking-widest mb-4 border border-[#C9A84C]/20 px-3 py-1 rounded-full">
@@ -673,7 +656,7 @@ export default function VehicleComparisonMatrix() {
                                                     placeholder="Enter vehicle name"
                                                     helperText={idx === 0 ? 'Start typing to search supported models, or enter a custom vehicle manually. Models from your OTD runs and offer worksheet appear here too.' : undefined}
                                                     onUnmatchedEntry={logUnmatched}
-                                                    className="w-full bg-transparent text-[#FAF8F5] font-medium placeholder:text-[#FAF8F5]/30 focus:outline-none focus:ring-0 border-0 p-0"
+                                                    className="studio-touch-input w-full bg-transparent text-[#FAF8F5] font-medium placeholder:text-[#FAF8F5]/30 focus:outline-none focus:ring-0 border-0 p-0"
                                                 />
                                             </div>
                                             {vehicles.length > 1 && (
@@ -760,9 +743,6 @@ export default function VehicleComparisonMatrix() {
                         <p className="text-xs text-[#FAF8F5]/20 font-['JetBrains_Mono'] text-center">
                             Autolitics Studio · Vehicle Decision Engine · studio.autolitics.com
                         </p>
-                    </main>
-                </div>
-            </div>
-        </>
+        </ResourcePageShell>
     );
 }

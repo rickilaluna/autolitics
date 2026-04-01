@@ -17,58 +17,13 @@ import { useAuth } from '../../contexts/AuthContext';
 import { usePurchases } from '../../hooks/usePurchases';
 import { useClientProfile } from '../../hooks/useClientProfile';
 import { useJourneyStatus } from '../../hooks/useJourneyStatus';
-import { PHASE_RESOURCES } from '../../data/dashboardResourceCatalog';
-import ResourceHubCrosslinks from '../../components/dashboard/ResourceHubCrosslinks';
+
+import GlobalJourneyTracker from '../../components/dashboard/GlobalJourneyTracker';
+import WorkspaceActivityModule from '../../components/dashboard/WorkspaceActivityModule';
 import OnboardingModal from './OnboardingModal';
 import { getConsideringModelStrings } from '../../lib/vehicleContextStorage';
 
-const PHASES = [
-    { num: 1, label: 'Setup', short: 'Profile' },
-    { num: 2, label: 'Strategy', short: 'Research' },
-    { num: 3, label: 'Evaluate', short: 'Test Drive' },
-    { num: 4, label: 'Negotiate', short: 'Close' },
-];
 
-const ProgressStepper = ({ currentPhase }) => (
-    <div className="bg-white border border-[#0D0D12]/10 rounded-2xl p-6 shadow-sm">
-        <div className="flex items-center justify-between">
-            {PHASES.map((phase, idx) => {
-                const isComplete = currentPhase > phase.num;
-                const isCurrent = currentPhase === phase.num;
-                return (
-                    <React.Fragment key={phase.num}>
-                        <div className="flex flex-col items-center gap-2 min-w-0">
-                            <div className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-                                isComplete
-                                    ? 'bg-[#C9A84C] text-white'
-                                    : isCurrent
-                                        ? 'bg-[#0D0D12] text-white'
-                                        : 'bg-[#0D0D12]/5 text-[#0D0D12]/30'
-                            }`}>
-                                {isComplete ? (
-                                    <CheckCircle2 size={18} />
-                                ) : (
-                                    <span className="text-sm font-bold">{phase.num}</span>
-                                )}
-                            </div>
-                            <div className="text-center">
-                                <p className={`text-xs font-semibold uppercase tracking-wider ${
-                                    isCurrent ? 'text-[#0D0D12]' : isComplete ? 'text-[#C9A84C]' : 'text-[#0D0D12]/30'
-                                }`}>{phase.label}</p>
-                                <p className="text-[10px] text-[#0D0D12]/40 font-['JetBrains_Mono'] hidden sm:block">{phase.short}</p>
-                            </div>
-                        </div>
-                        {idx < PHASES.length - 1 && (
-                            <div className={`flex-1 h-px mx-2 sm:mx-4 ${
-                                currentPhase > phase.num ? 'bg-[#C9A84C]' : 'bg-[#0D0D12]/10'
-                            }`} />
-                        )}
-                    </React.Fragment>
-                );
-            })}
-        </div>
-    </div>
-);
 
 const NextStepCard = ({ nextStep, onOpenOnboarding }) => {
     if (!nextStep) return null;
@@ -101,11 +56,11 @@ const NextStepCard = ({ nextStep, onOpenOnboarding }) => {
 const Overview = () => {
     const { user } = useAuth();
     const { loading: purchaseLoading, hasPurchasedAdvisory } = usePurchases();
-    const { profile, loading: profileLoading, updateProfile } = useClientProfile();
+    const { profile, loading: profileLoading, updateProfile, toggleTaskCompletion } = useClientProfile();
     const [profileSaveError, setProfileSaveError] = useState(null);
     const [showOnboarding, setShowOnboarding] = useState(false);
 
-    const { loading: journeyLoading, currentPhase, nextStep, counts } = useJourneyStatus({
+    const { loading: journeyLoading, currentPhase, nextStep, counts, workspace } = useJourneyStatus({
         profile,
         hasPurchasedAdvisory,
     });
@@ -121,6 +76,10 @@ const Overview = () => {
 
     const isProfileComplete = profile && profile.buying_timeline && profile.primary_goal;
     const hasActiveShortlist = profile?.active_shortlist && profile.active_shortlist.length > 0;
+    
+    const completedTasks = Array.isArray(profile?.completed_journey_tasks) ? profile.completed_journey_tasks : [];
+    const hasHadIntroCall = completedTasks.includes('c_intro');
+    const hasReviewedStrategy = completedTasks.includes('c_strategy');
 
     const mergedConsideringModels = (() => {
         const fromProfile = profile?.active_shortlist || [];
@@ -158,8 +117,8 @@ const Overview = () => {
                 </p>
             </header>
 
-            {/* Progress Stepper */}
-            {isProfileComplete && <ProgressStepper currentPhase={currentPhase} />}
+            {/* Global Journey Progress Tracker */}
+            {isProfileComplete && <GlobalJourneyTracker variant="expanded" />}
 
             {/* Advisory Status Banner */}
             {hasPurchasedAdvisory && isProfileComplete && (
@@ -170,13 +129,15 @@ const Overview = () => {
                                 <ShieldCheck className="text-[#C9A84C]" size={24} />
                                 <h2 className="text-2xl font-semibold">Active Advisory</h2>
                                 <span className="px-3 py-1 bg-[#C9A84C]/10 text-[#C9A84C] rounded-full text-xs font-bold uppercase tracking-wider">
-                                    {PHASES.find(p => p.num === currentPhase)?.label || 'Active'}
+                                    {['Discover', 'Evaluate', 'Compare Offers', 'Decision & Purchase'][currentPhase - 1] || 'Active'}
                                 </span>
                             </div>
                             <p className="text-[#0D0D12]/60 max-w-xl text-sm">
                                 {briefReadyForPortal
-                                    ? 'Your custom vehicle strategy brief is ready for review.'
-                                    : 'We are onboarding your engagement. Schedule your intro call if you have not yet, and your advisor will publish your strategy brief here when it is ready.'}
+                                    ? 'Your custom vehicle strategy brief is ready for review. Read through the strategy and mark it reviewed when you are ready to proceed.'
+                                    : hasHadIntroCall 
+                                        ? 'Your engagement has started. We are assembling your custom strategy brief and will publish it here soon.' 
+                                        : 'We are onboarding your engagement. Schedule your intro call to begin, and your advisor will publish your strategy brief here when it is ready.'}
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3">
@@ -185,15 +146,25 @@ const Overview = () => {
                                     <Link to="/dashboard/strategy-brief" className="inline-flex justify-center bg-[#0D0D12] text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-[#1A1A24] transition-colors items-center gap-2">
                                         Open Strategy Brief
                                     </Link>
-                                    <a href="mailto:rickilaluna@gmail.com?subject=Advisory%20Call" className="inline-flex justify-center bg-[#FAF8F5] border border-[#0D0D12]/10 text-[#0D0D12] px-6 py-3 rounded-xl text-sm font-medium hover:bg-white transition-colors items-center gap-2">
-                                        <Calendar size={16} /> Schedule Call
-                                    </a>
+                                    <button 
+                                        onClick={() => toggleTaskCompletion && toggleTaskCompletion('c_strategy')} 
+                                        className={`inline-flex justify-center px-6 py-3 rounded-xl text-sm font-medium transition-colors items-center gap-2 ${hasReviewedStrategy ? 'bg-[#C9A84C]/10 text-[#C9A84C]' : 'bg-[#FAF8F5] border border-[#0D0D12]/10 text-[#0D0D12] hover:bg-white'}`}
+                                    >
+                                        {hasReviewedStrategy ? 'Reviewed ✓' : 'Mark Reviewed'}
+                                    </button>
+                                    {!hasHadIntroCall && (
+                                        <a href="mailto:rickilaluna@gmail.com?subject=Advisory%20Call" className="inline-flex justify-center bg-[#FAF8F5] border border-[#0D0D12]/10 text-[#0D0D12] px-6 py-3 rounded-xl text-sm font-medium hover:bg-white transition-colors items-center gap-2">
+                                            <Calendar size={16} /> Schedule Call
+                                        </a>
+                                    )}
                                 </>
                             ) : (
                                 <>
-                                    <Link to="/book" className="inline-flex justify-center bg-[#0D0D12] text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-[#1A1A24] transition-colors items-center gap-2">
-                                        <Calendar size={16} /> Schedule Intro Call
-                                    </Link>
+                                    {!hasHadIntroCall && (
+                                        <Link to="/book" className="inline-flex justify-center bg-[#0D0D12] text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-[#1A1A24] transition-colors items-center gap-2">
+                                            <Calendar size={16} /> Schedule Intro Call
+                                        </Link>
+                                    )}
                                     <a href="mailto:rickilaluna@gmail.com?subject=Advisory%20question" className="inline-flex justify-center bg-[#FAF8F5] border border-[#0D0D12]/10 text-[#0D0D12] px-6 py-3 rounded-xl text-sm font-medium hover:bg-white transition-colors items-center gap-2">
                                         Email advisor
                                     </a>
@@ -259,116 +230,59 @@ const Overview = () => {
 
             {/* Target Vehicles / Context */}
             {isProfileComplete && (
-                <div>
-                    <h3 className="text-xl font-semibold tracking-tight text-[#0D0D12] mb-4">Active Shortlist</h3>
-                    {hasActiveShortlist ? (
-                        <div className="flex flex-wrap gap-3">
-                            {profile.active_shortlist.map((car, idx) => (
-                                <div key={idx} className="bg-white border border-[#0D0D12]/20 px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2">
-                                    <CarFront size={16} className="text-[#0D0D12]/50" />
-                                    {car}
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl p-4 text-sm font-['JetBrains_Mono'] text-[#0D0D12]/50">
-                            No vehicles added to shortlist yet. Use Edit Profile to add targets, or add models in the Decision Engine — they sync here on this device.
-                        </div>
-                    )}
-                </div>
-            )}
-
-            {isProfileComplete && mergedConsideringModels.length > 0 && (
-                <div className="bg-white border border-[#0D0D12]/10 rounded-[2rem] p-8 shadow-sm">
-                    <h3 className="text-sm font-['JetBrains_Mono'] text-[#0D0D12]/40 uppercase tracking-widest mb-2">Models considering</h3>
-                    <p className="text-sm text-[#0D0D12]/55 mb-4 max-w-2xl">
-                        Union of your profile shortlist and vehicles you&apos;ve typed in the Decision Engine, OTD checker, and offer comparison on this browser.
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-5">
-                        {mergedConsideringModels.map((car) => (
-                            <div
-                                key={car}
-                                className="bg-[#FAF8F5] border border-[#0D0D12]/15 px-4 py-2 rounded-xl font-medium text-sm flex items-center gap-2"
-                            >
-                                <CarFront size={16} className="text-[#C9A84C]" />
-                                {car}
-                            </div>
-                        ))}
-                    </div>
-                    <div className="flex flex-wrap gap-4 text-sm">
-                        <Link to="/resources/vehicle-comparison-matrix" className="font-medium text-[#C9A84C] hover:text-[#0D0D12] transition-colors">
-                            Vehicle Decision Engine →
-                        </Link>
-                        <Link to="/resources/out-the-door-calculator" className="font-medium text-[#C9A84C] hover:text-[#0D0D12] transition-colors">
-                            OTD Price Checker →
-                        </Link>
-                        <Link to="/resources/dealer-offer-comparison" className="font-medium text-[#C9A84C] hover:text-[#0D0D12] transition-colors">
-                            Offer comparison →
-                        </Link>
-                    </div>
-                </div>
-            )}
-
-            {/* Quick Actions — advisory workspace only */}
-            {hasPurchasedAdvisory && (
-                <div>
-                    <h3 className="text-sm font-['JetBrains_Mono'] text-[#0D0D12]/40 uppercase tracking-widest mb-4">Quick Actions</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <Link to="/dashboard/my-search/listing" className="p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
-                            <CarFront className="text-[#0D0D12] mb-3 group-hover:text-[#C9A84C] transition-colors" size={20} />
-                            <h3 className="font-semibold text-sm mb-1">Submit Listing</h3>
-                            <p className="text-xs text-[#0D0D12]/50 line-clamp-2">Vet a listing before visiting.</p>
-                        </Link>
-                        <Link to="/dashboard/my-search/test-drive" className="p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
-                            <MessagesSquare className="text-[#0D0D12] mb-3 group-hover:text-[#C9A84C] transition-colors" size={20} />
-                            <h3 className="font-semibold text-sm mb-1">Log Test Drive</h3>
-                            <p className="text-xs text-[#0D0D12]/50 line-clamp-2">Record reactions post-drive.</p>
-                        </Link>
-                        <Link to="/dashboard/my-search/offer" className="p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
-                            <FileSignature className="text-[#0D0D12] mb-3 group-hover:text-[#C9A84C] transition-colors" size={20} />
-                            <h3 className="font-semibold text-sm mb-1">Review Offer</h3>
-                            <p className="text-xs text-[#0D0D12]/50 line-clamp-2">Verify quote structures.</p>
-                        </Link>
-                    </div>
-                </div>
-            )}
-
-            {/* Full toolkit strip — same IP as Resources hub */}
-            {isProfileComplete && (
-                <ResourceHubCrosslinks variant="compact" emphasizePhase={nextStep?.resourcePhase || null} />
-            )}
-
-            {/* Phase-relevant Resources */}
-            {isProfileComplete && nextStep?.resourcePhase && PHASE_RESOURCES[nextStep.resourcePhase] && (
-                <div>
+                <div className="bg-white border border-[#0D0D12]/10 rounded-[2rem] p-6 shadow-sm mb-8">
                     <div className="flex items-center justify-between mb-4">
-                        <div>
-                            <h3 className="text-sm font-['JetBrains_Mono'] text-[#0D0D12]/40 uppercase tracking-widest mb-1">Relevant Resources</h3>
-                            <p className="text-xs text-[#0D0D12]/40">{PHASE_RESOURCES[nextStep.resourcePhase].description}</p>
-                        </div>
-                        <Link to="/dashboard/resources" className="text-xs font-medium text-[#C9A84C] hover:text-[#0D0D12] transition-colors flex items-center gap-1">
-                            View All <ArrowRight size={12} />
-                        </Link>
+                        <h3 className="text-lg font-semibold tracking-tight text-[#0D0D12]">Your Target Vehicles</h3>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {PHASE_RESOURCES[nextStep.resourcePhase].items.map((resource) => {
-                            const Icon = resource.icon;
-                            return (
-                                <Link key={resource.id} to={resource.to}
-                                    className="flex items-start gap-4 p-5 bg-white border border-[#0D0D12]/10 rounded-2xl hover:border-[#C9A84C]/50 transition-colors group">
-                                    <div className="h-10 w-10 bg-[#0D0D12]/5 rounded-xl flex items-center justify-center shrink-0 text-[#0D0D12] group-hover:bg-[#C9A84C]/10 group-hover:text-[#C9A84C] transition-colors">
-                                        <Icon size={18} />
-                                    </div>
-                                    <div className="min-w-0">
-                                        <h4 className="font-semibold text-sm mb-0.5">{resource.title}</h4>
-                                        <p className="text-xs text-[#0D0D12]/50 line-clamp-2">{resource.description}</p>
-                                    </div>
-                                </Link>
-                            );
-                        })}
+
+                    <div className="space-y-6">
+                        {/* Profile Shortlist */}
+                        <div>
+                            <h4 className="text-xs font-['JetBrains_Mono'] text-[#0D0D12]/40 uppercase tracking-widest mb-3">Profile Targets</h4>
+                            {hasActiveShortlist ? (
+                                <div className="flex flex-wrap gap-2">
+                                    {profile.active_shortlist.map((car, idx) => (
+                                        <div key={idx} className="bg-[#FAF8F5] border border-[#0D0D12]/10 px-3 py-1.5 rounded-lg font-medium text-sm flex items-center gap-2 text-[#0D0D12]">
+                                            <CarFront size={14} className="text-[#0D0D12]/50" />
+                                            {car}
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-sm text-[#0D0D12]/50">No initial targets defined in your profile. Use Edit Profile to add them.</p>
+                            )}
+                        </div>
+
+                        {/* Local Workspace Considerations */}
+                        {mergedConsideringModels.length > 0 && (
+                            <div className="pt-5 border-t border-[#0D0D12]/5">
+                                <h4 className="text-xs font-['JetBrains_Mono'] text-[#0D0D12]/40 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                    Workspace Activity
+                                    <span className="bg-[#C9A84C]/10 text-[#C9A84C] text-[10px] px-2 py-0.5 rounded-full lowercase tracking-normal font-sans">auto-synced</span>
+                                </h4>
+                                <p className="text-xs text-[#0D0D12]/50 mb-3 max-w-xl">
+                                    Vehicles you are actively exploring in the Decision Engine, Scorecard, and OTD Calculator on this device.
+                                </p>
+                                <div className="flex flex-wrap gap-2">
+                                    {mergedConsideringModels.map((car) => (
+                                        <div key={car} className="bg-white border border-[#C9A84C]/30 px-3 py-1.5 rounded-lg font-medium text-sm flex items-center gap-2 shadow-sm text-[#0D0D12]">
+                                            <CarFront size={14} className="text-[#C9A84C]" />
+                                            {car}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
+
+            {/* Your Saved Workspace — dynamic local storage artifacts */}
+            {isProfileComplete && workspace && (
+                <WorkspaceActivityModule workspace={workspace} />
+            )}
+
+            {/* Modules moved inside GlobalJourneyTracker */}
 
             {/* Modals */}
             {showOnboarding && (

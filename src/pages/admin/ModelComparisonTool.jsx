@@ -163,7 +163,7 @@ export default function ModelComparisonTool() {
                                         onChange={(e) =>
                                             setSelection(slot, 'make', e.target.value)
                                         }
-                                        className="w-full px-4 py-2.5 rounded-lg border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:ring-2 focus:ring-[#C9A84C]/30 focus:border-[#C9A84C]"
+                                        className="studio-touch-input w-full px-4 py-2.5 rounded-lg border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:ring-2 focus:ring-[#C9A84C]/30 focus:border-[#C9A84C]"
                                     >
                                         <option value="">Select make</option>
                                         {makes.map((make) => (
@@ -179,7 +179,7 @@ export default function ModelComparisonTool() {
                                             setSelection(slot, 'modelId', e.target.value)
                                         }
                                         disabled={!selections[slot].make}
-                                        className="w-full px-4 py-2.5 rounded-lg border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:ring-2 focus:ring-[#C9A84C]/30 disabled:opacity-50"
+                                        className="studio-touch-input w-full px-4 py-2.5 rounded-lg border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:ring-2 focus:ring-[#C9A84C]/30 disabled:opacity-50"
                                     >
                                         <option value="">Select model</option>
                                         {(modelsByMake[selections[slot].make] || []).map((m) => (

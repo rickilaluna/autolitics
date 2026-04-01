@@ -21,23 +21,36 @@ const DashboardLayout = () => {
     const location = useLocation();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    const navItems = useMemo(() => {
-        const items = [
-            { path: '/dashboard', icon: <LayoutDashboard size={20} />, label: 'Overview' },
+    const navGroups = useMemo(() => {
+        const groups = [
+            {
+                title: 'Overview',
+                items: [
+                    { path: '/dashboard', icon: <LayoutDashboard size={20} />, label: 'Dashboard' }
+                ]
+            }
         ];
-        if (!purchaseLoading && hasPurchasedAdvisory) {
-            items.push(
-                { path: '/dashboard/strategy-brief', icon: <FolderKanban size={20} />, label: 'My Strategy' },
-                { path: '/dashboard/my-search', icon: <Search size={20} />, label: 'My Search' },
-            );
-        }
-        items.push(
-            { path: '/dashboard/resources', icon: <BookOpen size={20} />, label: 'Resources' },
-            { path: '/dashboard/profile', icon: <User size={20} />, label: 'Profile' },
-        );
-        return items;
-    }, [purchaseLoading, hasPurchasedAdvisory]);
 
+        if (!purchaseLoading && hasPurchasedAdvisory) {
+            groups.push({
+                title: 'The Journey',
+                items: [
+                    { path: '/dashboard/strategy-brief', icon: <FolderKanban size={20} />, label: 'My Strategy' },
+                    { path: '/dashboard/my-search', icon: <Search size={20} />, label: 'My Search' },
+                ]
+            });
+        }
+
+        groups.push({
+            title: 'Workspace',
+            items: [
+                { path: '/dashboard/resources', icon: <BookOpen size={20} />, label: 'Resources' },
+                { path: '/dashboard/profile', icon: <User size={20} />, label: 'Profile' },
+            ]
+        });
+
+        return groups;
+    }, [purchaseLoading, hasPurchasedAdvisory]);
     return (
         <div className="min-h-screen bg-[#0D0D12] text-[#FAF8F5] font-['Inter'] flex">
             {/* Mobile Sidebar Overlay */}
@@ -57,7 +70,7 @@ const DashboardLayout = () => {
                     <div className="p-6 flex items-center justify-between border-b border-[#2A2A35]">
                         <Link to="/" className="flex items-center gap-2">
                             <ShieldCheck className="w-6 h-6 text-[#C9A84C]" />
-                            <span className="font-semibold tracking-tight text-[#FAF8F5]">Platform</span>
+                            <span className="font-semibold tracking-tight text-[#FAF8F5]">Autolitics Studio</span>
                         </Link>
                         <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-[#FAF8F5]/60 hover:text-[#FAF8F5]">
                             <X size={20} />
@@ -65,34 +78,34 @@ const DashboardLayout = () => {
                     </div>
 
                     <div className="p-4">
-                        <div className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 mb-4 px-2 uppercase tracking-wider">
-                            Menu
-                        </div>
-                        <nav className="space-y-1">
-                            {navItems.map((item) => {
-                                const path =
-                                    location.pathname.replace(/\/$/, '') || '/';
-                                const itemPath = item.path.replace(/\/$/, '') || '/';
-                                const isActive =
-                                    itemPath === '/dashboard'
-                                        ? path === '/dashboard'
-                                        : path === itemPath || path.startsWith(`${itemPath}/`);
-                                return (
-                                    <Link
-                                        key={item.path}
-                                        to={item.path}
-                                        onClick={() => setSidebarOpen(false)}
-                                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 ${isActive
-                                            ? 'bg-[#C9A84C]/10 text-[#C9A84C]'
-                                            : 'text-[#FAF8F5]/70 hover:bg-[#1A1A24] hover:text-[#FAF8F5]'
-                                            }`}
-                                    >
-                                        {item.icon}
-                                        <span className="font-medium text-sm">{item.label}</span>
-                                    </Link>
-                                );
-                            })}
-                        </nav>
+                        {navGroups.map((group, idx) => (
+                            <div key={group.title} className={idx > 0 ? "mt-6" : ""}>
+                                <div className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 mb-2 px-3 uppercase tracking-wider">
+                                    {group.title}
+                                </div>
+                                <nav className="space-y-1">
+                                    {group.items.map((item) => {
+                                        const path = location.pathname.replace(/\/$/, '') || '/';
+                                        const itemPath = item.path.replace(/\/$/, '') || '/';
+                                        const isActive = itemPath === '/dashboard' ? path === '/dashboard' : path === itemPath || path.startsWith(`${itemPath}/`);
+                                        return (
+                                            <Link
+                                                key={item.path}
+                                                to={item.path}
+                                                onClick={() => setSidebarOpen(false)}
+                                                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 ${isActive
+                                                    ? 'bg-[#C9A84C]/10 text-[#C9A84C]'
+                                                    : 'text-[#FAF8F5]/70 hover:bg-[#1A1A24] hover:text-[#FAF8F5]'
+                                                    }`}
+                                            >
+                                                {item.icon}
+                                                <span className="font-medium text-sm">{item.label}</span>
+                                            </Link>
+                                        );
+                                    })}
+                                </nav>
+                            </div>
+                        ))}
 
                         {/* Admin Section */}
                         {(user?.email === 'rickilaluna@gmail.com' || user?.email?.includes('autolitics.com')) && (

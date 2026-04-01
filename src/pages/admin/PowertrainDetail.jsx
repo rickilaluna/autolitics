@@ -78,7 +78,7 @@ const PowertrainDetail = () => {
                 type={type}
                 value={state[field] || ''}
                 onChange={e => setState({ ...state, [field]: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans"
+                className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans"
                 placeholder={placeholder}
             />
         </div>

@@ -254,7 +254,7 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
                     onKeyDownProp?.(e);
                 }}
                 placeholder={placeholder}
-                className={className}
+                className={['studio-touch-input', className].filter(Boolean).join(' ')}
                 autoComplete="off"
                 {...restInputProps}
             />

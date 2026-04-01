@@ -24,7 +24,7 @@ const MAX_OFFERS = 5;
 
 /** Native selects render shorter than text inputs; fixed height + padding aligns Shared tax location row. */
 const SHARED_TAX_FIELD_BASE =
-    'w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 h-11 min-h-[2.75rem] text-sm text-[#FAF8F5] leading-snug shadow-none';
+    'studio-touch-input w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 h-11 min-h-[2.75rem] text-sm text-[#FAF8F5] leading-snug shadow-none';
 const SHARED_TAX_SELECT_CLASS = `${SHARED_TAX_FIELD_BASE} appearance-none cursor-pointer pr-9 bg-[length:0.875rem] bg-[right_0.65rem_center] bg-no-repeat [background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C9A84C' stroke-opacity='0.55'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")]`;
 const SHARED_TAX_INPUT_CLASS = `${SHARED_TAX_FIELD_BASE} font-['JetBrains_Mono']`;
 
@@ -490,7 +490,7 @@ export default function DealerComparisonInteractive({ embedInPage = false }) {
                                         <input
                                             value={d.dealerName}
                                             onChange={(e) => updateDealer(i, { dealerName: e.target.value })}
-                                            className="w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1.5 text-sm font-semibold text-[#FAF8F5]"
+                                            className="studio-touch-input w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1.5 text-sm font-semibold text-[#FAF8F5]"
                                             aria-label={`Offer ${i + 1} label`}
                                         />
                                         {isBest && (
@@ -506,7 +506,7 @@ export default function DealerComparisonInteractive({ embedInPage = false }) {
                                     contextRecent={contextRecent}
                                     placeholder="Vehicle / trim"
                                     helperText=""
-                                    className="w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1.5 text-xs text-[#FAF8F5]/80"
+                                    className="studio-touch-input w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1.5 text-xs text-[#FAF8F5]/80"
                                 />
                                 <div className="space-y-1 min-w-0">
                                     <label className="text-[10px] text-[#FAF8F5]/40 uppercase tracking-wider">Sale price</label>
@@ -514,7 +514,7 @@ export default function DealerComparisonInteractive({ embedInPage = false }) {
                                         type="number"
                                         value={d.salePrice}
                                         onChange={(e) => updateDealer(i, { salePrice: e.target.value })}
-                                        className="w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1.5 text-sm font-['JetBrains_Mono'] text-[#FAF8F5]"
+                                        className="studio-touch-input w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1.5 text-sm font-['JetBrains_Mono'] text-[#FAF8F5]"
                                     />
                                 </div>
                                 <div className="space-y-1 min-w-0">
@@ -523,7 +523,7 @@ export default function DealerComparisonInteractive({ embedInPage = false }) {
                                         type="number"
                                         value={d.quotedOtd}
                                         onChange={(e) => updateDealer(i, { quotedOtd: e.target.value })}
-                                        className="w-full min-w-0 max-w-full box-border bg-[#C9A84C]/5 border border-[#C9A84C]/25 rounded-lg px-2 py-1.5 text-sm font-['JetBrains_Mono'] text-[#C9A84C]"
+                                        className="studio-touch-input w-full min-w-0 max-w-full box-border bg-[#C9A84C]/5 border border-[#C9A84C]/25 rounded-lg px-2 py-1.5 text-sm font-['JetBrains_Mono'] text-[#C9A84C]"
                                     />
                                 </div>
                                 <details className="text-xs min-w-0">
@@ -536,35 +536,35 @@ export default function DealerComparisonInteractive({ embedInPage = false }) {
                                             placeholder="Doc fee"
                                             value={d.docFee}
                                             onChange={(e) => updateDealer(i, { docFee: e.target.value })}
-                                            className="w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
+                                            className="studio-touch-input w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
                                         />
                                         <input
                                             type="number"
                                             placeholder="Reg estimate"
                                             value={d.regEstimate}
                                             onChange={(e) => updateDealer(i, { regEstimate: e.target.value })}
-                                            className="w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
+                                            className="studio-touch-input w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
                                         />
                                         <input
                                             type="number"
                                             placeholder="Tax % override"
                                             value={d.taxRateOverride}
                                             onChange={(e) => updateDealer(i, { taxRateOverride: e.target.value })}
-                                            className="w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
+                                            className="studio-touch-input w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
                                         />
                                         <input
                                             type="number"
                                             placeholder="Add-ons $"
                                             value={d.addons}
                                             onChange={(e) => updateDealer(i, { addons: e.target.value })}
-                                            className="w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
+                                            className="studio-touch-input w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
                                         />
                                         <input
                                             type="number"
                                             placeholder="Market adj. $"
                                             value={d.marketAdjustment}
                                             onChange={(e) => updateDealer(i, { marketAdjustment: e.target.value })}
-                                            className="w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
+                                            className="studio-touch-input w-full min-w-0 max-w-full box-border bg-[#0D0D12] border border-[#2A2A35] rounded-lg px-2 py-1 font-['JetBrains_Mono'] text-[#FAF8F5]"
                                         />
                                     </div>
                                 </details>

@@ -1,31 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../lib/supabase';
 import { usePurchases } from '../../hooks/usePurchases';
 import {
     Download,
     Loader2,
-    FileText,
-    BookOpen,
-    FileSpreadsheet,
-    ShieldCheck,
-    Calculator,
-    ExternalLink,
     ArrowRight,
 } from 'lucide-react';
 import { PHASE_RESOURCES } from '../../data/dashboardResourceCatalog';
 
 /** Back-compat for imports from `./Resources` (e.g. older dashboard paths). */
 export { PHASE_RESOURCES };
-
-const IconComponents = {
-    'file-text': FileText,
-    'book-open': BookOpen,
-    'file-spreadsheet': FileSpreadsheet,
-    'shield-check': ShieldCheck,
-    'calculator': Calculator,
-    'external-link': ExternalLink
-};
 
 const PhaseSection = ({ phase }) => (
     <div>
@@ -58,40 +42,15 @@ const PhaseSection = ({ phase }) => (
 );
 
 const Resources = () => {
-    const [resources, setResources] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const { loading: purchaseLoading, hasPurchasedGuide } = usePurchases();
+    const { loading: purchaseLoading, hasPurchasedGuide, hasPurchasedAdvisory } = usePurchases();
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const { data, error: sbError } = await supabase
-                    .from('advisory_resources')
-                    .select('*')
-                    .order('sort_order', { ascending: true })
-                    .order('created_at', { ascending: false });
-                if (sbError) throw sbError;
-                setResources(data || []);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        })();
-    }, []);
-
-    if (loading || purchaseLoading) {
+    if (purchaseLoading) {
         return (
             <div className="flex flex-col justify-center items-center h-64 gap-4 text-[#0D0D12]/50 font-['JetBrains_Mono'] animate-fade-in">
                 <Loader2 className="animate-spin text-[#C9A84C]" size={32} />
                 Loading toolkit...
             </div>
         );
-    }
-
-    if (error) {
-        return <div className="p-6 bg-red-50 text-red-600 rounded-xl">Error loading resources: {error}</div>;
     }
 
     return (
@@ -108,39 +67,6 @@ const Resources = () => {
                 <PhaseSection key={phase.label} phase={phase} />
             ))}
 
-            {/* DB-driven resources */}
-            {resources.length > 0 && (
-                <div>
-                    <div className="mb-4">
-                        <h2 className="text-lg font-semibold tracking-tight text-[#0D0D12]">Additional Resources</h2>
-                        <p className="text-sm text-[#0D0D12]/50">Advisor-curated materials for your engagement.</p>
-                    </div>
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                        {resources.map((resource) => {
-                            const Icon = IconComponents[resource.icon_type] || FileText;
-                            const isExternal = resource.document_url?.startsWith('http');
-                            return (
-                                <div key={resource.id} className="flex flex-col bg-white border border-[#0D0D12]/10 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                                    <div className="h-10 w-10 bg-[#0D0D12]/5 rounded-xl flex items-center justify-center mb-4 text-[#0D0D12]">
-                                        <Icon size={20} />
-                                    </div>
-                                    <h3 className="font-semibold mb-1 line-clamp-1">{resource.title}</h3>
-                                    <p className="text-[#0D0D12]/60 text-sm mb-4 flex-1 line-clamp-3">{resource.description}</p>
-                                    <a
-                                        href={resource.document_url}
-                                        target={isExternal ? '_blank' : '_self'}
-                                        rel={isExternal ? 'noopener noreferrer' : ''}
-                                        className="inline-flex items-center gap-2 text-sm font-medium text-[#C9A84C] hover:text-[#0D0D12] transition-colors mt-auto w-fit"
-                                    >
-                                        {isExternal ? <><ExternalLink size={14} /> Open Link</> : <><Download size={14} /> Download</>}
-                                    </a>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            )}
-
             {/* Guide Downloads */}
             <div className="pt-8 border-t border-[#0D0D12]/10">
                 <div className="mb-6">
@@ -148,7 +74,7 @@ const Resources = () => {
                     <p className="text-sm text-[#0D0D12]/50">Offline templates included with The Strategic Car Buyer guide.</p>
                 </div>
 
-                {!hasPurchasedGuide ? (
+                {!(hasPurchasedGuide || hasPurchasedAdvisory) ? (
                     <div className="bg-white border border-[#0D0D12]/10 rounded-[2rem] p-8 sm:p-12 shadow-sm text-center">
                         <div className="bg-[#0D0D12]/5 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                             <Download size={32} className="text-[#0D0D12]/30" />

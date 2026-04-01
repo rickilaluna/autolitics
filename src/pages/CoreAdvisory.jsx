@@ -4,11 +4,11 @@ import MinimalHeader from '../components/MinimalHeader';
 
 export default function CoreAdvisory() {
     return (
-        <div className="min-h-screen bg-background flex flex-col items-center py-16 px-6 pt-32 font-sans text-text">
+        <div className="public-page-shell bg-background flex flex-col items-center font-sans text-text">
 
             <MinimalHeader />
 
-            <div className="w-full max-w-2xl mx-auto flex flex-col items-center text-center animate-fade-in-up">
+            <div className="public-page-content w-full max-w-2xl mx-auto flex flex-col items-center text-center animate-fade-in-up pb-16">
 
                 {/* Header */}
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-primary mb-4">

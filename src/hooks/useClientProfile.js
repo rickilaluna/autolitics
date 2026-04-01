@@ -124,5 +124,40 @@ export function useClientProfile() {
         }
     };
 
-    return { profile, loading, error, updateProfile, refetchProfile: loadProfile };
+    const toggleTaskCompletion = async (taskId) => {
+        if (!profile?.id) return { error: 'No profile loaded' };
+        
+        const currentTasks = Array.isArray(profile.completed_journey_tasks) 
+            ? profile.completed_journey_tasks 
+            : [];
+            
+        const isCompleted = currentTasks.includes(taskId);
+        const newTasks = isCompleted 
+            ? currentTasks.filter(id => id !== taskId)
+            : [...currentTasks, taskId];
+            
+        // Optimistic update
+        setProfile((prev) => ({ ...prev, completed_journey_tasks: newTasks }));
+        
+        try {
+            const { data, error } = await supabase
+                .from('clients')
+                .update({ completed_journey_tasks: newTasks })
+                .eq('id', profile.id)
+                .select()
+                .single();
+                
+            if (error) {
+                // Revert on fail
+                setProfile((prev) => ({ ...prev, completed_journey_tasks: currentTasks }));
+                throw error;
+            }
+            return { data };
+        } catch (err) {
+            console.error('Error toggling task:', err);
+            return { error: err.message };
+        }
+    };
+
+    return { profile, loading, error, updateProfile, refetchProfile: loadProfile, toggleTaskCompletion };
 }

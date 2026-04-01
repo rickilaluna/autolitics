@@ -3,6 +3,7 @@
  */
 
 import { OTD_SAVED_QUOTES_KEY } from './otdCalculatorCore';
+import { normalizeScorecardBundle, getActiveEntry } from './scorecardBundle';
 
 export const DECISION_ENGINE_STORAGE_KEY = 'autolitics_vehicle_decision_engine_v1';
 export const OFFER_COMPARISON_STORAGE_KEY = 'autolitics_offer_comparison_worksheet_v1';
@@ -42,16 +43,25 @@ export function saveOfferComparisonSnapshot(payload) {
     }
 }
 
-export function loadScorecardSnapshot() {
-    return safeParse(localStorage.getItem(SCORECARD_STORAGE_KEY), null);
+/** Full multi-entry bundle (schema v2) or legacy object (normalized on read). */
+export function loadScorecardBundle() {
+    const raw = safeParse(localStorage.getItem(SCORECARD_STORAGE_KEY), null);
+    return normalizeScorecardBundle(raw);
 }
 
-export function saveScorecardSnapshot(payload) {
+export function saveScorecardBundle(bundle) {
     try {
-        localStorage.setItem(SCORECARD_STORAGE_KEY, JSON.stringify(payload));
+        localStorage.setItem(SCORECARD_STORAGE_KEY, JSON.stringify(bundle));
     } catch (e) {
-        console.warn('vehicleContextStorage: could not save scorecard', e);
+        console.warn('vehicleContextStorage: could not save scorecard bundle', e);
     }
+}
+
+/** @deprecated Prefer loadScorecardBundle; returns active entry only (for legacy callers). */
+export function loadScorecardSnapshot() {
+    const b = loadScorecardBundle();
+    const e = getActiveEntry(b);
+    return e || null;
 }
 
 function loadConsideringRing() {
@@ -88,10 +98,12 @@ export function getConsideringModelStrings() {
     const oc = loadOfferComparisonSnapshot();
     (oc?.dealers || []).forEach((d) => push(d?.vehicleLabel));
 
-    const scorecard = loadScorecardSnapshot();
-    push(scorecard?.vehicleModel);
-    push([scorecard?.vehicleModel, scorecard?.trim].filter(Boolean).join(' ').trim());
-    (scorecard?.comparedVehicles || []).forEach(push);
+    const bundle = loadScorecardBundle();
+    (bundle.entries || []).forEach((entry) => {
+        push(entry?.vehicleModel);
+        push([entry?.vehicleModel, entry?.trim].filter(Boolean).join(' ').trim());
+        (entry?.comparedVehicles || []).forEach(push);
+    });
 
     const quotes = safeParse(localStorage.getItem(OTD_SAVED_QUOTES_KEY), []);
     (Array.isArray(quotes) ? quotes : []).forEach((sq) => {
@@ -102,4 +114,90 @@ export function getConsideringModelStrings() {
     loadConsideringRing().forEach(push);
 
     return [...set];
+}
+
+/**
+ * Aggregates all meaningful local storage tool artifacts to power the Dashboard's "Saved Workspace"
+ * and Journey completion logic, proving retention of self-serve data.
+ */
+export function getWorkspaceActivity() {
+    const activity = {
+        otdQuotes: [],
+        decisionEngineWinner: null,
+        decisionEngineCount: 0,
+        hasScorecard: false,
+        scorecardCount: 0,
+        recentScorecardTitle: null,
+        offerComparisonCount: 0,
+        recentOfferDealer: null,
+        hasOfferComparison: false,
+    };
+
+    // 1. OTD Quotes
+    try {
+        const quotes = safeParse(localStorage.getItem(OTD_SAVED_QUOTES_KEY), []);
+        if (Array.isArray(quotes) && quotes.length > 0) {
+            // Sort by date descending if they have an ID or just take the end
+            const sorted = [...quotes].sort((a, b) => (b.id || 0) - (a.id || 0));
+            activity.otdQuotes = sorted.slice(0, 3);
+        }
+    } catch (e) { console.warn(e); }
+
+    // 2. Decision Engine
+    try {
+        const de = loadDecisionEngineSnapshot();
+        if (de && Array.isArray(de.vehicles)) {
+            // Count vehicles where at least one score is filled
+            const activeVehicles = de.vehicles.filter(v => 
+                v.name && v.scores && Object.values(v.scores).some(s => s !== null && s > 0)
+            );
+            activity.decisionEngineCount = activeVehicles.length;
+
+            if (activeVehicles.length >= 2) {
+                // Determine a simple average winner for display context
+                let best = null;
+                let maxAvg = 0;
+                activeVehicles.forEach(v => {
+                    const vals = Object.values(v.scores).filter(s => typeof s === 'number');
+                    const avg = vals.length > 0 ? vals.reduce((a,b)=>a+b, 0) / vals.length : 0;
+                    if (avg > maxAvg) {
+                        maxAvg = avg;
+                        best = v.name;
+                    }
+                });
+                activity.decisionEngineWinner = best;
+            }
+        }
+    } catch (e) { console.warn(e); }
+
+    // 3. Scorecard
+    try {
+        const sb = loadScorecardBundle();
+        if (sb && Array.isArray(sb.entries)) {
+            const validEntries = sb.entries.filter(e => e.vehicleModel || (e.exteriorRating > 0));
+            activity.scorecardCount = validEntries.length;
+            if (validEntries.length > 0) {
+                activity.hasScorecard = true;
+                activity.recentScorecardTitle = validEntries[0].vehicleModel || 'Test Drive Snapshot';
+            }
+        }
+    } catch (e) { console.warn(e); }
+
+    // 4. Offer Comparison Worksheet
+    try {
+        const oc = loadOfferComparisonSnapshot();
+        if (oc && Array.isArray(oc.dealers)) {
+            const activeDealers = oc.dealers.filter(d => d.dealerName || d.quotedOtd || d.vehicleLabel);
+            activity.offerComparisonCount = activeDealers.length;
+            if (activeDealers.length > 0) {
+                activity.hasOfferComparison = true;
+                activity.recentOfferDealer = 
+                    activeDealers[0].dealerName || 
+                    activeDealers[0].vehicleLabel || 
+                    'Offer Draft';
+            }
+        }
+    } catch (e) { console.warn(e); }
+
+    return activity;
 }

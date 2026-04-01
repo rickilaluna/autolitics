@@ -7,6 +7,7 @@ import { useJourneyStatus } from '../../hooks/useJourneyStatus';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import ResourceHubCrosslinks from '../../components/dashboard/ResourceHubCrosslinks';
+import GlobalJourneyTracker from '../../components/dashboard/GlobalJourneyTracker';
 
 const StrategyBrief = () => {
     const { loading: purchaseLoading, hasPurchasedAdvisory } = usePurchases();
@@ -101,6 +102,8 @@ const StrategyBrief = () => {
                     Your strategy briefs, recommendations, and advisory actions.
                 </p>
             </header>
+
+            <GlobalJourneyTracker />
 
             {hasPurchasedAdvisory && (
                 <ResourceHubCrosslinks

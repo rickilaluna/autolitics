@@ -254,15 +254,15 @@ const EngagementBuilder = () => {
                                 <h3 className="font-bold text-lg font-['Space_Grotesk']">Basic Parameters</h3>
                                 <div>
                                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1">Budget Min</label>
-                                    <input type="number" value={engagement?.budget_min || ''} onChange={e => handleEngagementChange('budget_min', Number(e.target.value))} className="w-full px-4 py-2 border rounded-xl text-[#FAF8F5] bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20" />
+                                    <input type="number" value={engagement?.budget_min || ''} onChange={e => handleEngagementChange('budget_min', Number(e.target.value))} className="studio-touch-input w-full px-4 py-2 border rounded-xl text-[#FAF8F5] bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1">Budget Max</label>
-                                    <input type="number" value={engagement?.budget_max || ''} onChange={e => handleEngagementChange('budget_max', Number(e.target.value))} className="w-full px-4 py-2 border rounded-xl text-[#FAF8F5] bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20" />
+                                    <input type="number" value={engagement?.budget_max || ''} onChange={e => handleEngagementChange('budget_max', Number(e.target.value))} className="studio-touch-input w-full px-4 py-2 border rounded-xl text-[#FAF8F5] bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1">Purchase Type</label>
-                                    <select value={engagement?.purchase_type || 'used'} onChange={e => handleEngagementChange('purchase_type', e.target.value)} className="w-full px-4 py-2 border rounded-xl text-[#FAF8F5] bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20">
+                                    <select value={engagement?.purchase_type || 'used'} onChange={e => handleEngagementChange('purchase_type', e.target.value)} className="studio-touch-input w-full px-4 py-2 border rounded-xl text-[#FAF8F5] bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20">
                                         <option value="new">New</option>
                                         <option value="cpo">CPO</option>
                                         <option value="used">Used</option>
@@ -393,7 +393,7 @@ const EngagementBuilder = () => {
                         <div className="flex items-center justify-between border-b pb-4">
                             <h2 className="text-2xl font-bold text-[#FAF8F5]">Select Vehicles</h2>
                             <div className="flex gap-2">
-                                <select value={selectedConfigId} onChange={e => setSelectedConfigId(e.target.value)} className="px-4 py-2 rounded-xl border border-[#2A2A35] bg-[#1A1A24] font-sans text-sm focus:bg-[#14141B] min-w-[300px] text-[#FAF8F5]">
+                                <select value={selectedConfigId} onChange={e => setSelectedConfigId(e.target.value)} className="studio-touch-input px-4 py-2 rounded-xl border border-[#2A2A35] bg-[#1A1A24] font-sans text-sm focus:bg-[#14141B] min-w-[300px] text-[#FAF8F5]">
                                     <option value="">-- Add Vehicle to Shortlist --</option>
                                     {availableConfigs.filter(c => {
                                         const desired = engagement?.desired_segments || [];
@@ -431,7 +431,7 @@ const EngagementBuilder = () => {
                                             <select
                                                 value={item.status}
                                                 onChange={e => handleItemChange(item.id, 'status', e.target.value)}
-                                                className="px-3 py-2 rounded-lg bg-[#14141B] border font-sans text-sm text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20"
+                                                className="studio-touch-input px-3 py-2 rounded-lg bg-[#14141B] border font-sans text-sm text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20"
                                             >
                                                 <option value="recommended">Recommended</option>
                                                 <option value="benchmark">Benchmark</option>
@@ -461,7 +461,7 @@ const EngagementBuilder = () => {
                             <textarea
                                 value={engagement?.notes_internal || ''}
                                 onChange={e => handleEngagementChange('notes_internal', e.target.value)}
-                                className="w-full p-4 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-y min-h-[120px]"
+                                className="studio-touch-input w-full p-4 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-y min-h-[120px]"
                                 placeholder="Based on the requirement for long-term reliability and heavy focus on space..."
                             ></textarea>
                         </div>
@@ -574,7 +574,7 @@ const EngagementBuilder = () => {
                                                     type="text"
                                                     value={item.best_for_tag || ''}
                                                     onChange={e => handleItemChange(item.id, 'best_for_tag', e.target.value)}
-                                                    className="w-full px-3 py-2 rounded-xl border border-[#2A2A35] text-sm font-bold bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20"
+                                                    className="studio-touch-input w-full px-3 py-2 rounded-xl border border-[#2A2A35] text-sm font-bold bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20"
                                                     placeholder="Best For Tag (e.g. Best Overall Fit)"
                                                 />
                                             </div>
@@ -586,7 +586,7 @@ const EngagementBuilder = () => {
                                                 <textarea
                                                     value={item[`_why_it_fits_bullets_raw`] !== undefined ? item[`_why_it_fits_bullets_raw`] : (item.why_it_fits_bullets?.join('\n') || '')}
                                                     onChange={e => handleBulletsChange(item.id, 'why_it_fits_bullets', e.target.value)}
-                                                    className="w-full p-4 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-none h-32 text-sm"
+                                                    className="studio-touch-input w-full p-4 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-none h-32 text-sm"
                                                     placeholder="• Incredible space packaging&#10;• Trusted reliability"
                                                 ></textarea>
                                             </div>
@@ -595,7 +595,7 @@ const EngagementBuilder = () => {
                                                 <textarea
                                                     value={item[`_tradeoffs_bullets_raw`] !== undefined ? item[`_tradeoffs_bullets_raw`] : (item.tradeoffs_bullets?.join('\n') || '')}
                                                     onChange={e => handleBulletsChange(item.id, 'tradeoffs_bullets', e.target.value)}
-                                                    className="w-full p-4 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-none h-32 text-sm"
+                                                    className="studio-touch-input w-full p-4 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-none h-32 text-sm"
                                                     placeholder="• Cabin trails competitors&#10;• Engine note is coarse"
                                                 ></textarea>
                                             </div>
@@ -606,7 +606,7 @@ const EngagementBuilder = () => {
                                             <textarea
                                                 value={item.trim_guidance_notes || ''}
                                                 onChange={e => handleItemChange(item.id, 'trim_guidance_notes', e.target.value)}
-                                                className="w-full p-3 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-none h-20 text-sm"
+                                                className="studio-touch-input w-full p-3 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-none h-20 text-sm"
                                                 placeholder="Target the XLE Premium for the best value..."
                                             ></textarea>
                                         </div>

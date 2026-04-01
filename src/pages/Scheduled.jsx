@@ -5,11 +5,11 @@ import MinimalHeader from '../components/MinimalHeader';
 
 export default function Scheduled() {
     return (
-        <div className="min-h-screen bg-background flex flex-col items-center py-16 px-6 pt-32 font-sans text-text">
+        <div className="public-page-shell bg-background flex flex-col items-center font-sans text-text">
 
             <MinimalHeader />
 
-            <div className="w-full max-w-2xl mx-auto flex flex-col items-center text-center animate-fade-in-up">
+            <div className="public-page-content w-full max-w-2xl mx-auto flex flex-col items-center text-center animate-fade-in-up pb-16">
 
                 {/* Icon */}
                 <div className="w-16 h-16 bg-accent/10 rounded-[2rem] flex items-center justify-center mb-8 border border-accent/20">

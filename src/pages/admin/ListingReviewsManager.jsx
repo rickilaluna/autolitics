@@ -113,7 +113,7 @@ const ListingReviewsManager = () => {
                             <div className="flex-1 bg-[#1A1A24] rounded-2xl p-6 border border-[#2A2A35] flex flex-col">
                                 <h3 className="text-sm font-bold uppercase tracking-wider text-[#FAF8F5]/50 mb-3 font-['Space_Grotesk']">Advisor Feedback</h3>
                                 <textarea
-                                    className="w-full flex-1 min-h-[100px] px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-y text-sm mb-4"
+                                    className="studio-touch-input w-full flex-1 min-h-[100px] px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#14141B] text-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 resize-y text-sm mb-4"
                                     placeholder="Enter feedback for the client..."
                                     defaultValue={review.advisor_feedback || ''}
                                     onBlur={(e) => {

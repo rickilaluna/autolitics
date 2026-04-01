@@ -57,7 +57,7 @@ const OnboardingModal = ({ profile, onClose, onSave }) => {
                                 <select 
                                     value={formData.buying_timeline}
                                     onChange={(e) => setFormData(prev => ({ ...prev, buying_timeline: e.target.value }))}
-                                    className="w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-3 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50 transition-shadow transition-colors"
+                                    className="studio-touch-input w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-3 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50 transition-shadow transition-colors"
                                     required
                                 >
                                     <option value="" disabled>Select Timeline...</option>
@@ -73,7 +73,7 @@ const OnboardingModal = ({ profile, onClose, onSave }) => {
                                 <select 
                                     value={formData.primary_goal}
                                     onChange={(e) => setFormData(prev => ({ ...prev, primary_goal: e.target.value }))}
-                                    className="w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-3 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50 transition-shadow"
+                                    className="studio-touch-input w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-3 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50 transition-shadow"
                                     required
                                 >
                                     <option value="" disabled>Select Priority...</option>
@@ -90,7 +90,7 @@ const OnboardingModal = ({ profile, onClose, onSave }) => {
                                 <select 
                                     value={formData.trade_in_status}
                                     onChange={(e) => setFormData(prev => ({ ...prev, trade_in_status: e.target.value }))}
-                                    className="w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-3 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50 transition-shadow"
+                                    className="studio-touch-input w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-3 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50 transition-shadow"
                                 >
                                     <option value="" disabled>Select Status...</option>
                                     <option value="No Trade-In">No, straight purchase</option>
@@ -111,7 +111,7 @@ const OnboardingModal = ({ profile, onClose, onSave }) => {
                                         contextRecent={contextRecent}
                                         placeholder="e.g. 2024 Toyota RAV4 Hybrid"
                                         helperText=""
-                                        className="flex-1 bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50"
+                                        className="studio-touch-input flex-1 bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2 text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50"
                                         onKeyDown={(e) => {
                                             if (e.key === 'Enter') {
                                                 e.preventDefault();

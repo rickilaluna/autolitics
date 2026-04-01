@@ -7,6 +7,7 @@ import { useClientProfile } from '../../hooks/useClientProfile';
 import { usePurchases } from '../../hooks/usePurchases';
 import { useJourneyStatus } from '../../hooks/useJourneyStatus';
 import ResourceHubCrosslinks from '../../components/dashboard/ResourceHubCrosslinks';
+import VehiclePreviewModal from '../../components/dashboard/VehiclePreviewModal';
 
 const PHASES = [
     { num: 1, label: 'Setup' },
@@ -41,7 +42,7 @@ const TextInput = ({ label, value, onChange, type = 'text', placeholder }) => (
             value={value}
             onChange={onChange}
             placeholder={placeholder}
-            className="w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2.5 text-sm text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50"
+            className="studio-touch-input w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2.5 text-sm text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50"
         />
     </div>
 );
@@ -52,7 +53,7 @@ const SelectInput = ({ label, value, onChange, options }) => (
         <select
             value={value}
             onChange={onChange}
-            className="w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2.5 text-sm text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50"
+            className="studio-touch-input w-full bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2.5 text-sm text-[#0D0D12] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50"
         >
             <option value="">—</option>
             {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -141,7 +142,7 @@ function ProfileShortlistEditor({ form, setForm, contextRecent }) {
                     contextRecent={contextRecent}
                     placeholder="Add a vehicle"
                     helperText=""
-                    className="flex-1 min-w-0 bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2.5 text-sm text-[#0D0D12]"
+                    className="studio-touch-input flex-1 min-w-0 bg-white border border-[#0D0D12]/20 rounded-xl px-4 py-2.5 text-sm text-[#0D0D12]"
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                             e.preventDefault();
@@ -191,6 +192,7 @@ const Profile = () => {
     const [editing, setEditing] = useState(false);
     const [saving, setSaving] = useState(false);
     const [form, setForm] = useState({});
+    const [previewVehicle, setPreviewVehicle] = useState(null);
 
     useEffect(() => {
         if (profile) {
@@ -289,7 +291,7 @@ const Profile = () => {
             {/* Contact & Preferences Card */}
             <div className="bg-white border border-[#0D0D12]/10 rounded-[2rem] p-8 shadow-sm">
                 <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-sm font-semibold text-[#0D0D12]/60 uppercase tracking-wider">Contact & Preferences</h3>
+                    <h3 className="text-lg font-semibold tracking-tight text-[#0D0D12]">Contact & Preferences</h3>
                     {!editing ? (
                         <button onClick={() => setEditing(true)} className="text-sm font-medium text-[#C9A84C] hover:text-[#0D0D12] transition-colors">
                             Edit
@@ -417,13 +419,17 @@ const Profile = () => {
             {/* Active Shortlist */}
             {profile?.active_shortlist?.length > 0 && (
                 <div className="bg-white border border-[#0D0D12]/10 rounded-[2rem] p-8 shadow-sm">
-                    <h3 className="text-sm font-semibold text-[#0D0D12]/60 uppercase tracking-wider mb-4">Active Shortlist</h3>
+                    <h3 className="text-lg font-semibold tracking-tight text-[#0D0D12] mb-4">Active Shortlist</h3>
                     <div className="flex flex-wrap gap-3">
                         {profile.active_shortlist.map((car, idx) => (
-                            <div key={idx} className="bg-[#FAF8F5] border border-[#0D0D12]/10 px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2">
+                            <button
+                                key={idx}
+                                onClick={() => setPreviewVehicle(car)}
+                                className="bg-[#FAF8F5] border border-[#0D0D12]/10 px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 hover:border-[#C9A84C]/50 hover:bg-[#C9A84C]/5 transition-colors cursor-pointer"
+                            >
                                 <CarFront size={16} className="text-[#C9A84C]" />
                                 {car}
-                            </div>
+                            </button>
                         ))}
                     </div>
                 </div>
@@ -433,12 +439,16 @@ const Profile = () => {
 
             {/* Account Details */}
             <div className="bg-white border border-[#0D0D12]/10 rounded-[2rem] p-8 shadow-sm">
-                <h3 className="text-sm font-semibold text-[#0D0D12]/60 uppercase tracking-wider mb-4">Account</h3>
+                <h3 className="text-lg font-semibold tracking-tight text-[#0D0D12] mb-4">Account</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <ReadOnlyField label="Email" value={user?.email} />
                     <ReadOnlyField label="Member Since" value={user?.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '—'} />
                 </div>
             </div>
+
+            {previewVehicle && (
+                <VehiclePreviewModal vehicleName={previewVehicle} onClose={() => setPreviewVehicle(null)} />
+            )}
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import MinimalHeader from '../../components/MinimalHeader';
+import ResourcePageShell from '../../components/ResourcePageShell';
 import ResourceNav from '../../components/ResourceNav';
 import ExpertReviewUpsellCard from '../../components/resources/ExpertReviewUpsellCard';
 import VehicleAutocomplete from '../../components/VehicleAutocomplete';
@@ -205,22 +205,24 @@ export default function OTDCalculator() {
                        results.status === 'CLEAN' ? CheckCircle2 : Info;
 
     return (
-        <div className="bg-[#0D0D12] min-h-screen text-[#FAF8F5] font-['Inter'] selection:bg-[#C9A84C]/20 flex flex-col">
-            {/* Noise overlay */}
-            <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.04] mix-blend-overlay no-print">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
-                    <filter id="noiseFilterOTD">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
-                    </filter>
-                    <rect width="100%" height="100%" filter="url(#noiseFilterOTD)" />
-                </svg>
-            </div>
-
-            <MinimalHeader />
-            <div className="pt-28 pb-16 flex-grow">
-                <ResourceNav title="OTD Price Checker" />
-
-                <main className="w-full max-w-5xl mx-auto px-6 md:px-8 pt-6">
+        <ResourcePageShell
+            navTitle="OTD Price Checker"
+            maxWidth="5xl"
+            mainClassName="md:px-6 !pb-8"
+            footer={
+                <div className="w-full bg-[#14141B] border-t border-[#2A2A35] py-12 sm:py-16 mt-auto">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center mb-8 sm:mb-10">
+                        <p className="text-[15px] font-['JetBrains_Mono'] text-[#FAF8F5]/40 leading-relaxed uppercase tracking-wider">
+                            This tool is part of the Autolitics decision system<br />
+                            for comparing vehicles, evaluating offers, and making a clear final decision.
+                        </p>
+                    </div>
+                    <div className="flex justify-center opacity-70 px-3">
+                        <ResourceNav title="OTD Price Checker" />
+                    </div>
+                </div>
+            }
+        >
                     
                     {/* Header */}
                     <div className="mb-12">
@@ -254,7 +256,7 @@ export default function OTDCalculator() {
                                             contextRecent={contextRecent}
                                             placeholder="e.g. 2025 BMW X3 xDrive30i"
                                             helperText="Matches the vehicle catalog and models from your Decision Engine worksheet."
-                                            className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all text-sm"
+                                            className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all text-sm"
                                         />
                                     </div>
 
@@ -267,7 +269,7 @@ export default function OTDCalculator() {
                                                 name="salePrice"
                                                 value={formData.salePrice}
                                                 onChange={handleChange}
-                                                className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 pl-8 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all font-['JetBrains_Mono']"
+                                                className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 pl-8 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all font-['JetBrains_Mono']"
                                                 placeholder="e.g. 45000"
                                             />
                                         </div>
@@ -282,7 +284,7 @@ export default function OTDCalculator() {
                                                 name="quotedOtd"
                                                 value={formData.quotedOtd}
                                                 onChange={handleChange}
-                                                className="w-full bg-[#C9A84C]/5 border border-[#C9A84C]/30 rounded-xl px-4 py-3 pl-8 text-[#C9A84C] focus:outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all font-['JetBrains_Mono'] font-bold"
+                                                className="studio-touch-input w-full bg-[#C9A84C]/5 border border-[#C9A84C]/30 rounded-xl px-4 py-3 pl-8 text-[#C9A84C] focus:outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all font-['JetBrains_Mono'] font-bold"
                                                 placeholder="e.g. 49500"
                                             />
                                         </div>
@@ -295,7 +297,7 @@ export default function OTDCalculator() {
                                                 name="state"
                                                 value={formData.state}
                                                 onChange={handleChange}
-                                                className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all appearance-none"
+                                                className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all appearance-none"
                                             >
                                                 {STATES.map(s => <option key={s.code} value={s.code}>{s.name}</option>)}
                                             </select>
@@ -311,7 +313,7 @@ export default function OTDCalculator() {
                                                 value={formData.zipCode}
                                                 onChange={handleChange}
                                                 maxLength={5}
-                                                className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all font-['JetBrains_Mono']"
+                                                className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all font-['JetBrains_Mono']"
                                                 placeholder="e.g. 90210"
                                             />
                                         </div>
@@ -328,7 +330,7 @@ export default function OTDCalculator() {
                                                         handleChange(e);
                                                         setFormData(prev => ({ ...prev, city: '' }));
                                                     }}
-                                                    className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all appearance-none text-sm"
+                                                    className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all appearance-none text-sm"
                                                 >
                                                     <option value="">Select County...</option>
                                                     {caCounties.map(c => <option key={c} value={c}>{c}</option>)}
@@ -342,7 +344,7 @@ export default function OTDCalculator() {
                                                     value={formData.city}
                                                     onChange={handleChange}
                                                     disabled={!formData.county || caCities.length === 0}
-                                                    className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all appearance-none disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                                                    className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 focus:ring-1 focus:ring-[#C9A84C]/50 transition-all appearance-none disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                                                 >
                                                     <option value="">{caCities.length === 0 ? 'City...' : 'Select City...'}</option>
                                                     {caCities.map(c => <option key={c} value={c}>{c}</option>)}
@@ -368,7 +370,7 @@ export default function OTDCalculator() {
                                                 name="docFee"
                                                 value={formData.docFee}
                                                 onChange={handleChange}
-                                                className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pl-7 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono'] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                                className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pl-7 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono'] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder={formData.state === 'CA' ? "85" : "0"}
                                             />
                                         </div>
@@ -383,7 +385,7 @@ export default function OTDCalculator() {
                                                 name="regEstimate"
                                                 value={formData.regEstimate}
                                                 onChange={handleChange}
-                                                className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pl-7 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono'] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                                className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pl-7 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono'] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder={formData.state === 'CA' ? Math.round((Number(formData.salePrice) || 0) * 0.0115).toString() : "0"}
                                             />
                                         </div>
@@ -398,7 +400,7 @@ export default function OTDCalculator() {
                                                 name="taxRateOverride"
                                                 value={formData.taxRateOverride}
                                                 onChange={handleChange}
-                                                className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pr-10 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono'] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                                className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pr-10 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono'] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder={formData.state === 'CA' ? calculatedCaTaxRate.toFixed(2) : "0.00"}
                                             />
                                             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#FAF8F5]/40">%</span>
@@ -420,7 +422,7 @@ export default function OTDCalculator() {
                                                     name="addons"
                                                     value={formData.addons}
                                                     onChange={handleChange}
-                                                    className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pl-7 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono']"
+                                                    className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pl-7 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono']"
                                                     placeholder="e.g. 1500"
                                                 />
                                             </div>
@@ -435,7 +437,7 @@ export default function OTDCalculator() {
                                                     name="marketAdjustment"
                                                     value={formData.marketAdjustment}
                                                     onChange={handleChange}
-                                                    className="w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pl-7 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono']"
+                                                    className="studio-touch-input w-full bg-[#0D0D12] border border-[#2A2A35] rounded-xl px-3 py-2.5 pl-7 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C]/50 transition-all font-['JetBrains_Mono']"
                                                     placeholder="e.g. 5000"
                                                 />
                                             </div>
@@ -693,7 +695,7 @@ export default function OTDCalculator() {
                                                         value={quoteName}
                                                         onChange={(e) => setQuoteName(e.target.value)}
                                                         placeholder="Name (e.g. BMW Downtown)"
-                                                        className="w-full sm:w-64 bg-[#14141B] border border-[#2A2A35] rounded-xl px-4 py-3 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C] transition-colors"
+                                                        className="studio-touch-input w-full sm:w-64 bg-[#14141B] border border-[#2A2A35] rounded-xl px-4 py-3 text-sm text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C] transition-colors"
                                                         autoFocus
                                                     />
                                                     <button onClick={handleSaveQuote} className="p-3 bg-[#C9A84C] rounded-xl text-white hover:opacity-90 transition-opacity">
@@ -729,11 +731,10 @@ export default function OTDCalculator() {
                         </div>
 
                     </div>
-                </main>
                 
                 {/* --- SEPARATE GUIDANCE SECTION BELOW UI --- */}
                 {results.valid && (
-                    <div className="w-full max-w-5xl mx-auto px-6 md:px-8 mt-20 pt-16 border-t border-[#2A2A35]">
+                    <div className="w-full mt-20 pt-16 border-t border-[#2A2A35]">
                         <div className="text-center mb-10">
                             <h2 className="text-sm font-['JetBrains_Mono'] text-[#C9A84C] uppercase tracking-widest mb-3">Advisory Action Plan</h2>
                             <h3 className="text-2xl font-bold">How to move forward</h3>
@@ -775,7 +776,7 @@ export default function OTDCalculator() {
 
                 {/* --- SAVED QUOTES UI --- */}
                 {savedQuotes.length > 0 && (
-                    <div className="w-full max-w-5xl mx-auto px-6 md:px-8 mt-16 print:hidden">
+                    <div className="w-full mt-16 print:hidden">
                         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                             <h3 className="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[#FAF8F5]/60">Your Saved Quotes</h3>
                             <Link
@@ -836,21 +837,6 @@ export default function OTDCalculator() {
                     </div>
                 )}
 
-            </div>
-            
-            {/* Global Bold Footer Context */}
-            <div className="w-full bg-[#14141B] border-t border-[#2A2A35] py-16 mt-auto">
-                <div className="max-w-4xl mx-auto px-6 text-center mb-10">
-                    <p className="text-[15px] font-['JetBrains_Mono'] text-[#FAF8F5]/40 leading-relaxed uppercase tracking-wider">
-                        This tool is part of the Autolitics decision system<br/>for comparing vehicles, evaluating offers, and making a clear final decision.
-                    </p>
-                </div>
-                {/* Embedded Resource Nav Duplicate */}
-                <div className="flex justify-center opacity-70 transform scale-90">
-                    <ResourceNav title="OTD Price Checker" />
-                </div>
-            </div>
-
-        </div>
+        </ResourcePageShell>
     );
 }

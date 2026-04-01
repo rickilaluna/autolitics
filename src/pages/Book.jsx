@@ -152,10 +152,11 @@ export default function Book() {
     const timeSlots = ['Morning (9–12)', 'Afternoon (12–3)', 'Evening (3–6)'];
 
     return (
-        <div ref={containerRef} className="bg-background min-h-screen text-text font-sans relative flex flex-col items-center py-12 px-6 pt-32">
+        <div ref={containerRef} className="public-page-shell bg-background text-text font-sans relative flex flex-col items-center pb-12">
 
             <MinimalHeader />
 
+            <div className="public-page-content w-full max-w-3xl mx-auto flex flex-col items-center px-0 sm:px-2">
             {/* Header */}
             <div className="text-center max-w-2xl mb-12 fade-up">
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-primary mb-4">
@@ -188,17 +189,17 @@ export default function Book() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                             <label className="block text-sm font-bold text-primary">Name</label>
-                            <input required name="name" value={formData.name} onChange={handleChange} type="text" placeholder="Your name" className="w-full bg-background border border-text/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors" />
+                            <input required name="name" value={formData.name} onChange={handleChange} type="text" placeholder="Your name" className="studio-touch-input w-full bg-background border border-text/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors" />
                         </div>
                         <div className="space-y-2">
                             <label className="block text-sm font-bold text-primary">Email</label>
-                            <input required name="email" value={formData.email} onChange={handleChange} type="email" placeholder="you@email.com" className="w-full bg-background border border-text/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors" />
+                            <input required name="email" value={formData.email} onChange={handleChange} type="email" placeholder="you@email.com" className="studio-touch-input w-full bg-background border border-text/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors" />
                         </div>
                     </div>
 
                     <div className="space-y-2">
                         <label className="block text-sm font-bold text-primary">Timeline</label>
-                        <select required name="timeline" value={formData.timeline} onChange={handleChange} className="w-full bg-background border border-text/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors appearance-none">
+                        <select required name="timeline" value={formData.timeline} onChange={handleChange} className="studio-touch-input w-full bg-background border border-text/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors appearance-none">
                             <option value="">Select your timeline</option>
                             <option value="ASAP">ASAP</option>
                             <option value="1-3 months">Within 1-3 months</option>
@@ -298,7 +299,7 @@ export default function Book() {
                         <label className="block text-sm font-bold text-primary">
                             Size <span className="text-text/40 font-normal">(optional)</span>
                         </label>
-                        <select name="size" value={formData.size} onChange={handleChange} className="w-full bg-background border border-text/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors appearance-none">
+                        <select name="size" value={formData.size} onChange={handleChange} className="studio-touch-input w-full bg-background border border-text/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors appearance-none">
                             <option value="">Select size</option>
                             <option value="Compact">Compact</option>
                             <option value="Mid-size">Mid-size</option>
@@ -308,7 +309,7 @@ export default function Book() {
 
                     <div className="space-y-2">
                         <label className="block text-sm font-bold text-primary">What would you most like help with?</label>
-                        <textarea name="helpText" value={formData.helpText} onChange={handleChange} placeholder="e.g., Narrowing down options, negotiating, understanding total cost..." className="w-full bg-background border border-text/10 rounded-xl px-4 py-3 text-sm h-28 resize-none focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"></textarea>
+                        <textarea name="helpText" value={formData.helpText} onChange={handleChange} placeholder="e.g., Narrowing down options, negotiating, understanding total cost..." className="studio-touch-input w-full bg-background border border-text/10 rounded-xl px-4 py-3 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"></textarea>
                     </div>
 
                     <hr className="border-text/5 my-4" />
@@ -372,7 +373,7 @@ export default function Book() {
                     </div>
 
                     <div className="pt-6 flex flex-col sm:flex-row items-center gap-6 border-t border-text/5 mt-4">
-                        <button disabled={isSubmitting} type="submit" className="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-full font-bold text-sm transition-transform duration-300 hover:scale-[1.03] shadow-[0_4px_14px_rgba(13,13,18,0.3)] disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button disabled={isSubmitting} type="submit" className="studio-touch-btn w-full sm:w-auto bg-primary text-white px-8 sm:py-4 rounded-full font-bold text-sm transition-transform duration-300 hover:scale-[1.03] shadow-[0_4px_14px_rgba(13,13,18,0.3)] disabled:opacity-50 disabled:cursor-not-allowed">
                             {isSubmitting ? 'Submitting...' : 'Confirm Booking'}
                         </button>
                         <Link to="/" className="text-sm font-medium text-text/50 hover:text-primary transition-colors">
@@ -386,6 +387,7 @@ export default function Book() {
                 I work with a limited number of clients each month to ensure focused support.
             </p>
 
+            </div>
         </div>
     );
 }

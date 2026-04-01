@@ -132,12 +132,12 @@ export default function Navbar() {
                     </div>
 
                     <Link
-                        to="/book"
+                        to={user ? "/dashboard" : "/book"}
                         className="hidden lg:block shrink-0 relative group/btn overflow-hidden bg-accent text-primary px-5 py-2.5 rounded-full font-bold text-sm transition-transform duration-300 hover:scale-[1.03] whitespace-nowrap"
                         style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
                     >
                         <span className="relative z-10 block transition-transform group-hover/btn:-translate-y-[1px]">
-                            Book a Strategy Session
+                            {user ? 'Go to Dashboard' : 'Book a Strategy Session'}
                         </span>
                         <span className="absolute right-0 bottom-0 w-full h-full bg-white/30 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 rounded-full"></span>
                     </Link>
@@ -188,12 +188,12 @@ export default function Navbar() {
                 </div>
 
                 <Link
-                    to="/book"
+                    to={user ? "/dashboard" : "/book"}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="w-full relative overflow-hidden bg-[#C9A84C] text-[#0D0D12] px-6 py-4 rounded-full font-bold text-lg text-center transition-transform duration-300 active:scale-95"
                 >
                     <span className="relative z-10 block">
-                        Schedule Intro Strategy Session
+                        {user ? 'Go to Dashboard' : 'Schedule Intro Strategy Session'}
                     </span>
                 </Link>
             </div>

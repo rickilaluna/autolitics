@@ -22,6 +22,33 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Studio resource tools — full-bleed mobile, safe areas (used by ResourcePageShell) */
+  .resource-page-root {
+    @apply w-full min-w-0 min-h-[100dvh] bg-[#0D0D12] text-[#FAF8F5] selection:bg-[#C9A84C]/20 pb-[env(safe-area-inset-bottom,0px)];
+  }
+  .resource-content-offset {
+    @apply w-full min-w-0 pt-[calc(7rem+env(safe-area-inset-top,0px))];
+  }
+  .resource-main {
+    @apply w-full min-w-0 mx-auto px-3 sm:px-4 pt-4 sm:pt-6 pb-[max(5rem,env(safe-area-inset-bottom,1.25rem))];
+  }
+
+  /* Primary actions on touch devices — use with sm:min-h-0 sm:px-* to shrink on desktop */
+  .studio-touch-btn {
+    @apply min-h-[48px] px-4 touch-manipulation active:opacity-90 sm:min-h-0;
+  }
+  .studio-touch-input {
+    @apply min-h-[44px] text-base sm:min-h-0 sm:text-sm;
+  }
+
+  /* Marketing / auth pages that use MinimalHeader only (no ResourceNav) */
+  .public-page-shell {
+    @apply w-full min-w-0 min-h-[100dvh] pb-[env(safe-area-inset-bottom,0px)];
+  }
+  .public-page-content {
+    @apply w-full min-w-0 pt-[calc(7rem+env(safe-area-inset-top,0px))] px-3 sm:px-6 lg:px-12 xl:px-16;
+  }
 }.font-inter { font-family: 'Inter', sans-serif; }
 .font-playfair { font-family: 'Playfair Display', serif; }
 .font-mono { font-family: 'JetBrains Mono', monospace; }

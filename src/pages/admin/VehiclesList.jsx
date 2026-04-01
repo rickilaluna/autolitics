@@ -128,7 +128,7 @@ export default function VehiclesList() {
                         type="text" placeholder="Search make or model..." value={search}
                         onChange={e => setSearch(e.target.value)}
                         style={{ width: "100%", background: "#1a2030", border: "1px solid #2a3348", borderRadius: "6px", padding: "8px 12px", fontSize: "12px", color: "#e2e8f0", marginBottom: "20px", boxSizing: "border-box" }}
-                        className="focus:outline-none focus:ring-1 focus:ring-[#3b82f6]"
+                        className="studio-touch-input focus:outline-none focus:ring-1 focus:ring-[#3b82f6]"
                     />
 
                     {[

@@ -134,18 +134,18 @@ const ListingReviewForm = () => {
                                 Year, Make & Model <span className="text-red-500">*</span>
                             </label>
                             <input type="text" id="vehicle_name" name="vehicle_name" required placeholder="e.g. 2021 Porsche Macan S" value={formData.vehicle_name} onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
                         </div>
                         <div>
                             <label htmlFor="vin" className="block text-sm font-medium text-[#0D0D12] mb-1">VIN</label>
                             <input type="text" id="vin" name="vin" placeholder="17-character VIN" maxLength={17} value={formData.vin} onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all font-['JetBrains_Mono'] uppercase" />
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all font-['JetBrains_Mono'] uppercase" />
                             <p className="text-xs text-[#0D0D12]/40 font-['JetBrains_Mono'] mt-1">Helps pull exact history & spec data</p>
                         </div>
                         <div>
                             <label htmlFor="mileage" className="block text-sm font-medium text-[#0D0D12] mb-1">Mileage</label>
                             <input type="text" id="mileage" name="mileage" placeholder="e.g. 38,500" value={formData.mileage} onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
                         </div>
                     </div>
                 </div>
@@ -157,19 +157,19 @@ const ListingReviewForm = () => {
                         <div>
                             <label htmlFor="dealership_name" className="block text-sm font-medium text-[#0D0D12] mb-1">Dealership Name</label>
                             <input type="text" id="dealership_name" name="dealership_name" placeholder="e.g. AutoNation Porsche" value={formData.dealership_name} onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
                         </div>
                         <div>
                             <label htmlFor="dealership_location" className="block text-sm font-medium text-[#0D0D12] mb-1">Dealer Location</label>
                             <input type="text" id="dealership_location" name="dealership_location" placeholder="City, State" value={formData.dealership_location} onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
                         </div>
                         <div>
                             <label htmlFor="asking_price" className="block text-sm font-medium text-[#0D0D12] mb-1">Asking Price</label>
                             <div className="relative">
                                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0D0D12]/40 font-medium">$</span>
                                 <input type="text" id="asking_price" name="asking_price" placeholder="42,500" value={formData.asking_price} onChange={handleChange}
-                                    className="w-full pl-8 pr-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
+                                    className="studio-touch-input w-full pl-8 pr-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
                             </div>
                         </div>
                         <div className="sm:col-span-2 sm:col-start-2 flex items-end">
@@ -194,13 +194,13 @@ const ListingReviewForm = () => {
                                 Listing URL <span className="text-red-500">*</span>
                             </label>
                             <input type="url" id="listing_url" name="listing_url" required placeholder="https://www.cargurus.com/Cars/..." value={formData.listing_url} onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all" />
                             <p className="text-xs text-[#0D0D12]/40 font-['JetBrains_Mono'] mt-1">Dealer site, Cars.com, Autotrader, CarGurus, etc.</p>
                         </div>
                         <div>
                             <label htmlFor="client_notes" className="block text-sm font-medium text-[#0D0D12] mb-1">Your Notes or Questions</label>
                             <textarea id="client_notes" name="client_notes" rows={4} placeholder="What caught your eye? Any concerns, must-haves, or questions for your advisor?" value={formData.client_notes} onChange={handleChange}
-                                className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y" />
+                                className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y" />
                         </div>
                     </div>
                 </div>

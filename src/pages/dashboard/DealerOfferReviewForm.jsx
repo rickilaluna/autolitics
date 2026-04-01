@@ -190,7 +190,7 @@ const DealerOfferReviewForm = () => {
                             placeholder="e.g. Porsche Downtown LA"
                             value={formData.dealership_name}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
+                            className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
                         />
                     </div>
                     
@@ -206,7 +206,7 @@ const DealerOfferReviewForm = () => {
                             placeholder="e.g. 2021 Porsche Macan S"
                             value={formData.vehicle_name}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
+                            className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
                         />
                     </div>
                 </div>
@@ -223,7 +223,7 @@ const DealerOfferReviewForm = () => {
                         placeholder="https://..."
                         value={formData.document_url}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
+                        className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
                     />
                     <p className="text-xs text-[#0D0D12]/40 font-['JetBrains_Mono'] mt-1">
                         Please upload a clear photo or PDF of the the "Buyer's Order" or quote worksheet from the dealer to a cloud drive and paste the sharing link here. Ensure permissions are set to "Anyone with link can view".
@@ -243,7 +243,7 @@ const DealerOfferReviewForm = () => {
                             placeholder="0.00"
                             value={formData.out_the_door_price}
                             onChange={handleChange}
-                            className="w-full pl-8 pr-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
+                            className="studio-touch-input w-full pl-8 pr-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all"
                         />
                     </div>
                     <p className="text-xs text-[#0D0D12]/40 font-['JetBrains_Mono'] mt-1">
@@ -262,7 +262,7 @@ const DealerOfferReviewForm = () => {
                         placeholder="Did the dealer promise anything specifically? Does the rate seem high? Any specific concerns?"
                         value={formData.client_notes}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y"
+                        className="studio-touch-input w-full px-4 py-3 bg-[#FAF8F5] border border-[#0D0D12]/10 rounded-xl outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C] transition-all resize-y"
                     />
                 </div>
 

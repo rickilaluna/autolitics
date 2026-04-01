@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
+import { getWorkspaceActivity } from '../lib/vehicleContextStorage';
 
 /**
  * Fetches client journey milestones: deliverables, listings, test drives, offers.
@@ -15,8 +16,12 @@ export function useJourneyStatus({ profile, hasPurchasedAdvisory }) {
         testDrives: 0,
         offers: 0,
     });
+    const [workspace, setWorkspace] = useState(null);
 
     useEffect(() => {
+        // Capture local storage state
+        setWorkspace(getWorkspaceActivity());
+
         async function fetchCounts() {
             if (!user?.email || !profile?.id) {
                 setLoading(false);
@@ -74,13 +79,18 @@ export function useJourneyStatus({ profile, hasPurchasedAdvisory }) {
     }, [user, profile?.id]);
 
     const isProfileComplete = profile && profile.buying_timeline && profile.primary_goal;
+    
+    // Evaluate if user has generated artifacts in their browser
+    const hasTestDriveData = counts.testDrives > 0 || workspace?.hasScorecard;
+    const hasOfferData = counts.offers > 0 || workspace?.hasOfferComparison || (workspace?.otdQuotes?.length > 0);
+    const hasCompareData = workspace?.decisionEngineCount >= 2;
 
     // Determine current phase (1-4)
     let currentPhase = 1;
-    if (isProfileComplete) currentPhase = 2;
+    if (isProfileComplete) currentPhase = 2; // Evaluate
     if (counts.deliverables > 0 || counts.listings > 0) currentPhase = 2;
-    if (counts.testDrives > 0) currentPhase = 3;
-    if (counts.offers > 0) currentPhase = 4;
+    if (hasTestDriveData || hasCompareData) currentPhase = 3; // Compare Offers
+    if (hasOfferData) currentPhase = 4; // Close
 
     // Determine next step (resourcePhase maps to PHASE_RESOURCES keys in dashboardResourceCatalog.js)
     let nextStep = null;
@@ -105,32 +115,33 @@ export function useJourneyStatus({ profile, hasPurchasedAdvisory }) {
     } else if (
         hasPurchasedAdvisory &&
         (counts.deliverables > 0 || profile?.advisory_strategy_brief_at) &&
-        counts.testDrives === 0
+        !hasTestDriveData && !hasCompareData && !hasOfferData
     ) {
         nextStep = {
             label: 'Review Your Strategy Brief',
-            description: 'Your personalized vehicle recommendations are ready. Review them, then schedule your first test drive.',
+            description: 'Your personalized vehicle recommendations are ready. Review them, then schedule your first test drive or use the Decision Engine.',
             link: '/dashboard/strategy-brief',
             linkLabel: 'Start Review',
             resourcePhase: 'strategy',
         };
-    } else if (hasPurchasedAdvisory && counts.testDrives > 0 && counts.offers === 0) {
+    } else if (hasPurchasedAdvisory && (hasTestDriveData || hasCompareData) && !hasOfferData) {
         nextStep = {
             label: 'Ready to Negotiate?',
-            description: 'You\'ve driven vehicles and logged feedback. When you receive a dealer quote, submit it for a line-by-line review.',
+            description: 'You are actively evaluating vehicles. When you receive a dealer quote, submit it for a line-by-line review.',
             link: '/dashboard/my-search/offer',
             linkLabel: 'Submit an Offer',
             resourcePhase: 'negotiate',
         };
-    } else if (hasPurchasedAdvisory && counts.offers > 0) {
+    } else if (hasPurchasedAdvisory && hasOfferData) {
         nextStep = {
             label: 'Review Your Offer Analysis',
-            description: 'Your submitted offers are being evaluated. Check My Search for status updates and advisor feedback.',
+            description: 'You\'ve engaged with dealer quotes. Check My Search for status updates or run additional quotes in the OTD Price Checker.',
             link: '/dashboard/my-search',
             linkLabel: 'View Submissions',
             resourcePhase: 'negotiate',
         };
     }
 
-    return { loading, counts, currentPhase, nextStep };
+    return { loading, counts, workspace, currentPhase, nextStep };
 }
+

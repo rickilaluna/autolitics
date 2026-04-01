@@ -65,10 +65,10 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#0D0D12] text-[#FAF8F5] font-['Inter'] selection:bg-[#C9A84C]/30 selection:text-[#FAF8F5]">
+        <div className="public-page-shell bg-[#0D0D12] text-[#FAF8F5] font-['Inter'] selection:bg-[#C9A84C]/30 selection:text-[#FAF8F5]">
             <MinimalHeader />
 
-            <div className="pt-32 pb-24 px-6 sm:px-12 xl:px-24 max-w-7xl mx-auto flex flex-col items-center justify-center min-h-[80vh]">
+            <div className="public-page-content max-w-7xl mx-auto flex flex-col items-center justify-center min-h-[min(85vh,calc(100dvh-6rem))] pb-16 sm:pb-24">
                 <div className="w-full max-w-md">
                     <div className="text-center mb-10">
                         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-[#FAF8F5] mb-4">
@@ -105,7 +105,7 @@ const Login = () => {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full bg-[#1A1A1A] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C] transition-colors"
+                                className="studio-touch-input w-full bg-[#1A1A1A] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C] transition-colors"
                                 placeholder="you@example.com"
                             />
                         </div>
@@ -120,7 +120,7 @@ const Login = () => {
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full bg-[#1A1A1A] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C] transition-colors"
+                                className="studio-touch-input w-full bg-[#1A1A1A] border border-[#2A2A35] rounded-xl px-4 py-3 text-[#FAF8F5] focus:outline-none focus:border-[#C9A84C] transition-colors"
                                 placeholder="••••••••"
                             />
                         </div>
@@ -128,7 +128,7 @@ const Login = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full group relative overflow-hidden bg-[#C9A84C] text-[#0D0D12] py-4 px-8 rounded-full font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-95 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2"
+                            className="studio-touch-btn w-full group relative overflow-hidden bg-[#C9A84C] text-[#0D0D12] sm:py-4 px-8 rounded-full font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-95 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 {loading ? 'Authenticating...' : 'Sign In'}

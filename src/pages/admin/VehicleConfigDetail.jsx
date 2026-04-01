@@ -105,7 +105,7 @@ const VehicleConfigDetail = () => {
                 type={type}
                 value={state[field] || ''}
                 onChange={e => setState({ ...state, [field]: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans"
+                className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans"
                 placeholder={placeholder}
             />
         </div>
@@ -167,7 +167,7 @@ const VehicleConfigDetail = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Config Notes</label>
-                                <textarea value={overview.config_notes || ''} onChange={e => setOverview({ ...overview, config_notes: e.target.value })} rows="3" className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none" placeholder="Internal notes about this config..."></textarea>
+                                <textarea value={overview.config_notes || ''} onChange={e => setOverview({ ...overview, config_notes: e.target.value })} rows="3" className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none" placeholder="Internal notes about this config..."></textarea>
                             </div>
                         </div>
                     )}
@@ -179,7 +179,7 @@ const VehicleConfigDetail = () => {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div>
                                     <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Market Type</label>
-                                    <select value={market.type || 'used'} onChange={e => setMarket({ ...market, type: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans">
+                                    <select value={market.type || 'used'} onChange={e => setMarket({ ...market, type: e.target.value })} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans">
                                         <option value="new">New</option>
                                         <option value="cpo">CPO</option>
                                         <option value="used">Used</option>
@@ -195,7 +195,7 @@ const VehicleConfigDetail = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Market Notes</label>
-                                <textarea value={market.notes || ''} onChange={e => setMarket({ ...market, notes: e.target.value })} rows="2" className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none" placeholder="Supply constraints pushing used prices up..."></textarea>
+                                <textarea value={market.notes || ''} onChange={e => setMarket({ ...market, notes: e.target.value })} rows="2" className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none" placeholder="Supply constraints pushing used prices up..."></textarea>
                             </div>
                         </div>
                     )}
@@ -218,7 +218,7 @@ const VehicleConfigDetail = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Overall Profile Notes</label>
-                                <textarea value={evaluations.overall_profile_notes || ''} onChange={e => setEvaluations({ ...evaluations, overall_profile_notes: e.target.value })} rows="4" className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none" placeholder="Narrative summary describing the vehicle's unique profile..."></textarea>
+                                <textarea value={evaluations.overall_profile_notes || ''} onChange={e => setEvaluations({ ...evaluations, overall_profile_notes: e.target.value })} rows="4" className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none" placeholder="Narrative summary describing the vehicle's unique profile..."></textarea>
                             </div>
                         </div>
                     )}

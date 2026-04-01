@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Shield, Search, Gauge, FileText, Handshake, DollarSign, Banknote, Clock, ArrowRight } from 'lucide-react';
-import MinimalHeader from '../../components/MinimalHeader';
-import ResourceNav from '../../components/ResourceNav';
+import ResourcePageShell from '../../components/ResourcePageShell';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,23 +47,18 @@ export default function Playbook() {
     }, []);
 
     return (
-        <div ref={containerRef} className="bg-[#0D0D12] min-h-screen text-[#FAF8F5] font-['Inter'] relative flex flex-col selection:bg-[#C9A84C]/20 selection:text-[#FAF8F5]">
-            {/* Noise Overlay */}
-            <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.04] mix-blend-overlay">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
-                    <filter id="noiseFilterPb">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
-                    </filter>
-                    <rect width="100%" height="100%" filter="url(#noiseFilterPb)" />
-                </svg>
-            </div>
-
-            <MinimalHeader />
-            <div className="pt-28">
-            <ResourceNav title="Autolitics Playbook" />
-
-            <main className="flex-1 w-full max-w-3xl mx-auto px-6 md:px-12 lg:px-16 pt-6 pb-32">
-
+        <ResourcePageShell
+            ref={containerRef}
+            navTitle="Autolitics Playbook"
+            maxWidth="3xl"
+            rootClassName="relative selection:bg-[#C9A84C]/20 selection:text-[#FAF8F5]"
+            mainClassName="md:px-6 lg:px-10 !pb-32"
+            footer={
+                <footer className="border-t border-[#2A2A35] py-8 text-center text-xs text-[#FAF8F5]/30 font-['JetBrains_Mono']">
+                    © {new Date().getFullYear()} Autolitics Studio. Independent Automotive Advisory.
+                </footer>
+            }
+        >
                 {/* Hero */}
                 <section className="text-center mb-20 pb-fade-up">
                     <div className="inline-block px-4 py-1.5 rounded-full border border-[#C9A84C]/30 text-[#C9A84C] text-xs font-semibold tracking-widest uppercase mb-6">
@@ -550,13 +544,6 @@ export default function Playbook() {
                     </div>
                 </section>
 
-            </main>
-            </div>
-
-            {/* Footer */}
-            <footer className="border-t border-[#2A2A35] py-8 text-center text-xs text-[#FAF8F5]/30 font-['JetBrains_Mono']">
-                © {new Date().getFullYear()} Autolitics Studio. Independent Automotive Advisory.
-            </footer>
-        </div>
+        </ResourcePageShell>
     );
 }

@@ -192,7 +192,7 @@ const VehicleDetail = () => {
                 type={type}
                 value={state[field] || ''}
                 onChange={e => setState({ ...state, [field]: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans"
+                className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans"
                 placeholder={placeholder}
             />
         </div>
@@ -253,53 +253,53 @@ const VehicleDetail = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Make</label>
-                            <input required type="text" name="make" value={formData.make} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Toyota" />
+                            <input required type="text" name="make" value={formData.make} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Toyota" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Model</label>
-                            <input required type="text" name="model" value={formData.model} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Grand Highlander Hybrid" />
+                            <input required type="text" name="model" value={formData.model} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Grand Highlander Hybrid" />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div>
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Segment</label>
-                            <select name="segment" value={formData.segment || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <select name="segment" value={formData.segment || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
                                 <option value="">Select Segment</option>
                                 {["Compact", "Midsize", "3-Row", "Truck-Based"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Use Case</label>
-                            <select name="use_case" value={formData.use_case || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <select name="use_case" value={formData.use_case || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
                                 <option value="">Select Use Case</option>
                                 {["Daily Driver", "Adventure", "Performance"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">MSRP Tier</label>
-                            <select name="msrp_tier" value={formData.msrp_tier || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <select name="msrp_tier" value={formData.msrp_tier || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
                                 <option value="">Select Tier</option>
                                 {["Under $35k", "$35–50k", "$50–65k", "$60–85k", "$85k+"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Positioning</label>
-                            <select name="positioning" value={formData.positioning || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <select name="positioning" value={formData.positioning || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
                                 <option value="">Select Positioning</option>
                                 {["Mainstream", "Near-Luxury", "Luxury", "Ultra-Premium"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Powertrain Summary</label>
-                            <select name="powertrain_summary" value={formData.powertrain_summary || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <select name="powertrain_summary" value={formData.powertrain_summary || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
                                 <option value="">Select Powertrain</option>
                                 {["Gas", "Hybrid", "Gas/Hybrid", "Electric", "Gas/Hybrid/Electric", "Gas/Electric"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Origin</label>
-                            <select name="origin" value={formData.origin || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <select name="origin" value={formData.origin || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
                                 <option value="">Select Origin</option>
                                 {["American", "Japanese", "Korean", "European"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
@@ -309,25 +309,25 @@ const VehicleDetail = () => {
                     <div className="grid grid-cols-1 gap-6 mt-4">
                         <div>
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Generation Label</label>
-                            <input type="text" name="generation_label" value={formData.generation_label || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="1st Gen" />
+                            <input type="text" name="generation_label" value={formData.generation_label || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="1st Gen" />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Generation Notes</label>
-                            <input type="text" name="generation_notes" value={formData.generation_notes || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="Introduced in 2024" />
+                            <input type="text" name="generation_notes" value={formData.generation_notes || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="Introduced in 2024" />
                         </div>
                         <div className="md:col-span-2 border-t border-[#2A2A35] pt-6 mt-2">
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Vehicle Summary</label>
-                            <input type="text" name="vehicle_summary" value={formData.vehicle_summary || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="A basic one-sentence summary for deliverables..." />
+                            <input type="text" name="vehicle_summary" value={formData.vehicle_summary || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="A basic one-sentence summary for deliverables..." />
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Strategic Role Tags (One per line)</label>
                             <textarea
                                 value={formData._strategic_role_tags_raw !== undefined ? formData._strategic_role_tags_raw : (formData.strategic_role_tags?.join('\n') || '')}
                                 onChange={e => handleArrayChange('strategic_role_tags', e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-20"
+                                className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-20"
                                 placeholder="Family flagship&#10;Hybrid efficiency leader"
                             ></textarea>
                         </div>
@@ -432,7 +432,7 @@ const VehicleDetail = () => {
                             {renderInput(safety, setSafety, 'nhtsa_overall_stars', 'NHTSA Overall Stars (0-5)', 'number')}
                             <div>
                                 <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">IIHS Top Safety Pick</label>
-                                <select value={safety.iihs_tsp_status || 'Not Rated'} onChange={e => setSafety({ ...safety, iihs_tsp_status: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans">
+                                <select value={safety.iihs_tsp_status || 'Not Rated'} onChange={e => setSafety({ ...safety, iihs_tsp_status: e.target.value })} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans">
                                     <option value="Not Rated">Not Rated</option>
                                     <option value="TSP+">Top Safety Pick +</option>
                                     <option value="TSP">Top Safety Pick</option>
@@ -441,7 +441,7 @@ const VehicleDetail = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Standard Safety Notes</label>
-                                <textarea value={safety.standard_safety_notes || ''} onChange={e => setSafety({ ...safety, standard_safety_notes: e.target.value })} rows="2" className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans resize-none"></textarea>
+                                <textarea value={safety.standard_safety_notes || ''} onChange={e => setSafety({ ...safety, standard_safety_notes: e.target.value })} rows="2" className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans resize-none"></textarea>
                             </div>
                             </div>
                         </div>
@@ -472,7 +472,7 @@ const VehicleDetail = () => {
                                 <textarea
                                     value={evaluations.overall_profile_notes || ''}
                                     onChange={e => setEvaluations({ ...evaluations, overall_profile_notes: e.target.value })}
-                                    className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-32"
+                                    className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-32"
                                     placeholder="A synthesized paragraph defining this vehicle's true competence and character..."
                                 ></textarea>
                             </div>
@@ -496,7 +496,7 @@ const VehicleDetail = () => {
                                         <textarea
                                             value={formData._default_why_it_fits_raw !== undefined ? formData._default_why_it_fits_raw : (formData.default_why_it_fits?.join('\n') || '')}
                                             onChange={e => handleArrayChange('default_why_it_fits', e.target.value)}
-                                            className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-32"
+                                            className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-32"
                                             placeholder="• Incredible space packaging&#10;• Trusted reliability"
                                         ></textarea>
                                     </div>
@@ -505,7 +505,7 @@ const VehicleDetail = () => {
                                         <textarea
                                             value={formData._default_tradeoffs_raw !== undefined ? formData._default_tradeoffs_raw : (formData.default_tradeoffs?.join('\n') || '')}
                                             onChange={e => handleArrayChange('default_tradeoffs', e.target.value)}
-                                            className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-32"
+                                            className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-32"
                                             placeholder="• Cabin trails competitors&#10;• Engine note is coarse"
                                         ></textarea>
                                     </div>
@@ -584,7 +584,7 @@ const VehicleDetail = () => {
                                 <textarea
                                     value={formData.default_trim_guidance || ''}
                                     onChange={e => setFormData({ ...formData, default_trim_guidance: e.target.value })}
-                                    className="w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-48"
+                                    className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-48"
                                     placeholder="Target the XLE Premium for the best value..."
                                 ></textarea>
                             </div>
