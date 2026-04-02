@@ -13,20 +13,45 @@ async function lookupVehicle(vehicleName) {
     const hintYear = yearMatch ? parseInt(yearMatch[1], 10) : null;
     const nameWithoutYear = yearMatch ? cleaned.slice(yearMatch[0].length) : cleaned;
 
-    // Try to find a model where make + ' ' + model is contained in the search string (or vice-versa)
-    const { data: models } = await supabase
-        .from('vehicle_models')
-        .select('id, make, model, segment, vehicle_summary, default_image_url, powertrain_summary, default_trim_guidance')
-        .or(`model.ilike.%${nameWithoutYear}%`)
-        .limit(10);
+    // Split into tokens to search make and model columns independently
+    // e.g. "Kia Telluride" → try make=Kia + model like Telluride
+    //       "Toyota RAV4 Prime" → try make=Toyota + model like RAV4
+    const tokens = nameWithoutYear.split(/\s+/).filter(Boolean);
+    const lowerName = nameWithoutYear.toLowerCase();
+
+    // Strategy 1: first token as make, rest as model substring
+    let models = [];
+    if (tokens.length >= 2) {
+        const makePart = tokens[0];
+        const modelPart = tokens.slice(1).join(' ');
+        const { data } = await supabase
+            .from('vehicle_models')
+            .select('id, make, model, segment, vehicle_summary, default_image_url, powertrain_summary, default_trim_guidance')
+            .ilike('make', makePart)
+            .ilike('model', `%${modelPart}%`)
+            .limit(10);
+        models = data || [];
+    }
+
+    // Strategy 2: fallback — search model column broadly
+    if (models.length === 0) {
+        const { data } = await supabase
+            .from('vehicle_models')
+            .select('id, make, model, segment, vehicle_summary, default_image_url, powertrain_summary, default_trim_guidance')
+            .or(`model.ilike.%${nameWithoutYear}%,make.ilike.%${nameWithoutYear}%`)
+            .limit(10);
+        models = data || [];
+    }
 
     if (!models || models.length === 0) return null;
 
     // Rank: prefer exact "make model" match
     const best = models.find(m =>
-        nameWithoutYear.toLowerCase().includes(`${m.make} ${m.model}`.toLowerCase())
+        lowerName === `${m.make} ${m.model}`.toLowerCase()
     ) || models.find(m =>
-        nameWithoutYear.toLowerCase().includes(m.model.toLowerCase())
+        lowerName.includes(`${m.make} ${m.model}`.toLowerCase())
+    ) || models.find(m =>
+        lowerName.includes(m.model.toLowerCase())
     ) || models[0];
 
     // Fetch configs with MSRP

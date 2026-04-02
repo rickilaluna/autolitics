@@ -69,9 +69,16 @@ function loadConsideringRing() {
     return Array.isArray(arr) ? arr.filter((s) => typeof s === 'string') : [];
 }
 
+/**
+ * Only records labels that look like real vehicle names — must have at least
+ * two words (e.g. "Toyota RAV4") and be ≥ 5 characters to reject partial keystrokes.
+ */
 export function recordConsideringModel(label) {
     const t = (label || '').trim();
-    if (t.length < 2) return;
+    if (t.length < 5) return;
+    // Require at least two tokens (brand + model) to filter out partials like "Ford B"
+    const tokens = t.split(/\s+/).filter(Boolean);
+    if (tokens.length < 2) return;
     let next = loadConsideringRing().filter((s) => s.toLowerCase() !== t.toLowerCase());
     next.unshift(t);
     next = next.slice(0, MAX_CONSIDERING);
@@ -89,7 +96,9 @@ export function getConsideringModelStrings() {
     const set = new Set();
     const push = (s) => {
         const t = (s || '').trim();
-        if (t.length > 1) set.add(t);
+        // Require at least "Brand Model" shape — 2+ tokens and 5+ chars
+        if (t.length < 5 || t.split(/\s+/).filter(Boolean).length < 2) return;
+        set.add(t);
     };
 
     const de = loadDecisionEngineSnapshot();
@@ -100,8 +109,14 @@ export function getConsideringModelStrings() {
 
     const bundle = loadScorecardBundle();
     (bundle.entries || []).forEach((entry) => {
-        push(entry?.vehicleModel);
-        push([entry?.vehicleModel, entry?.trim].filter(Boolean).join(' ').trim());
+        const model = (entry?.vehicleModel || '').trim();
+        const trim = (entry?.trim || '').trim();
+        // Only push the model+trim combo (not model alone, to avoid duplicates)
+        if (model && trim) {
+            push(`${model} ${trim}`);
+        } else if (model) {
+            push(model);
+        }
         (entry?.comparedVehicles || []).forEach(push);
     });
 

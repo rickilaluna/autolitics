@@ -47,7 +47,12 @@ function searchVehicles(vehicles, query) {
 function contextStringsMatching(contextRecent, query) {
     if (!contextRecent?.length) return [];
     const q = normalize(query);
-    const uniq = [...new Set(contextRecent.map((s) => (s || '').trim()).filter(Boolean))];
+    // Filter: only labels that look like real vehicle names (≥ 2 words, ≥ 5 chars)
+    const uniq = [...new Set(
+        contextRecent
+            .map((s) => (s || '').trim())
+            .filter((s) => s.length >= 5 && s.split(/\s+/).filter(Boolean).length >= 2)
+    )];
     if (!q.length) return uniq.slice(0, 6);
     return uniq
         .filter((s) => {
