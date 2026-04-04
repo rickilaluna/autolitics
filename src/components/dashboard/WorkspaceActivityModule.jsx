@@ -35,12 +35,25 @@ export default function WorkspaceActivityModule({ workspace }) {
                                 {workspace.decisionEngineCount} vehicles compared.
                             </p>
                             {workspace.decisionEngineWinner && (
-                                <button
-                                    onClick={(e) => { e.preventDefault(); setPreviewVehicle(workspace.decisionEngineWinner); }}
-                                    className="bg-[#FAF8F5] px-3 py-2 rounded-lg text-xs font-medium border border-[#0D0D12]/5 truncate text-left w-full hover:border-[#C9A84C]/40 transition-colors"
+                                <span
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        setPreviewVehicle(workspace.decisionEngineWinner);
+                                    }}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            setPreviewVehicle(workspace.decisionEngineWinner);
+                                        }
+                                    }}
+                                    className="bg-[#FAF8F5] px-3 py-2 rounded-lg text-xs font-medium border border-[#0D0D12]/5 truncate text-left w-full hover:border-[#C9A84C]/40 transition-colors cursor-pointer"
                                 >
                                     Top score: {workspace.decisionEngineWinner}
-                                </button>
+                                </span>
                             )}
                         </div>
                         <div className="text-xs font-['JetBrains_Mono'] uppercase tracking-widest text-[#C9A84C] mt-4 flex items-center gap-1">
@@ -95,12 +108,25 @@ export default function WorkspaceActivityModule({ workspace }) {
                                 {workspace.scorecardCount} entrie{workspace.scorecardCount === 1 ? 's' : 's'} logged.
                             </p>
                             {workspace.recentScorecardTitle && (
-                                <button
-                                    onClick={(e) => { e.preventDefault(); setPreviewVehicle(workspace.recentScorecardTitle); }}
-                                    className="bg-[#FAF8F5] px-3 py-2 rounded-lg text-xs font-medium border border-[#0D0D12]/5 truncate text-left w-full hover:border-[#C9A84C]/40 transition-colors"
+                                <span
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        setPreviewVehicle(workspace.recentScorecardTitle);
+                                    }}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            setPreviewVehicle(workspace.recentScorecardTitle);
+                                        }
+                                    }}
+                                    className="bg-[#FAF8F5] px-3 py-2 rounded-lg text-xs font-medium border border-[#0D0D12]/5 truncate text-left w-full hover:border-[#C9A84C]/40 transition-colors cursor-pointer"
                                 >
                                     Latest: {workspace.recentScorecardTitle}
-                                </button>
+                                </span>
                             )}
                         </div>
                         <div className="text-xs font-['JetBrains_Mono'] uppercase tracking-widest text-[#C9A84C] mt-4 flex items-center gap-1">

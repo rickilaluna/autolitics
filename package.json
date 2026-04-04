@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync-vehicles": "node scripts/sync-vehicle-autocomplete.mjs",
+    "ingest-manus-0402": "node scripts/ingest-manus-handoff.mjs",
+    "export-vehicle-csv": "node scripts/export-vehicle-catalog-csv.mjs",
+    "validate-vehicle-catalog": "node scripts/validate-vehicle-catalog.mjs"
   },
   "dependencies": {
     "@babel/runtime": "^7.28.6",

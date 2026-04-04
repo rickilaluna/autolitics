@@ -2,53 +2,24 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Loader2, Car } from 'lucide-react';
 import SpecComparisonTable from '../../components/SpecComparisonTable';
+import { useVehicleConfigCatalog } from '../../hooks/useVehicleConfigCatalog';
+import { VehicleConfigCombobox } from '../../components/vehicles';
 
 export default function ModelComparisonTool() {
-    const [makes, setMakes] = useState([]);
-    const [modelsByMake, setModelsByMake] = useState({});
-    const [loadingMeta, setLoadingMeta] = useState(true);
+    const { profiles: allConfigs, loading: loadingMeta } = useVehicleConfigCatalog(supabase);
 
-    const [selections, setSelections] = useState([
-        { makeId: '', modelId: '' },
-        { makeId: '', modelId: '' },
-        { makeId: '', modelId: '' },
-    ]);
+    const [configIds, setConfigIds] = useState(['', '', '']);
     const [profileRows, setProfileRows] = useState([]);
     const [powertrainRows, setPowertrainRows] = useState([]);
     const [loadingCompare, setLoadingCompare] = useState(false);
 
-    useEffect(() => {
-        const fetch = async () => {
-            const { data: models, error } = await supabase
-                .from('vehicle_models')
-                .select('id, make, model')
-                .order('make')
-                .order('model');
-            if (error) {
-                setLoadingMeta(false);
-                return;
-            }
-            const makeSet = new Set((models || []).map((m) => m.make));
-            const makeList = Array.from(makeSet).sort();
-            setMakes(makeList);
-            const byMake = {};
-            (models || []).forEach((m) => {
-                if (!byMake[m.make]) byMake[m.make] = [];
-                byMake[m.make].push(m);
-            });
-            setModelsByMake(byMake);
-            setLoadingMeta(false);
-        };
-        fetch();
-    }, []);
-
-    const selectedModelIds = useMemo(
-        () => selections.map((s) => s.modelId).filter(Boolean),
-        [selections]
+    const selectedConfigIds = useMemo(
+        () => configIds.filter(Boolean),
+        [configIds]
     );
 
     useEffect(() => {
-        if (selectedModelIds.length === 0) {
+        if (selectedConfigIds.length === 0) {
             setProfileRows([]);
             setPowertrainRows([]);
             return;
@@ -58,29 +29,22 @@ export default function ModelComparisonTool() {
             const { data: profileData, error: profileError } = await supabase
                 .from('v_vehicle_config_profile')
                 .select('*')
-                .in('vehicle_model_id', selectedModelIds)
-                .order('model_year', { ascending: false });
+                .in('vehicle_config_id', selectedConfigIds);
 
             if (profileError) {
                 setLoadingCompare(false);
                 return;
             }
 
-            const byModel = {};
+            const byId = {};
             (profileData || []).forEach((row) => {
-                const id = row.vehicle_model_id;
-                if (!byModel[id] || row.model_year > (byModel[id].model_year || 0)) {
-                    byModel[id] = row;
-                }
+                byId[row.vehicle_config_id] = row;
             });
-            const onePerModel = selectedModelIds
-                .map((id) => byModel[id])
-                .filter(Boolean);
+            const ordered = selectedConfigIds.map((id) => byId[id]).filter(Boolean);
+            setProfileRows(ordered);
 
-            setProfileRows(onePerModel);
-
-            const configIds = onePerModel.map((r) => r.vehicle_config_id).filter(Boolean);
-            if (configIds.length === 0) {
+            const modelIds = [...new Set(ordered.map((r) => r.vehicle_model_id).filter(Boolean))];
+            if (modelIds.length === 0) {
                 setPowertrainRows([]);
                 setLoadingCompare(false);
                 return;
@@ -89,25 +53,32 @@ export default function ModelComparisonTool() {
             const { data: ptData } = await supabase
                 .from('powertrain_specs')
                 .select('*')
-                .in('vehicle_config_id', configIds);
+                .in('vehicle_model_id', modelIds);
 
-            const ptByConfig = {};
-            (ptData || []).forEach((row) => {
-                ptByConfig[row.vehicle_config_id] = row;
+            const sorted = [...(ptData || [])].sort((a, b) =>
+                (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
+            );
+            const firstByModel = {};
+            sorted.forEach((row) => {
+                const mid = row.vehicle_model_id;
+                if (mid && !firstByModel[mid]) firstByModel[mid] = row;
             });
+
             setPowertrainRows(
-                onePerModel.map((row) => ptByConfig[row.vehicle_config_id] || {})
+                ordered.map((row) => firstByModel[row.vehicle_model_id] || {})
             );
             setLoadingCompare(false);
         };
         run();
-    }, [selectedModelIds.join(',')]);
+    }, [selectedConfigIds.join(',')]);
 
     const vehicles = useMemo(() => {
         if (profileRows.length === 0) return [];
         return profileRows.map((row, i) => {
             const pt = powertrainRows[i] || {};
-            const label = `${row.make} ${row.model}`;
+            const yr = row.model_year != null ? row.model_year : '';
+            const lbl = row.config_label || 'Representative';
+            const label = `${row.make} ${row.model} (${yr} · ${lbl})`;
             const data = {
                 ...row,
                 ...pt,
@@ -116,16 +87,8 @@ export default function ModelComparisonTool() {
         });
     }, [profileRows, powertrainRows]);
 
-    const setSelection = (slotIndex, key, value) => {
-        setSelections((prev) => {
-            const next = prev.map((s, i) =>
-                i === slotIndex ? { ...s, [key]: value } : s
-            );
-            if (key === 'make') {
-                next[slotIndex].modelId = '';
-            }
-            return next;
-        });
+    const setSlotConfig = (slotIndex, id) => {
+        setConfigIds((prev) => prev.map((v, i) => (i === slotIndex ? id : v)));
     };
 
     return (
@@ -135,7 +98,8 @@ export default function ModelComparisonTool() {
                 <div>
                     <h1 className="text-2xl font-bold text-[#FAF8F5]">Model Comparison Tool</h1>
                     <p className="text-sm text-[#FAF8F5]/60">
-                        Compare key specs for up to 3 models. Select make, then model.
+                        Search by make, model, model year, and config label (same catalog as engagement
+                        shortlists). Trim-level MSRP lives on each config&apos;s pricing record.
                     </p>
                 </div>
             </div>
@@ -143,7 +107,7 @@ export default function ModelComparisonTool() {
             {loadingMeta ? (
                 <div className="flex items-center gap-2 text-[#FAF8F5]/60 py-8">
                     <Loader2 className="animate-spin" size={20} />
-                    Loading makes and models…
+                    Loading vehicle configurations…
                 </div>
             ) : (
                 <>
@@ -156,39 +120,15 @@ export default function ModelComparisonTool() {
                                 <div className="text-xs font-semibold text-[#C9A84C]/80 uppercase tracking-wider mb-3">
                                     Vehicle {slot + 1}
                                 </div>
-                                <div className="space-y-3">
-                                    <label className="block text-sm text-[#FAF8F5]/70">Make</label>
-                                    <select
-                                        value={selections[slot].make}
-                                        onChange={(e) =>
-                                            setSelection(slot, 'make', e.target.value)
-                                        }
-                                        className="studio-touch-input w-full px-4 py-2.5 rounded-lg border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:ring-2 focus:ring-[#C9A84C]/30 focus:border-[#C9A84C]"
-                                    >
-                                        <option value="">Select make</option>
-                                        {makes.map((make) => (
-                                            <option key={make} value={make}>
-                                                {make}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <label className="block text-sm text-[#FAF8F5]/70">Model</label>
-                                    <select
-                                        value={selections[slot].modelId}
-                                        onChange={(e) =>
-                                            setSelection(slot, 'modelId', e.target.value)
-                                        }
-                                        disabled={!selections[slot].make}
-                                        className="studio-touch-input w-full px-4 py-2.5 rounded-lg border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:ring-2 focus:ring-[#C9A84C]/30 disabled:opacity-50"
-                                    >
-                                        <option value="">Select model</option>
-                                        {(modelsByMake[selections[slot].make] || []).map((m) => (
-                                            <option key={m.id} value={m.id}>
-                                                {m.model}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
+                                <label className="block text-sm text-[#FAF8F5]/70 mb-2">
+                                    Configuration
+                                </label>
+                                <VehicleConfigCombobox
+                                    configs={allConfigs}
+                                    value={configIds[slot]}
+                                    onChange={(id) => setSlotConfig(slot, id)}
+                                    placeholder="Search make, model, year, config…"
+                                />
                             </div>
                         ))}
                     </div>

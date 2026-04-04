@@ -3,6 +3,18 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { ArrowLeft, Save, Loader2, LayoutDashboard, TrendingUp, Star } from 'lucide-react';
+import {
+    vPage,
+    vTitle,
+    vSubtitle,
+    vLabel,
+    vSectionTitle,
+    vPanel,
+    vPrimaryBtn,
+    vTabBtn,
+    vInput,
+    vSelect,
+} from '../../components/admin/adminVehicleUi';
 
 const TABS = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
@@ -100,63 +112,74 @@ const VehicleConfigDetail = () => {
     // Render helpers
     const renderInput = (state, setState, field, label, type = 'text', placeholder = '') => (
         <div>
-            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">{label}</label>
+            <label className={vLabel}>{label}</label>
             <input
                 type={type}
                 value={state[field] || ''}
                 onChange={e => setState({ ...state, [field]: e.target.value })}
-                className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans"
+                className={vInput}
                 placeholder={placeholder}
             />
         </div>
     );
 
-    if (loading) return <div className="p-8 flex justify-center"><Loader2 className="animate-spin text-[#FAF8F5]/40" size={32} /></div>;
+    if (loading) {
+        return (
+            <div className={`${vPage} flex justify-center py-24`}>
+                <Loader2 className="animate-spin text-[#C9A84C]/60" size={32} />
+            </div>
+        );
+    }
 
     return (
-        <div className="font-['Space_Grotesk'] max-w-6xl mx-auto pb-20">
-            <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
-                    <Link to={`/admin/vehicles/${modelId}`} className="p-2 rounded-full hover:bg-[#2A2A35] transition-colors">
-                        <ArrowLeft size={24} />
+        <div className={vPage}>
+            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8">
+                <div className="flex items-start gap-4">
+                    <Link
+                        to={`/admin/vehicles/${modelId}`}
+                        className="p-2.5 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5]/80 hover:border-[#C9A84C]/40 hover:text-[#C9A84C] transition-colors shrink-0"
+                    >
+                        <ArrowLeft size={22} />
                     </Link>
                     <div>
-                        <h1 className="text-3xl font-bold">{isNew ? 'New Configuration' : 'Edit Configuration'}</h1>
-                        {vehicleModel && <p className="text-[#FAF8F5]/50 font-sans mt-1">{vehicleModel.make} {vehicleModel.model}</p>}
+                        <p className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 uppercase tracking-widest mb-1">Configuration</p>
+                        <h1 className={vTitle}>{isNew ? 'New configuration' : 'Edit configuration'}</h1>
+                        {vehicleModel && <p className={vSubtitle}>{vehicleModel.make} {vehicleModel.model}</p>}
                     </div>
                 </div>
-                <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 bg-[#111111] text-white px-6 py-3 rounded-xl hover:bg-[#222222] transition-colors disabled:opacity-50">
+                <button type="button" onClick={handleSave} disabled={saving} className={`${vPrimaryBtn} self-start`}>
                     {saving ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />}
-                    <span className="font-semibold">Save Config</span>
+                    <span>Save configuration</span>
                 </button>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-8">
+            <div className="flex flex-col xl:flex-row gap-8">
                 {/* Tabs Sidebar */}
-                <div className="w-full lg:w-64 shrink-0 flex flex-row lg:flex-col gap-2 overflow-x-auto pb-4 lg:pb-0">
+                <div className="w-full xl:w-56 shrink-0 flex flex-row xl:flex-col gap-2 overflow-x-auto pb-2 xl:pb-0 -mx-1 px-1">
                     {TABS.map(tab => {
                         const Icon = tab.icon;
                         const isActive = activeTab === tab.id;
                         return (
                             <button
                                 key={tab.id}
+                                type="button"
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-colors whitespace-nowrap ${isActive ? 'bg-[#14141B] text-[#C9A84C] shadow-sm font-bold border border-[#2A2A35]' : 'text-[#FAF8F5]/50 hover:bg-[#14141B]/50'}`}
+                                className={vTabBtn(isActive)}
                             >
-                                <Icon size={20} className={isActive ? 'text-[#C9A84C]' : 'text-[#FAF8F5]/40'} />
-                                <span>{tab.label}</span>
+                                <Icon size={20} className={isActive ? 'text-[#C9A84C]' : 'text-[#FAF8F5]/35'} />
+                                <span className="font-medium">{tab.label}</span>
                             </button>
                         );
                     })}
                 </div>
 
                 {/* Main Content Area */}
-                <div className="flex-1 bg-[#14141B] rounded-[2rem] shadow-sm border border-[#2A2A35] p-8 min-h-[600px]">
+                <div className={`flex-1 ${vPanel} p-6 sm:p-8 min-h-[560px]`}>
 
                     {/* OVERVIEW TAB */}
                     {activeTab === 'overview' && (
                         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            <h2 className="text-2xl font-bold mb-6">Core Identity</h2>
+                            <h2 className={vSectionTitle}>Core identity</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {renderInput(overview, setOverview, 'model_year', 'Model Year', 'number')}
                                 {renderInput(overview, setOverview, 'config_label', 'Config Label (e.g. Representative, Performance)')}
@@ -166,8 +189,8 @@ const VehicleConfigDetail = () => {
                                 {renderInput(overview, setOverview, 'seating_max', 'Max Seating', 'number')}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Config Notes</label>
-                                <textarea value={overview.config_notes || ''} onChange={e => setOverview({ ...overview, config_notes: e.target.value })} rows="3" className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none" placeholder="Internal notes about this config..."></textarea>
+                                <label className={vLabel}>Config notes</label>
+                                <textarea value={overview.config_notes || ''} onChange={e => setOverview({ ...overview, config_notes: e.target.value })} rows={3} className={`${vInput} resize-none min-h-[5rem]`} placeholder="Internal notes about this config..." />
                             </div>
                         </div>
                     )}
@@ -194,8 +217,8 @@ const VehicleConfigDetail = () => {
                                 {renderInput(market, setMarket, 'price_high', 'Price High ($)', 'number')}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Market Notes</label>
-                                <textarea value={market.notes || ''} onChange={e => setMarket({ ...market, notes: e.target.value })} rows="2" className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none" placeholder="Supply constraints pushing used prices up..."></textarea>
+                                <label className={vLabel}>Market notes</label>
+                                <textarea value={market.notes || ''} onChange={e => setMarket({ ...market, notes: e.target.value })} rows={2} className={`${vInput} resize-none min-h-[4.5rem]`} placeholder="Supply constraints pushing used prices up..." />
                             </div>
                         </div>
                     )}
@@ -203,7 +226,7 @@ const VehicleConfigDetail = () => {
                     {/* EVALUATIONS TAB */}
                     {activeTab === 'evaluations' && (
                         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            <h2 className="text-2xl font-bold mb-6">Evaluation Scores (1-5)</h2>
+                            <h2 className={vSectionTitle}>Evaluation scores (1–5)</h2>
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                                 {renderInput(evaluations, setEvaluations, 'space_score', 'Space', 'number')}
                                 {renderInput(evaluations, setEvaluations, 'usability_score', 'Usability', 'number')}
@@ -217,8 +240,8 @@ const VehicleConfigDetail = () => {
                                 {renderInput(evaluations, setEvaluations, 'autolitics_design_index', 'ADI (Design)', 'number')}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Overall Profile Notes</label>
-                                <textarea value={evaluations.overall_profile_notes || ''} onChange={e => setEvaluations({ ...evaluations, overall_profile_notes: e.target.value })} rows="4" className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none" placeholder="Narrative summary describing the vehicle's unique profile..."></textarea>
+                                <label className={vLabel}>Overall profile notes</label>
+                                <textarea value={evaluations.overall_profile_notes || ''} onChange={e => setEvaluations({ ...evaluations, overall_profile_notes: e.target.value })} rows={4} className={`${vInput} resize-none min-h-[8rem]`} placeholder="Narrative summary describing the vehicle's unique profile..." />
                             </div>
                         </div>
                     )}

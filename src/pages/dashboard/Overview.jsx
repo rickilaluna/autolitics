@@ -20,6 +20,7 @@ import { useJourneyStatus } from '../../hooks/useJourneyStatus';
 
 import GlobalJourneyTracker from '../../components/dashboard/GlobalJourneyTracker';
 import WorkspaceActivityModule from '../../components/dashboard/WorkspaceActivityModule';
+import VehiclePreviewModal from '../../components/dashboard/VehiclePreviewModal';
 import OnboardingModal from './OnboardingModal';
 import { getConsideringModelStrings } from '../../lib/vehicleContextStorage';
 
@@ -59,6 +60,7 @@ const Overview = () => {
     const { profile, loading: profileLoading, updateProfile, toggleTaskCompletion } = useClientProfile();
     const [profileSaveError, setProfileSaveError] = useState(null);
     const [showOnboarding, setShowOnboarding] = useState(false);
+    const [previewVehicle, setPreviewVehicle] = useState(null);
 
     const { loading: journeyLoading, currentPhase, nextStep, counts, workspace } = useJourneyStatus({
         profile,
@@ -242,10 +244,15 @@ const Overview = () => {
                             {hasActiveShortlist ? (
                                 <div className="flex flex-wrap gap-2">
                                     {profile.active_shortlist.map((car, idx) => (
-                                        <div key={idx} className="bg-[#FAF8F5] border border-[#0D0D12]/10 px-3 py-1.5 rounded-lg font-medium text-sm flex items-center gap-2 text-[#0D0D12]">
+                                        <button
+                                            key={idx}
+                                            type="button"
+                                            onClick={() => setPreviewVehicle(car)}
+                                            className="bg-[#FAF8F5] border border-[#0D0D12]/10 px-3 py-1.5 rounded-lg font-medium text-sm flex items-center gap-2 text-[#0D0D12] hover:border-[#C9A84C]/50 hover:bg-[#C9A84C]/5 transition-colors cursor-pointer text-left"
+                                        >
                                             <CarFront size={14} className="text-[#0D0D12]/50" />
                                             {car}
-                                        </div>
+                                        </button>
                                     ))}
                                 </div>
                             ) : (
@@ -265,10 +272,15 @@ const Overview = () => {
                                 </p>
                                 <div className="flex flex-wrap gap-2">
                                     {mergedConsideringModels.map((car) => (
-                                        <div key={car} className="bg-white border border-[#C9A84C]/30 px-3 py-1.5 rounded-lg font-medium text-sm flex items-center gap-2 shadow-sm text-[#0D0D12]">
+                                        <button
+                                            key={car}
+                                            type="button"
+                                            onClick={() => setPreviewVehicle(car)}
+                                            className="bg-white border border-[#C9A84C]/30 px-3 py-1.5 rounded-lg font-medium text-sm flex items-center gap-2 shadow-sm text-[#0D0D12] hover:border-[#C9A84C]/60 hover:bg-[#C9A84C]/5 transition-colors cursor-pointer text-left"
+                                        >
                                             <CarFront size={14} className="text-[#C9A84C]" />
                                             {car}
-                                        </div>
+                                        </button>
                                     ))}
                                 </div>
                             </div>
@@ -299,6 +311,9 @@ const Overview = () => {
                         setShowOnboarding(false);
                     }}
                 />
+            )}
+            {previewVehicle && (
+                <VehiclePreviewModal vehicleName={previewVehicle} onClose={() => setPreviewVehicle(null)} />
             )}
             {profileSaveError && (
                 <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] max-w-md w-[calc(100%-2rem)] bg-red-500/15 border border-red-500/40 text-red-800 px-4 py-3 rounded-xl text-sm font-['JetBrains_Mono'] shadow-lg">

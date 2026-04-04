@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Plus, Loader2, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useVehicleModelsCatalog } from '../../hooks/useVehicleModelsCatalog';
 
-const SIZES = ["Compact", "Midsize", "3-Row", "Truck-Based"];
+/** Canonical segment labels (admin dropdown); merged with live DB values in explorer */
+const DEFAULT_SEGMENTS = ['Compact', 'Midsize', '3-Row', 'Truck-Based'];
 const USE_CASES = ["Daily Driver", "Adventure", "Performance"];
 const MSRP_TIERS = ["Under $35k", "$35–50k", "$50–65k", "$60–85k", "$85k+"];
 const POSITIONING = ["Mainstream", "Near-Luxury", "Luxury", "Ultra-Premium"];
@@ -32,6 +34,21 @@ const sizeColors = {
     "Truck-Based": { bg: "#3a2010", text: "#fdba74" },
 };
 
+/** Table / filter chip colors for any `segment` string stored in DB (includes legacy + long-form rows). */
+function resolveSegmentColors(segment) {
+    if (!segment || !String(segment).trim()) return { bg: '#374151', text: '#e5e7eb' };
+    const key = String(segment).trim();
+    if (sizeColors[key]) return sizeColors[key];
+    const t = key.toLowerCase();
+    if (t.includes('full-size') || t.includes('fullsize')) return { bg: '#4c1d95', text: '#e9d5ff' };
+    if (t.includes('midsize') && (t.includes('3-row') || t.includes('3 row'))) return { bg: '#1e3a8a', text: '#bfdbfe' };
+    if (t.includes('midsize')) return sizeColors.Midsize;
+    if (t.includes('compact')) return sizeColors.Compact;
+    if (t.includes('truck') || t.includes('pickup')) return sizeColors['Truck-Based'];
+    if (t.includes('3-row') || t.includes('3 row')) return sizeColors['3-Row'];
+    return { bg: '#292524', text: '#fafaf9' };
+}
+
 const useCaseIcons = { "Daily Driver": "🏙️", "Adventure": "🏔️", "Performance": "⚡" };
 
 const ptColors = {
@@ -42,11 +59,12 @@ const ptColors = {
 
 function Tag({ label, colors }) {
     if (!label) return <span className="text-[#FAF8F5]/50">—</span>;
+    const c = colors || { bg: '#333', text: '#fff' };
     return (
         <span style={{
             display: "inline-block", fontSize: "11px", fontWeight: "600",
             padding: "2px 8px", borderRadius: "3px",
-            background: colors?.bg || '#333', color: colors?.text || '#fff', fontFamily: "system-ui",
+            background: c.bg, color: c.text, fontFamily: "system-ui",
             whiteSpace: "nowrap"
         }}>{label}</span>
     );
@@ -57,24 +75,20 @@ const posOrder = ["Mainstream", "Near-Luxury", "Luxury", "Ultra-Premium"];
 
 export default function VehiclesList() {
     const navigate = useNavigate();
-    const [vehicles, setVehicles] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { models: vehicles, loading } = useVehicleModelsCatalog(supabase);
     const [filters, setFilters] = useState({ size: [], useCase: [], msrp: [], positioning: [], powertrain: [], origin: [] });
     const [sortBy, setSortBy] = useState("name");
     const [search, setSearch] = useState("");
 
-    useEffect(() => {
-        const fetchVehicles = async () => {
-            const { data, error } = await supabase
-                .from('vehicle_models')
-                .select('*');
-            if (!error && data) {
-                setVehicles(data);
-            }
-            setLoading(false);
-        };
-        fetchVehicles();
-    }, []);
+    /** Distinct `vehicle_models.segment` values in the loaded catalog + canonical defaults */
+    const segmentOptions = useMemo(() => {
+        const s = new Set(DEFAULT_SEGMENTS);
+        for (const v of vehicles) {
+            const seg = v.segment?.trim();
+            if (seg) s.add(seg);
+        }
+        return [...s].sort((a, b) => a.localeCompare(b));
+    }, [vehicles]);
 
     const toggle = (key, val) =>
         setFilters(f => ({ ...f, [key]: f[key].includes(val) ? f[key].filter(x => x !== val) : [...f[key], val] }));
@@ -83,9 +97,18 @@ export default function VehiclesList() {
     const clearAll = () => setFilters({ size: [], useCase: [], msrp: [], positioning: [], powertrain: [], origin: [] });
 
     const filtered = useMemo(() => {
+        const searchTokens = search.toLowerCase().split(/\s+/).filter(Boolean);
+        const matchesSearch = (v) => {
+            if (searchTokens.length === 0) return true;
+            const hay = [v.make, v.model, v.segment, v.use_case, v.powertrain_summary, v.positioning, v.origin]
+                .filter(Boolean)
+                .join(' ')
+                .toLowerCase();
+            return searchTokens.every((t) => hay.includes(t));
+        };
         return vehicles
             .filter(v => {
-                if (search && !(v.make + " " + v.model).toLowerCase().includes(search.toLowerCase())) return false;
+                if (!matchesSearch(v)) return false;
                 if (filters.size.length && !filters.size.includes(v.segment)) return false;
                 if (filters.useCase.length && !filters.useCase.includes(v.use_case)) return false;
                 if (filters.msrp.length && !filters.msrp.includes(v.msrp_tier)) return false;
@@ -132,7 +155,7 @@ export default function VehiclesList() {
                     />
 
                     {[
-                        { key: "size", label: "SEGMENT", values: SIZES, accent: "#0f5132" },
+                        { key: "size", label: "SEGMENT", values: segmentOptions, accent: "#0f5132" },
                         { key: "useCase", label: "USE CASE", values: USE_CASES, accent: "#1e3a5f", icons: useCaseIcons },
                         { key: "msrp", label: "MSRP TIER", values: MSRP_TIERS, accent: "#0369a1" },
                         { key: "positioning", label: "POSITIONING", values: POSITIONING, accent: "#7c3aed" },
@@ -206,7 +229,7 @@ export default function VehiclesList() {
                                         onClick={() => navigate(`/admin/vehicles/${v.id}`)}
                                     >
                                         <td style={{ padding: "6px 14px", fontWeight: "600", color: "#f8fafc", whiteSpace: "nowrap", borderBottom: "1px solid #141a26" }}>{v.make} {v.model}</td>
-                                        <td style={{ padding: "6px 14px", borderBottom: "1px solid #141a26" }}><Tag label={v.segment} colors={sizeColors[v.segment]} /></td>
+                                        <td style={{ padding: "6px 14px", borderBottom: "1px solid #141a26" }}><Tag label={v.segment} colors={resolveSegmentColors(v.segment)} /></td>
                                         <td style={{ padding: "6px 14px", fontSize: "12px", fontFamily: "system-ui", color: "#94a3b8", whiteSpace: "nowrap", borderBottom: "1px solid #141a26" }}>
                                             {v.use_case ? <>{useCaseIcons[v.use_case]} {v.use_case}</> : <span className="text-[#FAF8F5]/70">—</span>}
                                         </td>

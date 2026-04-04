@@ -3,6 +3,24 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { ArrowLeft, Save, Loader2, Plus, Trash2, LayoutDashboard, Settings2, Lightbulb, MessageSquare, BarChart3, ListChecks } from 'lucide-react';
 import ImageUploader from '../../components/admin/ImageUploader';
+import {
+    vPage,
+    vTitle,
+    vSubtitle,
+    vLabel,
+    vSectionTitle,
+    vSubsectionTitle,
+    vPanel,
+    vInset,
+    vPrimaryBtn,
+    vSecondaryBtn,
+    vGhostLink,
+    vDestructiveBtn,
+    vTabBtn,
+    vInput,
+    vSelect,
+    vTextarea,
+} from '../../components/admin/adminVehicleUi';
 
 const TABS = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
@@ -187,12 +205,12 @@ const VehicleDetail = () => {
 
     const renderInput = (state, setState, field, label, type = 'text', placeholder = '') => (
         <div>
-            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">{label}</label>
+            <label className={vLabel}>{label}</label>
             <input
                 type={type}
                 value={state[field] || ''}
                 onChange={e => setState({ ...state, [field]: e.target.value })}
-                className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans"
+                className={vInput}
                 placeholder={placeholder}
             />
         </div>
@@ -209,97 +227,116 @@ const VehicleDetail = () => {
         return Math.round((filled / fields.length) * 100);
     };
 
-    if (loading) return <div className="p-8 flex justify-center"><Loader2 className="animate-spin text-[#FAF8F5]/40" size={32} /></div>;
+    if (loading) {
+        return (
+            <div className={`${vPage} flex justify-center py-24`}>
+                <Loader2 className="animate-spin text-[#C9A84C]/60" size={32} />
+            </div>
+        );
+    }
 
     return (
-        <div className="font-['Space_Grotesk'] w-full max-w-[1600px] px-4 md:px-8 mx-auto pb-20 pt-6">
-            <div className="flex items-center gap-4 mb-6">
-                <Link to="/admin/vehicles" className="p-2 rounded-full hover:bg-[#2A2A35] transition-colors">
-                    <ArrowLeft size={24} />
-                </Link>
-                <div>
-                    <h1 className="text-3xl font-bold">{isNew ? 'New Vehicle & Specs' : 'Edit Vehicle & Specs'}</h1>
-                    {formData.make && <p className="text-[#FAF8F5]/50 font-sans mt-1">{formData.make} {formData.model}</p>}
+        <div className={vPage}>
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
+                <div className="flex items-start gap-4">
+                    <Link
+                        to="/admin/vehicles"
+                        className="p-2.5 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5]/80 hover:border-[#C9A84C]/40 hover:text-[#C9A84C] transition-colors shrink-0"
+                    >
+                        <ArrowLeft size={22} />
+                    </Link>
+                    <div>
+                        <p className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 uppercase tracking-widest mb-1">Vehicle library</p>
+                        <h1 className={vTitle}>{isNew ? 'New vehicle & specs' : 'Edit vehicle & specs'}</h1>
+                        {formData.make ? (
+                            <p className={vSubtitle}>
+                                {formData.make} {formData.model}
+                            </p>
+                        ) : (
+                            <p className={vSubtitle}>Define identity, specs, and advisory defaults.</p>
+                        )}
+                    </div>
                 </div>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+            <div className="flex flex-col xl:flex-row gap-8 mb-10">
                 {/* Tabs Sidebar */}
-                <div className="w-full lg:w-64 shrink-0 flex flex-row lg:flex-col gap-2 overflow-x-auto pb-4 lg:pb-0">
+                <div className="w-full xl:w-56 shrink-0 flex flex-row xl:flex-col gap-2 overflow-x-auto pb-2 xl:pb-0 -mx-1 px-1">
                     {TABS.map(tab => {
                         const Icon = tab.icon;
                         const isActive = activeTab === tab.id;
                         return (
                             <button
                                 key={tab.id}
+                                type="button"
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-colors whitespace-nowrap ${isActive ? 'bg-[#14141B] text-[#C9A84C] shadow-sm font-bold border border-[#2A2A35]' : 'text-[#FAF8F5]/50 hover:bg-[#14141B]/50'}`}
+                                className={vTabBtn(isActive)}
                             >
-                                <Icon size={20} className={isActive ? 'text-[#C9A84C]' : 'text-[#FAF8F5]/40'} />
-                                <span>{tab.label}</span>
+                                <Icon size={20} className={isActive ? 'text-[#C9A84C]' : 'text-[#FAF8F5]/35'} />
+                                <span className="font-medium">{tab.label}</span>
                             </button>
                         );
                     })}
                 </div>
 
                 {/* Main Content Area */}
-                <form onSubmit={handleSubmit} className="flex-1 bg-[#14141B] rounded-[2rem] shadow-sm border border-[#2A2A35] p-8 min-h-[600px]">
+                <form onSubmit={handleSubmit} className={`flex-1 ${vPanel} p-6 sm:p-8 min-h-[560px]`}>
                     
                     {/* OVERVIEW TAB */}
                     {activeTab === 'overview' && (
                         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                             <div className="space-y-6">
-                                <h2 className="text-2xl font-bold border-b border-[#2A2A35] pb-2">Core Identity</h2>
+                                <h2 className={vSectionTitle}>Core identity</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Make</label>
-                            <input required type="text" name="make" value={formData.make} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Toyota" />
+                            <label className={vLabel}>Make</label>
+                            <input required type="text" name="make" value={formData.make} onChange={handleChange} className={vInput} placeholder="Toyota" />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Model</label>
-                            <input required type="text" name="model" value={formData.model} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans" placeholder="Grand Highlander Hybrid" />
+                            <label className={vLabel}>Model</label>
+                            <input required type="text" name="model" value={formData.model} onChange={handleChange} className={vInput} placeholder="Grand Highlander Hybrid" />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Segment</label>
-                            <select name="segment" value={formData.segment || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <label className={vLabel}>Segment</label>
+                            <select name="segment" value={formData.segment || ''} onChange={handleChange} className={vSelect}>
                                 <option value="">Select Segment</option>
                                 {["Compact", "Midsize", "3-Row", "Truck-Based"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Use Case</label>
-                            <select name="use_case" value={formData.use_case || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <label className={vLabel}>Use Case</label>
+                            <select name="use_case" value={formData.use_case || ''} onChange={handleChange} className={vSelect}>
                                 <option value="">Select Use Case</option>
                                 {["Daily Driver", "Adventure", "Performance"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">MSRP Tier</label>
-                            <select name="msrp_tier" value={formData.msrp_tier || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <label className={vLabel}>MSRP Tier</label>
+                            <select name="msrp_tier" value={formData.msrp_tier || ''} onChange={handleChange} className={vSelect}>
                                 <option value="">Select Tier</option>
                                 {["Under $35k", "$35–50k", "$50–65k", "$60–85k", "$85k+"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Positioning</label>
-                            <select name="positioning" value={formData.positioning || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <label className={vLabel}>Positioning</label>
+                            <select name="positioning" value={formData.positioning || ''} onChange={handleChange} className={vSelect}>
                                 <option value="">Select Positioning</option>
                                 {["Mainstream", "Near-Luxury", "Luxury", "Ultra-Premium"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Powertrain Summary</label>
-                            <select name="powertrain_summary" value={formData.powertrain_summary || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <label className={vLabel}>Powertrain Summary</label>
+                            <select name="powertrain_summary" value={formData.powertrain_summary || ''} onChange={handleChange} className={vSelect}>
                                 <option value="">Select Powertrain</option>
                                 {["Gas", "Hybrid", "Gas/Hybrid", "Electric", "Gas/Hybrid/Electric", "Gas/Electric"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Origin</label>
-                            <select name="origin" value={formData.origin || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans">
+                            <label className={vLabel}>Origin</label>
+                            <select name="origin" value={formData.origin || ''} onChange={handleChange} className={vSelect}>
                                 <option value="">Select Origin</option>
                                 {["American", "Japanese", "Korean", "European"].map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
@@ -308,26 +345,26 @@ const VehicleDetail = () => {
 
                     <div className="grid grid-cols-1 gap-6 mt-4">
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Generation Label</label>
-                            <input type="text" name="generation_label" value={formData.generation_label || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="1st Gen" />
+                            <label className={vLabel}>Generation Label</label>
+                            <input type="text" name="generation_label" value={formData.generation_label || ''} onChange={handleChange} className={vInput} placeholder="1st Gen" />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="md:col-span-2">
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Generation Notes</label>
-                            <input type="text" name="generation_notes" value={formData.generation_notes || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="Introduced in 2024" />
+                            <label className={vLabel}>Generation Notes</label>
+                            <input type="text" name="generation_notes" value={formData.generation_notes || ''} onChange={handleChange} className={vInput} placeholder="Introduced in 2024" />
                         </div>
                         <div className="md:col-span-2 border-t border-[#2A2A35] pt-6 mt-2">
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Vehicle Summary</label>
-                            <input type="text" name="vehicle_summary" value={formData.vehicle_summary || ''} onChange={handleChange} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans" placeholder="A basic one-sentence summary for deliverables..." />
+                            <label className={vLabel}>Vehicle Summary</label>
+                            <input type="text" name="vehicle_summary" value={formData.vehicle_summary || ''} onChange={handleChange} className={vInput} placeholder="A basic one-sentence summary for deliverables..." />
                         </div>
                         <div className="md:col-span-2">
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Strategic Role Tags (One per line)</label>
+                            <label className={vLabel}>Strategic Role Tags (One per line)</label>
                             <textarea
                                 value={formData._strategic_role_tags_raw !== undefined ? formData._strategic_role_tags_raw : (formData.strategic_role_tags?.join('\n') || '')}
                                 onChange={e => handleArrayChange('strategic_role_tags', e.target.value)}
-                                className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-20"
+                                className={`${vTextarea} h-20`}
                                 placeholder="Family flagship&#10;Hybrid efficiency leader"
                             ></textarea>
                         </div>
@@ -335,7 +372,7 @@ const VehicleDetail = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Exterior Image</label>
+                            <label className={vLabel}>Exterior Image</label>
                             <ImageUploader
                                 currentUrl={formData.default_image_url}
                                 onUploadComplete={(url) => setFormData(prev => ({ ...prev, default_image_url: url }))}
@@ -343,7 +380,7 @@ const VehicleDetail = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Interior Image</label>
+                            <label className={vLabel}>Interior Image</label>
                             <ImageUploader
                                 currentUrl={formData.interior_image_url}
                                 onUploadComplete={(url) => setFormData(prev => ({ ...prev, interior_image_url: url }))}
@@ -352,10 +389,10 @@ const VehicleDetail = () => {
                         </div>
                     </div>
 
-                    <h3 className="text-xl font-bold mt-8 mb-4">Standard Image Set (Auto-Ingested)</h3>
+                    <h3 className={`${vSubsectionTitle} mt-10`}>Standard image set (auto-ingested)</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Front 3/4</label>
+                            <label className={vLabel}>Front 3/4</label>
                             <ImageUploader
                                 currentUrl={formData.photo_url_front_34}
                                 onUploadComplete={(url) => setFormData(prev => ({ ...prev, photo_url_front_34: url }))}
@@ -363,7 +400,7 @@ const VehicleDetail = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Rear 3/4</label>
+                            <label className={vLabel}>Rear 3/4</label>
                             <ImageUploader
                                 currentUrl={formData.photo_url_rear_34}
                                 onUploadComplete={(url) => setFormData(prev => ({ ...prev, photo_url_rear_34: url }))}
@@ -371,7 +408,7 @@ const VehicleDetail = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Side Profile</label>
+                            <label className={vLabel}>Side Profile</label>
                             <ImageUploader
                                 currentUrl={formData.photo_url_side_profile}
                                 onUploadComplete={(url) => setFormData(prev => ({ ...prev, photo_url_side_profile: url }))}
@@ -379,7 +416,7 @@ const VehicleDetail = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Interior Dash</label>
+                            <label className={vLabel}>Interior Dash</label>
                             <ImageUploader
                                 currentUrl={formData.photo_url_interior_dash}
                                 onUploadComplete={(url) => setFormData(prev => ({ ...prev, photo_url_interior_dash: url }))}
@@ -387,7 +424,7 @@ const VehicleDetail = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Cargo Area</label>
+                            <label className={vLabel}>Cargo Area</label>
                             <ImageUploader
                                 currentUrl={formData.photo_url_cargo_area}
                                 onUploadComplete={(url) => setFormData(prev => ({ ...prev, photo_url_cargo_area: url }))}
@@ -403,7 +440,7 @@ const VehicleDetail = () => {
                 {activeTab === 'specs' && (
                     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <div className="space-y-6">
-                            <h2 className="text-2xl font-bold border-b border-[#2A2A35] pb-2">Dimensions & Packaging</h2>
+                            <h2 className={vSectionTitle}>Dimensions & packaging</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {renderInput(dimensions, setDimensions, 'length_in', 'Length (in)', 'number')}
                         {renderInput(dimensions, setDimensions, 'width_in', 'Width (in)', 'number')}
@@ -413,7 +450,7 @@ const VehicleDetail = () => {
                         {renderInput(dimensions, setDimensions, 'towing_capacity_lbs', 'Towing Capacity (lbs)', 'number')}
                         {renderInput(dimensions, setDimensions, 'ground_clearance_in', 'Ground Clearance (in)', 'number')}
                     </div>
-                    <h3 className="text-lg font-bold mt-4">Interior Space</h3>
+                    <h3 className={`${vSubsectionTitle} mt-6`}>Interior space</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {renderInput(dimensions, setDimensions, 'legroom_2nd_row_in', '2nd Row Legroom (in)', 'number')}
                         {renderInput(dimensions, setDimensions, 'legroom_3rd_row_in', '3rd Row Legroom (in)', 'number')}
@@ -424,28 +461,38 @@ const VehicleDetail = () => {
                         
                     {/* SAFETY & RELIABILITY */}
                         <div className="space-y-6">
-                            <h2 className="text-2xl font-bold border-b border-[#2A2A35] pb-2">Safety & Reliability</h2>
+                            <h2 className={vSectionTitle}>Safety & reliability</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Safety */}
-                        <div className="space-y-6">
-                            <h3 className="text-lg font-bold">Safety Ratings</h3>
-                            {renderInput(safety, setSafety, 'nhtsa_overall_stars', 'NHTSA Overall Stars (0-5)', 'number')}
-                            <div>
-                                <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">IIHS Top Safety Pick</label>
-                                <select value={safety.iihs_tsp_status || 'Not Rated'} onChange={e => setSafety({ ...safety, iihs_tsp_status: e.target.value })} className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans">
-                                    <option value="Not Rated">Not Rated</option>
-                                    <option value="TSP+">Top Safety Pick +</option>
-                                    <option value="TSP">Top Safety Pick</option>
-                                    <option value="None">None</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">Standard Safety Notes</label>
-                                <textarea value={safety.standard_safety_notes || ''} onChange={e => setSafety({ ...safety, standard_safety_notes: e.target.value })} rows="2" className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 font-sans resize-none"></textarea>
-                            </div>
+                                <div className={`${vInset} p-6 space-y-5`}>
+                                    <h3 className={vSubsectionTitle}>Safety ratings</h3>
+                                    {renderInput(safety, setSafety, 'nhtsa_overall_stars', 'NHTSA overall stars (0–5)', 'number')}
+                                    <div>
+                                        <label className={vLabel}>IIHS top safety pick</label>
+                                        <select value={safety.iihs_tsp_status || 'Not Rated'} onChange={e => setSafety({ ...safety, iihs_tsp_status: e.target.value })} className={vSelect}>
+                                            <option value="Not Rated">Not Rated</option>
+                                            <option value="TSP+">Top Safety Pick +</option>
+                                            <option value="TSP">Top Safety Pick</option>
+                                            <option value="None">None</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label className={vLabel}>Standard safety notes</label>
+                                        <textarea value={safety.standard_safety_notes || ''} onChange={e => setSafety({ ...safety, standard_safety_notes: e.target.value })} rows={2} className={`${vTextarea} min-h-[4.5rem]`} />
+                                    </div>
+                                </div>
+                                <div className={`${vInset} p-6 space-y-5`}>
+                                    <h3 className={vSubsectionTitle}>Reliability signals</h3>
+                                    {renderInput(reliability, setReliability, 'source_name', 'Source name')}
+                                    {renderInput(reliability, setReliability, 'score_value', 'Score value')}
+                                    {renderInput(reliability, setReliability, 'score_scale', 'Score scale')}
+                                    {renderInput(reliability, setReliability, 'summary_label', 'Summary label')}
+                                    <div>
+                                        <label className={vLabel}>Known issues notes</label>
+                                        <textarea value={reliability.known_issues_notes || ''} onChange={e => setReliability({ ...reliability, known_issues_notes: e.target.value })} rows={3} className={`${vTextarea} min-h-[5rem]`} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
                 )}
                 
@@ -453,8 +500,8 @@ const VehicleDetail = () => {
                 {activeTab === 'evaluations' && (
                     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <div>
-                            <h2 className="text-2xl font-bold mb-2">Autolitics Evaluation Model</h2>
-                            <p className="text-sm text-[#FAF8F5]/50 font-sans mb-6">Rate this model on a 1-5 scale across core dimensions.</p>
+                            <h2 className={`${vSectionTitle} border-0 pb-0 mb-2`}>Autolitics evaluation model</h2>
+                            <p className="text-sm text-[#FAF8F5]/50 font-sans mb-6">Rate this model on a 1–5 scale across core dimensions.</p>
                             
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 {renderInput(evaluations, setEvaluations, 'space_score', 'Space & Packaging (1-5)', 'number')}
@@ -468,13 +515,13 @@ const VehicleDetail = () => {
                             </div>
 
                             <div className="mt-8">
-                                <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Overall Analyst Profile Note</label>
+                                <label className={vLabel}>Overall Analyst Profile Note</label>
                                 <textarea
                                     value={evaluations.overall_profile_notes || ''}
                                     onChange={e => setEvaluations({ ...evaluations, overall_profile_notes: e.target.value })}
-                                    className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-32"
+                                    className={`${vTextarea} min-h-[8rem]`}
                                     placeholder="A synthesized paragraph defining this vehicle's true competence and character..."
-                                ></textarea>
+                                />
                             </div>
                         </div>
                     </div>
@@ -484,28 +531,28 @@ const VehicleDetail = () => {
                 {activeTab === 'intelligence' && (
                     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <div>
-                            <h2 className="text-2xl font-bold mb-2">Base Rationale Defaults</h2>
-                            <p className="text-sm text-[#FAF8F5]/50 font-sans mb-6">These points will auto-populate when adding this model to a new engagement.</p>
+                            <h2 className={`${vSectionTitle} border-0 pb-0 mb-2`}>Base rationale defaults</h2>
+                            <p className="text-sm text-[#FAF8F5]/50 font-sans mb-6">These points auto-populate when adding this model to a new engagement.</p>
                             
                             <div className="space-y-6">
                                 {renderInput(formData, setFormData, 'default_best_for', 'Best For Tag (e.g. Best Overall Fit)')}
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Why It Fits (One per line)</label>
+                                        <label className={vLabel}>Why It Fits (One per line)</label>
                                         <textarea
                                             value={formData._default_why_it_fits_raw !== undefined ? formData._default_why_it_fits_raw : (formData.default_why_it_fits?.join('\n') || '')}
                                             onChange={e => handleArrayChange('default_why_it_fits', e.target.value)}
-                                            className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-32"
+                                            className={`${vTextarea} min-h-[8rem]`}
                                             placeholder="• Incredible space packaging&#10;• Trusted reliability"
                                         ></textarea>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Tradeoffs (One per line)</label>
+                                        <label className={vLabel}>Tradeoffs (One per line)</label>
                                         <textarea
                                             value={formData._default_tradeoffs_raw !== undefined ? formData._default_tradeoffs_raw : (formData.default_tradeoffs?.join('\n') || '')}
                                             onChange={e => handleArrayChange('default_tradeoffs', e.target.value)}
-                                            className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-32"
+                                            className={`${vTextarea} min-h-[8rem]`}
                                             placeholder="• Cabin trails competitors&#10;• Engine note is coarse"
                                         ></textarea>
                                     </div>
@@ -576,35 +623,35 @@ const VehicleDetail = () => {
                 {activeTab === 'guidance' && (
                     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <div>
-                            <h2 className="text-2xl font-bold mb-2">Features & Trim Guidance</h2>
+                            <h2 className={`${vSectionTitle} border-0 pb-0 mb-2`}>Features & trim guidance</h2>
                             <p className="text-sm text-[#FAF8F5]/50 font-sans mb-6">Advice on features, trim levels, and configurations to seek or avoid.</p>
                             
                             <div>
-                                <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-2 font-sans">Trim Guidance Notes</label>
+                                <label className={vLabel}>Trim guidance notes</label>
                                 <textarea
                                     value={formData.default_trim_guidance || ''}
                                     onChange={e => setFormData({ ...formData, default_trim_guidance: e.target.value })}
-                                    className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-sans resize-none h-48"
+                                    className={`${vTextarea} min-h-[12rem]`}
                                     placeholder="Target the XLE Premium for the best value..."
-                                ></textarea>
+                                />
                             </div>
                         </div>
                     </div>
                 )}
 
                 <div className="flex justify-end pt-8 mt-8 border-t border-[#2A2A35]">
-                    <button type="submit" disabled={saving} className="flex items-center gap-2 bg-[#111111] text-white px-8 py-4 rounded-xl hover:bg-[#222222] transition-colors disabled:opacity-50 w-full justify-center">
+                    <button type="submit" disabled={saving} className={`${vPrimaryBtn} px-8 py-3.5 text-base w-full sm:w-auto`}>
                         {saving ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />}
-                        <span className="font-semibold text-lg">Save Vehicle Document</span>
+                        <span>Save vehicle document</span>
                     </button>
                 </div>
             </form>
 
             {/* Right Sidebar - Health Metrics */}
             {!isNew && (
-                <div className="w-full lg:w-64 shrink-0 space-y-6">
-                    <div className="bg-[#14141B] rounded-2xl shadow-sm border border-[#2A2A35] p-6">
-                        <div className="text-xs font-['Space_Mono'] text-[#FAF8F5]/40 mb-4 uppercase tracking-wider">Intelligence Health</div>
+                <div className="w-full xl:w-64 shrink-0 space-y-6">
+                    <div className={`${vPanel} rounded-2xl p-6`}>
+                        <div className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 mb-4 uppercase tracking-wider">Intelligence health</div>
                         <div className="mb-6">
                             <div className="flex justify-between items-end mb-2">
                                 <span className="text-sm font-medium text-[#FAF8F5]/80 font-sans">Data Completeness</span>
@@ -631,8 +678,8 @@ const VehicleDetail = () => {
                         </div>
                     </div>
 
-                    <div className="bg-[#14141B] rounded-2xl shadow-sm border border-[#2A2A35] p-6">
-                        <div className="text-xs font-['Space_Mono'] text-[#FAF8F5]/40 mb-4 uppercase tracking-wider">Engagement Usage</div>
+                    <div className={`${vPanel} rounded-2xl p-6`}>
+                        <div className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 mb-4 uppercase tracking-wider">Engagement usage</div>
                         <div className="text-3xl font-bold text-[#FAF8F5] mb-1">{history.length}</div>
                         <div className="text-sm font-sans text-[#FAF8F5]/50">Times Shortlisted</div>
                     </div>
@@ -641,31 +688,31 @@ const VehicleDetail = () => {
             </div>
 
             {!isNew && (
-                <div className="bg-[#14141B] rounded-[2rem] shadow-sm border border-[#2A2A35] p-8">
-                <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-2xl font-bold">Vehicle Configurations</h2>
-                        <button onClick={handleAddConfig} className="flex items-center gap-2 bg-[#2A2A35] text-[#FAF8F5] px-4 py-2 rounded-xl hover:bg-gray-300 transition-colors">
+                <div className={`${vPanel} p-6 sm:p-8`}>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                        <h2 className={vSectionTitle + ' border-0 pb-0 mb-0'}>Vehicle configurations</h2>
+                        <button type="button" onClick={handleAddConfig} className={vSecondaryBtn}>
                             <Plus size={16} />
-                            <span>Add Config</span>
+                            <span>Add config</span>
                         </button>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                         {configs.length === 0 ? (
-                            <div className="bg-[#14141B] p-8 rounded-[2rem] text-center text-[#FAF8F5]/50 border border-[#2A2A35]">
-                                No configs added yet.
+                            <div className={`${vInset} p-10 text-center text-sm text-[#FAF8F5]/45 font-sans`}>
+                                No configurations yet. Add a model year / variant spine.
                             </div>
                         ) : configs.map(config => (
-                            <div key={config.id} className="bg-[#14141B] rounded-2xl shadow-sm border border-[#2A2A35] p-6 relative group flex justify-between items-center">
+                            <div key={config.id} className={`${vInset} p-5 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4`}>
                                 <div>
-                                    <h3 className="font-bold text-lg">{config.model_year} {config.config_label}</h3>
-                                    <p className="text-sm text-[#FAF8F5]/50 font-sans">{config.powertrain_category}</p>
+                                    <h3 className="font-semibold text-lg text-[#FAF8F5]">{config.model_year} · {config.config_label}</h3>
+                                    <p className="text-sm text-[#FAF8F5]/50 font-sans mt-0.5">{config.powertrain_category || '—'}</p>
                                 </div>
-                                <div className="flex items-center gap-4">
-                                    <Link to={`/admin/vehicles/${id}/configs/${config.id}`} className="px-4 py-2 border rounded-lg hover:bg-[#1A1A24] font-medium text-sm transition-colors">
-                                        Edit Details
+                                <div className="flex items-center gap-3 shrink-0">
+                                    <Link to={`/admin/vehicles/${id}/configs/${config.id}`} className={vGhostLink}>
+                                        Edit details
                                     </Link>
-                                    <button onClick={() => handleDeleteConfig(config.id)} className="text-red-500 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                    <button type="button" onClick={() => handleDeleteConfig(config.id)} className={vDestructiveBtn} aria-label="Delete configuration">
                                         <Trash2 size={20} />
                                     </button>
                                 </div>
@@ -673,30 +720,32 @@ const VehicleDetail = () => {
                         ))}
                     </div>
 
-                    <div className="flex justify-between items-center mb-4 mt-12">
-                        <h2 className="text-2xl font-bold">Powertrain Variations</h2>
-                        <button onClick={handleAddPowertrain} className="flex items-center gap-2 bg-[#2A2A35] text-[#FAF8F5] px-4 py-2 rounded-xl hover:bg-gray-300 transition-colors">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mt-12 mb-6">
+                        <h2 className={vSectionTitle + ' border-0 pb-0 mb-0'}>Powertrain variations</h2>
+                        <button type="button" onClick={handleAddPowertrain} className={vSecondaryBtn}>
                             <Plus size={16} />
-                            <span>Add Powertrain</span>
+                            <span>Add powertrain</span>
                         </button>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                         {powertrains.length === 0 ? (
-                            <div className="bg-[#14141B] p-8 rounded-[2rem] text-center text-[#FAF8F5]/50 border border-[#2A2A35]">
-                                No powertrains added yet.
+                            <div className={`${vInset} p-10 text-center text-sm text-[#FAF8F5]/45 font-sans`}>
+                                No powertrains yet. Add motor options for this model row.
                             </div>
                         ) : powertrains.map(pt => (
-                            <div key={pt.id} className="bg-[#14141B] rounded-2xl shadow-sm border border-[#2A2A35] p-6 relative group flex justify-between items-center">
+                            <div key={pt.id} className={`${vInset} p-5 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4`}>
                                 <div>
-                                    <h3 className="font-bold text-lg">{pt.name}</h3>
-                                    <p className="text-sm text-[#FAF8F5]/50 font-sans">{pt.engine_description} • {pt.horsepower_hp} HP</p>
+                                    <h3 className="font-semibold text-lg text-[#FAF8F5]">{pt.name}</h3>
+                                    <p className="text-sm text-[#FAF8F5]/50 font-sans mt-0.5">
+                                        {[pt.engine_description, pt.horsepower_hp ? `${pt.horsepower_hp} hp` : null].filter(Boolean).join(' · ') || '—'}
+                                    </p>
                                 </div>
-                                <div className="flex items-center gap-4">
-                                    <Link to={`/admin/vehicles/${id}/powertrains/${pt.id}`} className="px-4 py-2 border rounded-lg hover:bg-[#1A1A24] font-medium text-sm transition-colors">
-                                        Edit Details
+                                <div className="flex items-center gap-3 shrink-0">
+                                    <Link to={`/admin/vehicles/${id}/powertrains/${pt.id}`} className={vGhostLink}>
+                                        Edit details
                                     </Link>
-                                    <button onClick={() => handleDeletePowertrain(pt.id)} className="text-red-500 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                    <button type="button" onClick={() => handleDeletePowertrain(pt.id)} className={vDestructiveBtn} aria-label="Delete powertrain">
                                         <Trash2 size={20} />
                                     </button>
                                 </div>

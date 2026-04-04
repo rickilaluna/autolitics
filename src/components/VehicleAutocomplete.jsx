@@ -1,16 +1,59 @@
 import React, { useState, useMemo, useRef, useEffect, useCallback, useId } from 'react';
+import { supabase } from '../lib/supabase';
+import { fetchAllVehicleModels } from '../lib/vehicleCatalogApi';
 
-import vehiclesData from '../data/autolitics_vehicle_autocomplete.json';
+import staticVehiclesData from '../data/autolitics_vehicle_autocomplete.json';
 
 const MAX_SUGGESTIONS = 8;
 const MIN_CHARS = 2;
 
-/** Normalize for matching: lowercase, collapse spaces */
+// ---------------------------------------------------------------------------
+// Module-level Supabase cache — shared across all instances, loaded once.
+// ---------------------------------------------------------------------------
+let _supabaseModelsCache = null;
+let _supabaseModelsPromise = null;
+
+function loadSupabaseModels() {
+    if (_supabaseModelsCache) return Promise.resolve(_supabaseModelsCache);
+    if (_supabaseModelsPromise) return _supabaseModelsPromise;
+    _supabaseModelsPromise = fetchAllVehicleModels(supabase, 'id, make, model, segment')
+        .then((rows) => {
+            // De-duplicate by make+model → one entry per model, collect available info
+            const seen = new Map();
+            for (const r of rows) {
+                const key = `${r.make}|${r.model}`;
+                if (!seen.has(key)) {
+                    seen.set(key, {
+                        id: r.id,
+                        brand: r.make,
+                        model: r.model,
+                        display_name: `${r.make} ${r.model}`,
+                        aliases: [r.model],
+                        segment: r.segment || '',
+                        is_active: true,
+                        _fromSupabase: true,
+                    });
+                }
+            }
+            _supabaseModelsCache = [...seen.values()];
+            return _supabaseModelsCache;
+        })
+        .catch((err) => {
+            console.warn('[VehicleAutocomplete] Supabase models load failed, using static JSON', err);
+            _supabaseModelsPromise = null;
+            return [];
+        });
+    return _supabaseModelsPromise;
+}
+
+// ---------------------------------------------------------------------------
+// Scoring / search helpers
+// ---------------------------------------------------------------------------
+
 function normalize(s) {
     return (s || '').toLowerCase().replace(/\s+/g, ' ').trim();
 }
 
-/** Search across display_name and all aliases. Rank: prefix match highest, then substring. */
 function scoreVehicle(vehicle, q) {
     const nq = normalize(q);
     if (!nq) return 0;
@@ -24,6 +67,11 @@ function scoreVehicle(vehicle, q) {
         if (s.startsWith(nq)) best = Math.max(best, 1000);
         else if (nq.startsWith(s)) best = Math.max(best, 700);
         else if (s.includes(nq)) best = Math.max(best, 100);
+        // Also check all individual tokens match (handles "kia telluride" matching "Kia Telluride")
+        else {
+            const parts = nq.split(' ').filter(Boolean);
+            if (parts.length > 1 && parts.every(p => s.includes(p))) best = Math.max(best, 80);
+        }
     }
     const b = normalize(vehicle.brand);
     if (b.startsWith(nq)) best = Math.max(best, 500);
@@ -43,11 +91,9 @@ function searchVehicles(vehicles, query) {
         .map(({ vehicle }) => vehicle);
 }
 
-/** Labels from Decision Engine / worksheets / profile — shown when query is short or as extra matches */
 function contextStringsMatching(contextRecent, query) {
     if (!contextRecent?.length) return [];
     const q = normalize(query);
-    // Filter: only labels that look like real vehicle names (≥ 2 words, ≥ 5 chars)
     const uniq = [...new Set(
         contextRecent
             .map((s) => (s || '').trim())
@@ -82,7 +128,30 @@ function mergeCatalogAndContext(vehicles, query, contextRecent) {
     return [...fromContext, ...catalog].slice(0, MAX_SUGGESTIONS + 4);
 }
 
-/** Find start index in original text that corresponds to normalized match start */
+// ---------------------------------------------------------------------------
+// Merge static JSON + Supabase models, de-duped by normalized display_name
+// ---------------------------------------------------------------------------
+
+function mergeVehicleSources(staticList, supabaseList) {
+    const map = new Map();
+    // Static entries first (they may have richer aliases)
+    for (const v of staticList) {
+        map.set(normalize(v.display_name), v);
+    }
+    // Supabase entries fill in anything the static list doesn't have
+    for (const v of supabaseList) {
+        const key = normalize(v.display_name);
+        if (!map.has(key)) {
+            map.set(key, v);
+        }
+    }
+    return [...map.values()];
+}
+
+// ---------------------------------------------------------------------------
+// Bold match helper
+// ---------------------------------------------------------------------------
+
 function findMatchRange(text, query) {
     const nq = normalize(query);
     const nt = normalize(text);
@@ -111,7 +180,6 @@ function findMatchRange(text, query) {
     return { start: origStart - 1, end: origEnd };
 }
 
-/** Wrap matched substring in bold for display */
 function boldMatch(text, query) {
     const range = findMatchRange(text, query);
     if (!range) return text;
@@ -127,6 +195,10 @@ function boldMatch(text, query) {
     );
 }
 
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
 const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
     {
         value = '',
@@ -136,7 +208,6 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
         placeholder = 'Enter vehicle name',
         helperText = 'Start typing to search supported models, or enter a custom vehicle manually.',
         className = '',
-        /** Recent / cross-tool labels (Decision Engine, worksheets, etc.) */
         contextRecent = [],
         id,
         'aria-label': ariaLabel,
@@ -147,11 +218,23 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
     const { onKeyDown: onKeyDownProp, ...restInputProps } = inputProps;
     const [open, setOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
+    const [supabaseModels, setSupabaseModels] = useState(_supabaseModelsCache || []);
     const listRef = useRef(null);
     const wrapperRef = useRef(null);
     const listboxId = useId();
 
-    const vehicles = useMemo(() => vehiclesData, []);
+    // Kick off Supabase load on mount (module-level cache means this is near-instant after first load)
+    useEffect(() => {
+        loadSupabaseModels().then((models) => {
+            if (models.length) setSupabaseModels(models);
+        });
+    }, []);
+
+    const vehicles = useMemo(
+        () => mergeVehicleSources(staticVehiclesData, supabaseModels),
+        [supabaseModels]
+    );
+
     const suggestions = useMemo(
         () => mergeCatalogAndContext(vehicles, value, contextRecent),
         [vehicles, value, contextRecent]
@@ -288,7 +371,11 @@ const VehicleAutocomplete = React.forwardRef(function VehicleAutocomplete(
                                 {boldMatch(vehicle.display_name, value)}
                             </span>
                             <span className="block text-xs text-[#FAF8F5]/50 mt-0.5">
-                                {vehicle._fromContext ? 'Decision Engine · worksheets · saved' : vehicle.brand}
+                                {vehicle._fromContext
+                                    ? 'Decision Engine \u00b7 worksheets \u00b7 saved'
+                                    : vehicle._fromSupabase
+                                    ? `${vehicle.segment || vehicle.brand}`
+                                    : vehicle.brand}
                             </span>
                         </li>
                     ))}

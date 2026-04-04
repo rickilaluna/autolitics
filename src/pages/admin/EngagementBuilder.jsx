@@ -4,6 +4,8 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { ArrowLeft, Save, Plus, Loader2, Trash2, Eye, ChevronRight, ChevronLeft, Car, Calendar, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { generateSnapshot } from '../../lib/fitEngine';
+import { useVehicleConfigCatalog } from '../../hooks/useVehicleConfigCatalog';
+import { VehicleConfigCombobox } from '../../components/vehicles';
 
 const STEPS = [
     { id: 'intake', label: '1. Intake & Weights' },
@@ -27,8 +29,12 @@ const EngagementBuilder = () => {
     const [shortlist, setShortlist] = useState([]);
     const [testDrives, setTestDrives] = useState([]);
 
-    // For adding vehicles
-    const [availableConfigs, setAvailableConfigs] = useState([]);
+    const {
+        profiles: availableConfigs,
+        loading: catalogLoading,
+        reload: reloadVehicleCatalog,
+    } = useVehicleConfigCatalog(supabase);
+
     const [selectedConfigId, setSelectedConfigId] = useState('');
 
     useEffect(() => {
@@ -36,6 +42,7 @@ const EngagementBuilder = () => {
     }, [id]);
 
     const fetchData = async () => {
+        setLoading(true);
         // Fetch engagement
         const { data: eData } = await supabase.from('engagements').select('*').eq('id', id).single();
         if (eData) {
@@ -63,12 +70,11 @@ const EngagementBuilder = () => {
             const enrichedShortlist = await Promise.all(sData.map(async (item) => {
                 const config = cData?.find(c => c.vehicle_config_id === item.vehicle_config_id);
                 let powertrains = [];
-                if (config) {
+                if (config?.vehicle_model_id) {
                     const { data: pts } = await supabase
                         .from('powertrain_specs')
-                        .select('*, vehicle_models!inner(make, model)')
-                        .eq('vehicle_models.make', config.make)
-                        .eq('vehicle_models.model', config.model);
+                        .select('*')
+                        .eq('vehicle_model_id', config.vehicle_model_id);
                     powertrains = pts || [];
                 }
                 return { ...item, _config: { ...config, powertrains } };
@@ -77,10 +83,6 @@ const EngagementBuilder = () => {
         } else {
             setShortlist([]);
         }
-
-        // Fetch all configs for dropdown
-        const { data: configData } = await supabase.from('v_vehicle_config_profile').select('*').order('make');
-        if (configData) setAvailableConfigs(configData);
 
         setLoading(false);
     };
@@ -107,12 +109,11 @@ const EngagementBuilder = () => {
         const { data } = await supabase.from('shortlist_items').insert([payload]).select().single();
         if (data) {
             let powertrains = [];
-            if (config) {
+            if (config?.vehicle_model_id) {
                 const { data: pts } = await supabase
                     .from('powertrain_specs')
-                    .select('*, vehicle_models!inner(make, model)')
-                    .eq('vehicle_models.make', config.make)
-                    .eq('vehicle_models.model', config.model);
+                    .select('*')
+                    .eq('vehicle_model_id', config.vehicle_model_id);
                 powertrains = pts || [];
             }
             setShortlist([...shortlist, { ...data, _config: { ...config, powertrains } }]);
@@ -196,7 +197,13 @@ const EngagementBuilder = () => {
         setSaving(false);
     };
 
-    if (loading) return <div className="p-8 flex justify-center"><Loader2 className="animate-spin text-[#FAF8F5]/40" size={32} /></div>;
+    if (loading || catalogLoading) {
+        return (
+            <div className="p-8 flex justify-center">
+                <Loader2 className="animate-spin text-[#FAF8F5]/40" size={32} />
+            </div>
+        );
+    }
 
     const currentStepIndex = STEPS.findIndex(s => s.id === currentStep);
 
@@ -392,17 +399,18 @@ const EngagementBuilder = () => {
                     <div className="space-y-8 animate-in fade-in duration-300">
                         <div className="flex items-center justify-between border-b pb-4">
                             <h2 className="text-2xl font-bold text-[#FAF8F5]">Select Vehicles</h2>
-                            <div className="flex gap-2">
-                                <select value={selectedConfigId} onChange={e => setSelectedConfigId(e.target.value)} className="studio-touch-input px-4 py-2 rounded-xl border border-[#2A2A35] bg-[#1A1A24] font-sans text-sm focus:bg-[#14141B] min-w-[300px] text-[#FAF8F5]">
-                                    <option value="">-- Add Vehicle to Shortlist --</option>
-                                    {availableConfigs.filter(c => {
+                            <div className="flex flex-wrap items-end gap-2">
+                                <VehicleConfigCombobox
+                                    configs={availableConfigs}
+                                    value={selectedConfigId}
+                                    onChange={setSelectedConfigId}
+                                    placeholder="Search make, model, year, config…"
+                                    segmentFilter={(c) => {
                                         const desired = engagement?.desired_segments || [];
-                                        if (desired.length === 0) return true;
-                                        return desired.includes(c.segment);
-                                    }).map(c => (
-                                        <option key={c.vehicle_config_id} value={c.vehicle_config_id}>{c.make} {c.model} ({c.model_year} {c.config_label})</option>
-                                    ))}
-                                </select>
+                                        if (!desired.length) return true;
+                                        return c.segment != null && desired.includes(c.segment);
+                                    }}
+                                />
                                 <button onClick={handleAddVehicle} disabled={!selectedConfigId} className="bg-[#111111] text-white p-2 px-4 rounded-xl hover:bg-[#222222] disabled:opacity-50 font-bold flex items-center gap-2">
                                     <Plus size={16} /> Add
                                 </button>
@@ -548,15 +556,7 @@ const EngagementBuilder = () => {
                                                                     default_trim_guidance: item.trim_guidance_notes || null
                                                                 }).eq('id', item.vehicle_config_id);
                                                                 alert('Success! Default config rationale updated.');
-                                                                
-                                                                // Update local state config so it carries over
-                                                                setAvailableConfigs(prev => prev.map(c => c.vehicle_config_id === item.vehicle_config_id ? {
-                                                                    ...c,
-                                                                    default_best_for: item.best_for_tag || null,
-                                                                    default_why_it_fits: item.why_it_fits_bullets || [],
-                                                                    default_tradeoffs: item.tradeoffs_bullets || [],
-                                                                    default_trim_guidance: item.trim_guidance_notes || null
-                                                                } : c));
+                                                                await reloadVehicleCatalog({ silent: true });
                                                             } catch (err) {
                                                                 console.error(err);
                                                                 alert('Error saving defaults');

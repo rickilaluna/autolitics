@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
+import {
+    vPageNarrow,
+    vTitle,
+    vSubtitle,
+    vLabel,
+    vSectionTitle,
+    vPanel,
+    vPrimaryBtn,
+    vInput,
+} from '../../components/admin/adminVehicleUi';
 
 const PowertrainDetail = () => {
     const { modelId, ptId } = useParams();
@@ -72,41 +82,51 @@ const PowertrainDetail = () => {
 
     const renderInput = (state, setState, field, label, type = 'text', placeholder = '', required = false) => (
         <div>
-            <label className="block text-sm font-medium text-[#FAF8F5]/80 mb-1 font-sans">{label}</label>
+            <label className={vLabel}>{label}</label>
             <input
                 required={required}
                 type={type}
                 value={state[field] || ''}
                 onChange={e => setState({ ...state, [field]: e.target.value })}
-                className="studio-touch-input w-full px-4 py-3 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5] focus:bg-[#14141B] focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 focus:border-[#C9A84C] transition-all font-sans"
+                className={vInput}
                 placeholder={placeholder}
             />
         </div>
     );
 
-    if (loading) return <div className="p-8 flex justify-center"><Loader2 className="animate-spin text-[#FAF8F5]/40" size={32} /></div>;
+    if (loading) {
+        return (
+            <div className={`${vPageNarrow} flex justify-center py-24`}>
+                <Loader2 className="animate-spin text-[#C9A84C]/60" size={32} />
+            </div>
+        );
+    }
 
     return (
-        <div className="font-['Space_Grotesk'] max-w-4xl mx-auto pb-20">
-            <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
-                    <Link to={`/admin/vehicles/${modelId}`} className="p-2 rounded-full hover:bg-[#2A2A35] transition-colors">
-                        <ArrowLeft size={24} />
+        <div className={vPageNarrow}>
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-8">
+                <div className="flex items-start gap-4">
+                    <Link
+                        to={`/admin/vehicles/${modelId}`}
+                        className="p-2.5 rounded-xl border border-[#2A2A35] bg-[#1A1A24] text-[#FAF8F5]/80 hover:border-[#C9A84C]/40 hover:text-[#C9A84C] transition-colors shrink-0"
+                    >
+                        <ArrowLeft size={22} />
                     </Link>
                     <div>
-                        <h1 className="text-3xl font-bold">{isNew ? 'New Powertrain' : 'Edit Powertrain'}</h1>
-                        {vehicleModel && <p className="text-[#FAF8F5]/50 font-sans mt-1">{vehicleModel.make} {vehicleModel.model}</p>}
+                        <p className="text-xs font-['JetBrains_Mono'] text-[#FAF8F5]/40 uppercase tracking-widest mb-1">Powertrain</p>
+                        <h1 className={vTitle}>{isNew ? 'New powertrain' : 'Edit powertrain'}</h1>
+                        {vehicleModel && <p className={vSubtitle}>{vehicleModel.make} {vehicleModel.model}</p>}
                     </div>
                 </div>
-                <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 bg-[#111111] text-white px-6 py-3 rounded-xl hover:bg-[#222222] transition-colors disabled:opacity-50">
+                <button type="button" onClick={handleSave} disabled={saving} className={`${vPrimaryBtn} shrink-0`}>
                     {saving ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />}
-                    <span className="font-semibold">Save Powertrain</span>
+                    <span>Save powertrain</span>
                 </button>
             </div>
 
-            <div className="bg-[#14141B] rounded-[2rem] shadow-sm border border-[#2A2A35] p-8 space-y-8">
+            <div className={`${vPanel} p-6 sm:p-8 space-y-10`}>
                 <div>
-                    <h2 className="text-2xl font-bold mb-6">Core Identity</h2>
+                    <h2 className={vSectionTitle}>Core identity</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {renderInput(powertrain, setPowertrain, 'name', 'Powertrain Name', 'text', 'e.g., Hybrid MAX', true)}
                         {renderInput(powertrain, setPowertrain, 'engine_description', 'Engine Description', 'text', '2.4L Turbo Hybrid')}
@@ -115,7 +135,7 @@ const PowertrainDetail = () => {
                 </div>
 
                 <div className="border-t border-[#2A2A35] pt-8">
-                    <h2 className="text-2xl font-bold mb-6">Output</h2>
+                    <h2 className={vSectionTitle}>Output</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {renderInput(powertrain, setPowertrain, 'horsepower_hp', 'Horsepower (HP)', 'number')}
                         {renderInput(powertrain, setPowertrain, 'torque_lb_ft', 'Torque (lb-ft)', 'number')}
@@ -124,7 +144,7 @@ const PowertrainDetail = () => {
                 </div>
 
                 <div className="border-t border-[#2A2A35] pt-8">
-                    <h2 className="text-2xl font-bold mb-6">Efficiency</h2>
+                    <h2 className={vSectionTitle}>Efficiency</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {renderInput(powertrain, setPowertrain, 'city_mpg', 'City MPG', 'number')}
                         {renderInput(powertrain, setPowertrain, 'highway_mpg', 'Highway MPG', 'number')}

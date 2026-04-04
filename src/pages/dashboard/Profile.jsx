@@ -424,6 +424,7 @@ const Profile = () => {
                         {profile.active_shortlist.map((car, idx) => (
                             <button
                                 key={idx}
+                                type="button"
                                 onClick={() => setPreviewVehicle(car)}
                                 className="bg-[#FAF8F5] border border-[#0D0D12]/10 px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 hover:border-[#C9A84C]/50 hover:bg-[#C9A84C]/5 transition-colors cursor-pointer"
                             >
