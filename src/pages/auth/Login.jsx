@@ -111,9 +111,17 @@ const Login = () => {
                         </div>
 
                         <div>
-                            <label className="block text-sm text-[#FAF8F5]/60 mb-2 font-['JetBrains_Mono']" htmlFor="password">
-                                Password
-                            </label>
+                            <div className="flex items-center justify-between mb-2">
+                                <label className="block text-sm text-[#FAF8F5]/60 font-['JetBrains_Mono']" htmlFor="password">
+                                    Password
+                                </label>
+                                <Link
+                                    to="/forgot-password"
+                                    className="text-xs text-[#C9A84C] hover:underline font-['JetBrains_Mono']"
+                                >
+                                    Forgot password?
+                                </Link>
+                            </div>
                             <input
                                 id="password"
                                 type="password"

@@ -28,6 +28,8 @@ import BuildInfo from './pages/BuildInfo';
 // Auth Pages
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
 
 // Dashboard Pages
 import DashboardLayout from './components/dashboard/DashboardLayout';
@@ -39,6 +41,10 @@ import TestDriveFeedbackForm from './pages/dashboard/TestDriveFeedbackForm';
 import DealerOfferReviewForm from './pages/dashboard/DealerOfferReviewForm';
 import Resources from './pages/dashboard/Resources';
 import Profile from './pages/dashboard/Profile';
+import StrategicCarBuyerGuide from './pages/dashboard/StrategicCarBuyerGuide';
+import GuideProductGate from './components/dashboard/GuideProductGate';
+import BuyerMission from './pages/dashboard/BuyerMission';
+import { GUIDE_TOOL_CONTEXTS } from './data/strategicCarBuyerGuide';
 
 // Admin Pages
 import AdminRoute from './components/admin/AdminRoute';
@@ -85,6 +91,8 @@ function App() {
                     {/* Auth Routes */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/start/success" element={<SuccessState />} />
                     <Route path="/deliverable/:id" element={<DeliverableView />} />
 
@@ -98,6 +106,70 @@ function App() {
                             <Route path="my-search/test-drive" element={<TestDriveFeedbackForm />} />
                             <Route path="my-search/offer" element={<DealerOfferReviewForm />} />
                             <Route path="resources" element={<Resources />} />
+                            <Route
+                                path="strategic-car-buyer-guide"
+                                element={
+                                    <GuideProductGate>
+                                        <StrategicCarBuyerGuide />
+                                    </GuideProductGate>
+                                }
+                            />
+                            <Route
+                                path="strategic-car-buyer-guide/framework"
+                                element={
+                                    <GuideProductGate>
+                                        <BuyingFramework guideContext={GUIDE_TOOL_CONTEXTS.framework} />
+                                    </GuideProductGate>
+                                }
+                            />
+                            <Route
+                                path="strategic-car-buyer-guide/playbook"
+                                element={
+                                    <GuideProductGate>
+                                        <Playbook guideContext={GUIDE_TOOL_CONTEXTS.playbook} />
+                                    </GuideProductGate>
+                                }
+                            />
+                            <Route
+                                path="strategic-car-buyer-guide/decision-engine"
+                                element={
+                                    <GuideProductGate>
+                                        <VehicleComparisonMatrix guideContext={GUIDE_TOOL_CONTEXTS.decisionEngine} />
+                                    </GuideProductGate>
+                                }
+                            />
+                            <Route
+                                path="strategic-car-buyer-guide/scorecard"
+                                element={
+                                    <GuideProductGate>
+                                        <Scorecard guideContext={GUIDE_TOOL_CONTEXTS.scorecard} />
+                                    </GuideProductGate>
+                                }
+                            />
+                            <Route
+                                path="strategic-car-buyer-guide/out-the-door-calculator"
+                                element={
+                                    <GuideProductGate>
+                                        <OTDCalculator guideContext={GUIDE_TOOL_CONTEXTS.otdCalculator} />
+                                    </GuideProductGate>
+                                }
+                            />
+                            <Route
+                                path="strategic-car-buyer-guide/dealer-offer-comparison"
+                                element={
+                                    <GuideProductGate>
+                                        <DealerComparison guideContext={GUIDE_TOOL_CONTEXTS.offerComparison} />
+                                    </GuideProductGate>
+                                }
+                            />
+                            <Route
+                                path="buyer-mission"
+                                element={
+                                    <GuideProductGate>
+                                        <BuyerMission />
+                                    </GuideProductGate>
+                                }
+                            />
                             <Route path="profile" element={<Profile />} />
                         </Route>
                     </Route>
