@@ -16,3 +16,4 @@ dist/
 # Logs & temp
 *.log
 tmp/
+.vercel

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { getWorkspaceActivity } from '../lib/vehicleContextStorage';
+import { BUYER_MISSION_PATH } from '../data/strategicCarBuyerGuide';
 
 /**
  * Fetches client journey milestones: deliverables, listings, test drives, offers.
@@ -96,9 +97,10 @@ export function useJourneyStatus({ profile, hasPurchasedAdvisory }) {
     let nextStep = null;
     if (!isProfileComplete) {
         nextStep = {
-            label: 'Complete Your Search Profile',
-            description: 'Tell us about your timeline, goals, and target vehicles so we can personalize your experience.',
-            action: 'onboarding',
+            label: 'Define Your Buying Goals',
+            description: 'Complete the Buyer Mission worksheet so the rest of the guide has your priorities, budget posture, timeline, and shortlist context.',
+            link: BUYER_MISSION_PATH,
+            linkLabel: 'Define My Goals',
             resourcePhase: 'strategy',
         };
     } else if (
@@ -144,4 +146,3 @@ export function useJourneyStatus({ profile, hasPurchasedAdvisory }) {
 
     return { loading, counts, workspace, currentPhase, nextStep };
 }
-

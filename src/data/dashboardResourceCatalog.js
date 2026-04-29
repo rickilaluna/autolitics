@@ -11,6 +11,7 @@ import {
     Calculator,
     LayoutGrid,
 } from 'lucide-react';
+import { GUIDE_TOOL_PATHS } from './strategicCarBuyerGuide';
 
 /** @type {Record<string, { label: string, description: string, items: Array<{ id: string, title: string, description: string, to: string, icon: typeof ShieldCheck }> }>} */
 export const PHASE_RESOURCES = {
@@ -23,6 +24,7 @@ export const PHASE_RESOURCES = {
                 title: 'Car Buying Framework',
                 description: 'A four-stage decision model that shifts power from the dealership to the buyer.',
                 to: '/resources/buying-framework',
+                guideTo: GUIDE_TOOL_PATHS.framework,
                 icon: ShieldCheck,
             },
             {
@@ -30,6 +32,7 @@ export const PHASE_RESOURCES = {
                 title: 'The Autolitics Playbook',
                 description: 'Navigate dealerships, evaluate vehicles, understand pricing, and structure a smart deal.',
                 to: '/resources/playbook',
+                guideTo: GUIDE_TOOL_PATHS.playbook,
                 icon: BookOpen,
             },
         ],
@@ -43,6 +46,7 @@ export const PHASE_RESOURCES = {
                 title: 'Vehicle Evaluation Scorecard',
                 description: 'A printable worksheet for scoring vehicles during test drives across six categories.',
                 to: '/resources/scorecard',
+                guideTo: GUIDE_TOOL_PATHS.scorecard,
                 icon: FileSpreadsheet,
             },
             {
@@ -50,6 +54,7 @@ export const PHASE_RESOURCES = {
                 title: 'Vehicle Decision Engine',
                 description: 'Compare vehicles digitally, score across 8 dimensions, and get a visual recommendation.',
                 to: '/resources/vehicle-comparison-matrix',
+                guideTo: GUIDE_TOOL_PATHS.decisionEngine,
                 icon: LayoutGrid,
             },
         ],
@@ -63,6 +68,7 @@ export const PHASE_RESOURCES = {
                 title: 'Out-the-Door Price Checker',
                 description: 'See what a clean total should look like and spot hidden extras in a dealer quote.',
                 to: '/resources/out-the-door-calculator',
+                guideTo: GUIDE_TOOL_PATHS.otdCalculator,
                 icon: Calculator,
             },
             {
@@ -70,6 +76,7 @@ export const PHASE_RESOURCES = {
                 title: 'Dealer Offer Comparison',
                 description: 'Compare quotes from up to four dealerships side-by-side to find the true lowest cost.',
                 to: '/resources/dealer-offer-comparison',
+                guideTo: GUIDE_TOOL_PATHS.offerComparison,
                 icon: FileText,
             },
         ],
