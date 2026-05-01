@@ -4,6 +4,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Search, Gauge, FileText, Handshake, ArrowRight } from 'lucide-react';
 import ResourcePageShell from '../../components/ResourcePageShell';
+import { usePurchases } from '../../hooks/usePurchases';
+import { GUIDE_TOOL_PATHS } from '../../data/strategicCarBuyerGuide';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,10 +72,15 @@ const stages = [
     }
 ];
 
-export default function BuyingFramework() {
+export default function BuyingFramework({ guideContext = null }) {
     const containerRef = useRef(null);
+    const { hasPurchasedAdvisory } = usePurchases();
 
     useEffect(() => {
+        // When embedded in dashboard, ScrollTrigger watches wrong container
+        // Use simple entrance animations instead
+        const isEmbedded = Boolean(guideContext);
+
         const ctx = gsap.context(() => {
             gsap.fromTo(
                 '.fw-fade-up',
@@ -85,20 +92,22 @@ export default function BuyingFramework() {
                 { opacity: 0, y: 60 },
                 {
                     opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
-                    scrollTrigger: { trigger: '.stages-grid', start: 'top 80%' }
+                    delay: isEmbedded ? 0.3 : 0,
+                    ...(isEmbedded ? {} : { scrollTrigger: { trigger: '.stages-grid', start: 'top 80%' } })
                 }
             );
             gsap.fromTo(
-                '.power-bar',
-                { scaleX: 0 },
+                '.power-line',
+                { pathLength: 0 },
                 {
-                    scaleX: 1, duration: 1.5, ease: 'power2.out',
-                    scrollTrigger: { trigger: '.power-section', start: 'top 75%' }
+                    pathLength: 1, duration: 1.5, ease: 'power2.out',
+                    delay: isEmbedded ? 0.6 : 0,
+                    ...(isEmbedded ? {} : { scrollTrigger: { trigger: '.power-section', start: 'top 75%' } })
                 }
             );
         }, containerRef);
         return () => ctx.revert();
-    }, []);
+    }, [guideContext]);
 
     return (
         <ResourcePageShell
@@ -107,6 +116,7 @@ export default function BuyingFramework() {
             maxWidth="5xl"
             rootClassName="relative selection:bg-[#C9A84C]/20 selection:text-[#FAF8F5]"
             mainClassName="md:px-4 lg:px-10 xl:px-16 !pb-32"
+            guideContext={guideContext}
             footer={
                 <footer className="border-t border-[#2A2A35] py-8 text-center text-xs text-[#FAF8F5]/30 font-['JetBrains_Mono']">
                     © {new Date().getFullYear()} Autolitics Studio. Independent Automotive Advisory.
@@ -161,13 +171,18 @@ export default function BuyingFramework() {
                             return (
                                 <div key={stage.number} className="stage-card group bg-[#14141B] rounded-[2rem] border border-[#2A2A35] p-8 hover:border-[#C9A84C]/30 transition-all duration-500">
                                     <div className="flex items-start justify-between mb-6">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-xl bg-[#C9A84C]/10 border border-[#C9A84C]/20 flex items-center justify-center group-hover:bg-[#C9A84C]/20 transition-colors duration-300">
-                                                <Icon size={22} className="text-[#C9A84C]" />
+                                        <div className="flex items-start gap-5">
+                                            <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[1.5rem] bg-[#0D0D12] text-[#C9A84C] border border-[#C9A84C]/20 shadow-sm">
+                                                <div className="text-center">
+                                                    <div className="text-[10px] font-['JetBrains_Mono'] uppercase tracking-[0.2em] text-[#FAF8F5]/45">Stage</div>
+                                                    <div className="text-4xl font-semibold leading-none">{stage.number}</div>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <div className="text-xs text-[#FAF8F5]/30 font-['JetBrains_Mono'] tracking-wider uppercase">Stage {stage.number}</div>
-                                                <h3 className="text-xl font-bold tracking-tight">{stage.title}</h3>
+                                            <div className="pt-2">
+                                                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#C9A84C]/10 border border-[#C9A84C]/20 group-hover:bg-[#C9A84C]/20 transition-colors duration-300">
+                                                    <Icon size={20} className="text-[#C9A84C]" />
+                                                </div>
+                                                <h3 className="text-2xl font-bold tracking-tight">{stage.title}</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -211,19 +226,41 @@ export default function BuyingFramework() {
                     </div>
 
                     <div className="bg-[#14141B] rounded-[2rem] border border-[#2A2A35] p-8 md:p-12">
-                        <div className="flex items-end gap-4 h-48 mb-6">
+                        <div className="relative h-72 mb-6 rounded-2xl border border-[#2A2A35] bg-[#0D0D12]/55 p-5 overflow-hidden">
+                            <svg viewBox="0 0 800 260" className="absolute inset-5 h-[calc(100%-2.5rem)] w-[calc(100%-2.5rem)] overflow-visible" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="buyerPowerGradient" x1="0" x2="1" y1="0" y2="0">
+                                        <stop offset="0%" stopColor="#C9A84C" stopOpacity="0.25" />
+                                        <stop offset="100%" stopColor="#C9A84C" stopOpacity="1" />
+                                    </linearGradient>
+                                </defs>
+                                {[40, 105, 170, 235].map((y) => (
+                                    <line key={y} x1="40" x2="760" y1={y} y2={y} stroke="#FAF8F5" strokeOpacity="0.07" />
+                                ))}
+                                <path d="M 60 220 C 160 210, 205 178, 275 160 S 430 112, 525 88 S 675 45, 740 35" fill="none" stroke="url(#buyerPowerGradient)" strokeWidth="6" strokeLinecap="round" className="power-line" />
+                                <path d="M 60 220 C 160 210, 205 178, 275 160 S 430 112, 525 88 S 675 45, 740 35 L 740 235 L 60 235 Z" fill="#C9A84C" opacity="0.08" />
+                                {[
+                                    [60, 220],
+                                    [275, 160],
+                                    [525, 88],
+                                    [740, 35],
+                                ].map(([x, y], i) => (
+                                    <g key={i}>
+                                        <circle cx={x} cy={y} r="11" fill="#0D0D12" stroke="#C9A84C" strokeWidth="4" />
+                                        <circle cx={x} cy={y} r="4" fill="#C9A84C" />
+                                    </g>
+                                ))}
+                            </svg>
+                            <div className="relative z-10 grid h-full grid-cols-4 items-end gap-3">
                             {stages.map((stage, i) => (
-                                <div key={i} className="flex-1 flex flex-col items-center gap-3">
-                                    <div
-                                        className="power-bar w-full rounded-t-lg bg-gradient-to-t from-[#C9A84C]/30 to-[#C9A84C] origin-bottom"
-                                        style={{ height: `${25 + i * 25}%`, transformOrigin: 'bottom' }}
-                                    ></div>
-                                    <div className="text-center">
+                                <div key={i} className="flex h-full flex-col justify-end text-center">
+                                    <div className="mb-2">
                                         <div className="text-xs font-semibold text-[#C9A84C] tracking-wide">{stage.number}</div>
-                                        <div className="text-xs text-[#FAF8F5]/50 hidden md:block">{stage.title}</div>
+                                        <div className="text-xs text-[#FAF8F5]/60 hidden md:block">{stage.title}</div>
                                     </div>
                                 </div>
                             ))}
+                            </div>
                         </div>
                         <div className="flex justify-between text-xs text-[#FAF8F5]/30 font-['JetBrains_Mono'] uppercase tracking-widest border-t border-[#2A2A35] pt-4 mt-4">
                             <span>Low Leverage</span>
@@ -252,9 +289,9 @@ export default function BuyingFramework() {
                             </p>
                             <ul className="space-y-3 mb-8 max-w-2xl">
                                 {[
-                                    { label: 'The Autolitics Playbook', desc: 'A practical guide to navigating dealerships and structuring a smart purchase', link: '/resources/playbook' },
-                                    { label: 'Advisory Intelligence Tools', desc: 'Vehicle evaluations, market insights, and deal analysis' },
-                                    { label: 'The Autolitics Strategy Brief', desc: 'A personalized recommendation and purchase strategy' },
+                                    { label: 'The Autolitics Playbook', desc: 'How to navigate dealership visits and negotiations so you avoid mistakes that can cost you thousands.', link: guideContext ? GUIDE_TOOL_PATHS.playbook : '/resources/playbook' },
+                                    { label: 'Advisory Intelligence Tools', desc: 'How to compare vehicles, market position, and dealer offers with evidence instead of guesswork.' },
+                                    { label: 'The Autolitics Strategy Brief', desc: 'How advisory clients get the framework applied to their exact needs, shortlist, and purchase decision.' },
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-start gap-3 text-sm">
                                         <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] mt-1.5 shrink-0"></span>
@@ -280,7 +317,7 @@ export default function BuyingFramework() {
                             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                                 {[
                                     { layer: '01', label: 'Framework', sublabel: 'Decision Model', active: true, link: null },
-                                    { layer: '02', label: 'Playbook', sublabel: 'Strategy Guide', active: false, link: '/resources/playbook' },
+                                    { layer: '02', label: 'Playbook', sublabel: 'Strategy Guide', active: false, link: guideContext ? GUIDE_TOOL_PATHS.playbook : '/resources/playbook' },
                                     { layer: '03', label: 'Intelligence Tools', sublabel: 'Analysis Layer', active: false, link: null },
                                     { layer: '04', label: 'Strategy Brief', sublabel: 'Client Deliverable', active: false, link: null },
                                 ].map((item, i, arr) => {
@@ -317,8 +354,24 @@ export default function BuyingFramework() {
                     </div>
                 </section>
 
+                <section className="mb-8 rounded-[2rem] border border-[#2A2A35] bg-[#14141B] p-6 md:p-8">
+                    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <p className="mb-2 text-xs font-['JetBrains_Mono'] uppercase tracking-wider text-[#C9A84C]">Next step</p>
+                            <h2 className="text-2xl font-bold tracking-tight">Read the Autolitics Playbook</h2>
+                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#FAF8F5]/55">
+                                Now that you know the four-stage model, use the Playbook to apply it inside real dealership conversations.
+                            </p>
+                        </div>
+                        <Link to={guideContext ? GUIDE_TOOL_PATHS.playbook : '/resources/playbook'} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-bold text-[#0D0D12] transition-transform hover:scale-[1.02]">
+                            Continue to Playbook
+                            <ArrowRight size={16} />
+                        </Link>
+                    </div>
+                </section>
+
                 {/* CTA */}
-                <section className="text-center bg-[#14141B] rounded-[3rem] p-12 md:p-20 relative overflow-hidden">
+                {!hasPurchasedAdvisory && <section className="text-center bg-[#14141B] rounded-[3rem] p-12 md:p-20 relative overflow-hidden">
                     <div className="pointer-events-none absolute inset-0 opacity-10 mix-blend-overlay">
                         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
                             <filter id="noiseFilterCtaFw">
@@ -345,12 +398,12 @@ export default function BuyingFramework() {
                             <span className="absolute inset-0 bg-white/30 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 rounded-full"></span>
                         </Link>
                         <div className="mt-6">
-                            <Link to="/resources/playbook" className="inline-flex items-center gap-2 text-sm text-[#FAF8F5]/40 hover:text-[#C9A84C] transition-colors">
+                            <Link to={guideContext ? GUIDE_TOOL_PATHS.playbook : '/resources/playbook'} className="inline-flex items-center gap-2 text-sm text-[#FAF8F5]/40 hover:text-[#C9A84C] transition-colors">
                                 <span>Read The Autolitics Playbook →</span>
                             </Link>
                         </div>
                     </div>
-                </section>
+                </section>}
 
         </ResourcePageShell>
     );

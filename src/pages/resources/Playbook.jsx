@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Shield, Search, Gauge, FileText, Handshake, DollarSign, Banknote, Clock, ArrowRight } from 'lucide-react';
 import ResourcePageShell from '../../components/ResourcePageShell';
+import { GUIDE_TOOL_PATHS } from '../../data/strategicCarBuyerGuide';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,10 +23,13 @@ const SectionNumber = ({ number }) => (
     </div>
 );
 
-export default function Playbook() {
+export default function Playbook({ guideContext = null }) {
     const containerRef = useRef(null);
 
     useEffect(() => {
+        // When embedded in dashboard, ScrollTrigger watches wrong container
+        const isEmbedded = Boolean(guideContext);
+
         const ctx = gsap.context(() => {
             gsap.fromTo(
                 '.pb-fade-up',
@@ -33,18 +37,28 @@ export default function Playbook() {
                 { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out' }
             );
 
-            gsap.utils.toArray('.pb-section').forEach(section => {
-                gsap.fromTo(section,
+            if (isEmbedded) {
+                // Animate all sections on mount with stagger
+                gsap.fromTo(
+                    '.pb-section',
                     { opacity: 0, y: 50 },
-                    {
-                        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-                        scrollTrigger: { trigger: section, start: 'top 80%' }
-                    }
+                    { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.2 }
                 );
-            });
+            } else {
+                // Use scroll-triggered animations
+                gsap.utils.toArray('.pb-section').forEach(section => {
+                    gsap.fromTo(section,
+                        { opacity: 0, y: 50 },
+                        {
+                            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+                            scrollTrigger: { trigger: section, start: 'top 80%' }
+                        }
+                    );
+                });
+            }
         }, containerRef);
         return () => ctx.revert();
-    }, []);
+    }, [guideContext]);
 
     return (
         <ResourcePageShell
@@ -53,6 +67,7 @@ export default function Playbook() {
             maxWidth="3xl"
             rootClassName="relative selection:bg-[#C9A84C]/20 selection:text-[#FAF8F5]"
             mainClassName="md:px-6 lg:px-10 !pb-32"
+            guideContext={guideContext}
             footer={
                 <footer className="border-t border-[#2A2A35] py-8 text-center text-xs text-[#FAF8F5]/30 font-['JetBrains_Mono']">
                     © {new Date().getFullYear()} Autolitics Studio. Independent Automotive Advisory.
@@ -119,7 +134,7 @@ export default function Playbook() {
                                 role: 'Conceptual Model',
                                 desc: 'Four-stage decision model defining buyer strategy',
                                 active: false,
-                                link: '/resources/buying-framework',
+                                link: guideContext ? GUIDE_TOOL_PATHS.framework : '/resources/buying-framework',
                             },
                             {
                                 layer: '02',
@@ -276,7 +291,7 @@ export default function Playbook() {
                     </div>
 
                     <div className="mt-6 text-center">
-                        <Link to="/resources/buying-framework" className="inline-flex items-center gap-2 text-sm text-[#C9A84C] font-medium hover:text-[#D4B86A] transition-colors">
+                        <Link to={guideContext ? GUIDE_TOOL_PATHS.framework : '/resources/buying-framework'} className="inline-flex items-center gap-2 text-sm text-[#C9A84C] font-medium hover:text-[#D4B86A] transition-colors">
                             <span>View the full framework visualization</span>
                             <ArrowRight size={16} />
                         </Link>

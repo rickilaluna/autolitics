@@ -44,6 +44,7 @@ import Profile from './pages/dashboard/Profile';
 import StrategicCarBuyerGuide from './pages/dashboard/StrategicCarBuyerGuide';
 import GuideProductGate from './components/dashboard/GuideProductGate';
 import BuyerMission from './pages/dashboard/BuyerMission';
+import GuideWelcome from './pages/dashboard/GuideWelcome';
 import { GUIDE_TOOL_CONTEXTS } from './data/strategicCarBuyerGuide';
 
 // Admin Pages
@@ -98,6 +99,15 @@ function App() {
 
                     {/* Protected Dashboard Routes */}
                     <Route element={<ProtectedRoute />}>
+                        {/* Full-screen guide welcome - outside DashboardLayout */}
+                        <Route
+                            path="/dashboard/guide-welcome"
+                            element={
+                                <GuideProductGate>
+                                    <GuideWelcome />
+                                </GuideProductGate>
+                            }
+                        />
                         <Route path="/dashboard" element={<DashboardLayout />}>
                             <Route index element={<Overview />} />
                             <Route path="strategy-brief" element={<StrategyBrief />} />
